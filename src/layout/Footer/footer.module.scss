@@ -1,0 +1,36 @@
+@use "../../styles/_variables.scss" as *;
+
+.footer {
+  background: $main-dark-color;
+  color: $main-light-color;
+  &_top {
+    display: flex;
+    align-items: center;
+    padding: 100px 100px;
+    font-weight: 600;
+    font-size: 18px;
+    position: relative;
+  }
+
+  &_logo {
+    align-self: center;
+    margin: auto;
+    font-family: "Mouzambik", sans-serif;
+    font-size: 150px;
+    font-weight: 400;
+    position: absolute; /* Центруємо тільки середній елемент */
+    left: 50%; /* Встановлюємо центр по горизонталі */
+    transform: translateX(-50%); /* Вирівнюємо по центру */
+  }
+
+  &_social {
+    margin-left: auto;
+    display: flex;
+    gap: .625rem;
+    &__icon {
+      width: 35px;
+      height: 35px;
+      fill: white;
+    }
+  }
+}

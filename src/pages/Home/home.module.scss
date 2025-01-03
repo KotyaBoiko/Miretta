@@ -1,0 +1,25 @@
+@use "../../styles/variables.scss" as *;
+
+.home {
+  &_main {
+    position: relative;
+    &__top {
+      text-align: center;
+      font-family: "Mouzambik", sans-serif;
+      background-color: $light-green;
+      height: 75vh;
+    }
+
+    &__bottom {
+      height: 15vh;
+      background: #c8bfae;
+    }
+
+    &__logo {
+      color: $main-light-color;
+      font-size: 550px;
+    }
+
+
+  }
+}

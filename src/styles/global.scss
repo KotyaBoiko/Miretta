@@ -1,0 +1,28 @@
+@use "./reset.scss" as *;
+@use "./variables.scss" as *;
+
+@font-face {
+  font-family: "Mouzambik";
+  src: url("../assets/fonts/Mouzambik.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  scrollbar-width: none; /* Для Firefox */
+  -ms-overflow-style: none; /* Для Internet Explorer */
+  &::-webkit-scrollbar {
+    display: none; /* Для Chrome, Safari та Edge */
+  }
+}
+:root {
+  font-family: "Roboto", sans-serif;
+  color: $main-text-color;
+  background-color: $main-light-color;
+}
+
+.wrapper {
+  padding: 0 100px;
+}
+
+

@@ -1,0 +1,78 @@
+@use "../../styles/_variables.scss" as *;
+
+.header {
+  color: $main-dark-color;
+  height: 10vh;
+  &_main {
+    background: $light-green;
+  }
+
+  &_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 0;
+    font-weight: 600;
+    font-size: 18px;
+    position: relative;
+  }
+
+  &_nav {
+
+    &__link {
+      text-decoration: none;
+      position: relative;
+      text-decoration: none;
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0; bottom: -5px;
+        width: 100%;
+        transform: scaleX(0);
+        height: 1.5px;
+        background-color: $main-dark-color;
+        transition: all 0.3s ease-in;
+      }
+
+      &:hover::after {
+        transform: scaleX(1)
+      }
+    }
+
+    &__list {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      list-style: none;
+      gap: 15px;
+    }
+  }
+
+  &_logo {
+    margin: auto;
+    color: $dark-green;
+    font-family: "Mouzambik", sans-serif;
+    font-size: 60px;
+    font-weight: 300;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &_interactive {
+    margin-left: auto;
+    display: flex;
+    gap: .625rem;
+  }
+
+  &_profile{
+    width: 20px;
+    height: 22px;
+    color: $main-dark-color;
+  }
+
+  &_cart  {
+
+    color: $main-dark-color;
+  }
+}

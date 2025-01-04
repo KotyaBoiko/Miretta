@@ -3,6 +3,7 @@
 .home {
   &_main {
     position: relative;
+    z-index: 100;
     &__top {
       text-align: center;
       font-family: "Mouzambik", sans-serif;

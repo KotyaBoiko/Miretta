@@ -1,0 +1,12 @@
+@use "../../../styles/variables.scss" as *;
+.btn {
+  display: block;
+  padding: 12px;
+  border: 1px solid $main-text-color;
+  border-radius: 25px;
+  width: fit-content;
+  transition: all 0.3s;
+  &:hover {
+    color: $main-dark-color;
+  }
+}

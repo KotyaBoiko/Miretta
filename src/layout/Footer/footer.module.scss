@@ -3,6 +3,9 @@
 .footer {
   background: $main-dark-color;
   color: $main-light-color;
+  z-index: 100;
+  position: relative;
+  width: 100vw;
   &_top {
     display: flex;
     align-items: center;

@@ -15,14 +15,65 @@
     display: none; /* Для Chrome, Safari та Edge */
   }
 }
-:root {
+
+.global_wrapper {
   font-family: "Roboto", sans-serif;
   color: $main-text-color;
   background-color: $main-light-color;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
 }
 
 .wrapper {
-  padding: 0 100px;
+  margin: 0 100px;
+  position: relative;
+  z-index: 90;
 }
 
+.line {
+  position: absolute;
+  height: 100%;
+  width: 1px;
+  background: $line-color;
 
+  &_left {
+    margin-left: 99px;
+    left: 0;
+    &::before {
+      content: '';
+      display: block;
+      height: 100%;
+      width:1px;
+      background-color: $line-color;
+      position: absolute;
+      top: 0;
+      left: 235px;
+    }
+  }
+
+  &_right {
+    padding-right: 2px;
+    margin-right: 98px;
+    right: 0;
+    &::after {
+      content: '';
+      display: block;
+      height: 100%;
+      width: 1px;
+      background-color: $line-color;
+      position: absolute;
+      top: 0;
+      right: 235px;
+    }
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Mouzambik", sans-serif;
+  font-weight: 400;
+  font-size: 120px;
+  color: $main-dark-color;
+}

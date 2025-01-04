@@ -1,6 +1,6 @@
 export enum COMMON_ROUTES_NAMES {
   Home = '/',
-  Shirts = '/shirts&Tops',
+  Shirts = '/shirts&tops',
   Outerwear = '/outerwear',
   Bottoms = '/bottoms',
   Caps = '/caps',

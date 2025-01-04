@@ -19,7 +19,6 @@ const Header: FC = () => {
       <div className="wrapper">
         <div className={classes.header_container}>
           <nav className={classes.header_nav}>
-            <ul className={classes.header_nav__list}>
               <Link
                 to={COMMON_ROUTES_NAMES.Shirts}
                 className={classes.header_nav__link}
@@ -44,7 +43,6 @@ const Header: FC = () => {
               >
                 Caps
               </Link>
-            </ul>
           </nav>
           {location.pathname != "/" && (
             <Link to={COMMON_ROUTES_NAMES.Home} className={classes.header_logo}>

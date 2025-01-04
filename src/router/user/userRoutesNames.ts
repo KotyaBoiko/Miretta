@@ -6,5 +6,4 @@ export const enum USER_ROUTES_NAMES {
   Caps = '/caps',
   Cart = '/cart',
   Profile = '/profile',
-  NotFound = '/not-found',
 }

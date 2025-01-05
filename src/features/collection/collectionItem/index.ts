@@ -1,1 +1,2 @@
-export { Collection, type TCollectionProps } from "./Collection";
+export { CollectionVSide} from "./CollectionVSide/CollectionVSide.tsx"
+export {type TCollectionProps} from './type'

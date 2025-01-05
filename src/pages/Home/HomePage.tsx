@@ -12,9 +12,7 @@ const HomePage:FC = () => {
         <div className={classes.home_main__bottom}>
         </div>
       </section>
-        <div className='wrapper'>
           <CollectionList />
-        </div>
     </main>
   )
 }

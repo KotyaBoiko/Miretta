@@ -1,9 +1,10 @@
 import { FC } from "react";
-import { TCollectionProps } from "../type";
+
 import classes from "./collectionVCenter.module.scss";
-import { MoreButton } from "../../../../shared/Buttons/MoreButton";
-import { mainLightColor } from "../../../../styles/_variables";
-const CollectionVCenter: FC<TCollectionProps> = ({
+import { mainLightColor } from "@/styles/_variables";
+import { MoreButton } from "@/components/ui/Buttons/MoreButton";
+import { TCollectionProps } from "../type";
+const CollectionVCenter: FC<Omit<TCollectionProps, "variant" | "smallImg">> = ({
   title,
   description,
   mainImageUrl,

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router";
 import classes from "./moreButton.module.scss";
-import { mainDarkColor } from "../../../styles/_variables";
+import { mainDarkColor } from "@/styles/_variables";
 type Props = {
   path: string;
   text: string;
@@ -21,3 +21,6 @@ const MoreButton: FC<Props> = ({ path, text, color = mainDarkColor }) => {
 };
 
 export { MoreButton };
+
+
+

@@ -1,15 +1,12 @@
-@use "../../styles/_variables.scss" as *;
+@use "../../../styles/_variables.scss" as *;
 
 .header {
   color: $main-dark-color;
-  height: 10vh;
   position: relative;
   z-index: 100;
-  &_main {
-    background: $light-green;
-  }
 
   &_container {
+    height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,7 +18,6 @@
   }
 
   &_nav {
-
     display: flex;
     justify-content: space-between;
     align-items: center;

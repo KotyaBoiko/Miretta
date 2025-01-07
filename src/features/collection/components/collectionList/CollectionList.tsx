@@ -1,7 +1,7 @@
 import { FC } from "react";
 import {  CollectionVSide, TCollectionProps } from "../collectionItem";
-import mainImg1 from "../../../assets/img/171960011-dynamic1-pdp.webp";
-import capsImg from "../../../assets/img/ccapescapr-capldhelcap-vgoEPFKHiJU-unsplcapsh.jpg"
+import mainImg1 from "@/assets/img/171960011-dynamic1-pdp.webp";
+import capsImg from "@/assets/img/ccapescapr-capldhelcap-vgoEPFKHiJU-unsplcapsh.jpg"
 import classes from "./collectionsList.module.scss";
 import CollectionVCenter from "../collectionItem/CollectionVCenter/CollectionVCenter";
 type Props = {};

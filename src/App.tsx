@@ -1,6 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
-import Layout from "./layout/Layout";
-import { commonRouter } from "./router/common/commonRouter";
+import { commonRouter } from "@/router/common/commonRouter";
+import Layout from "@/components/layout/Layout";
 
 const App = () => {
   const router = createBrowserRouter([

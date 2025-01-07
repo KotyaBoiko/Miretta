@@ -1,7 +1,8 @@
 import { FC } from "react";
 import classes from "./collectionVSide.module.scss"
-import { MoreButton } from "../../../../shared/Buttons/MoreButton";
+
 import { TCollectionProps } from "../type";
+import { MoreButton } from "@/components/ui/Buttons/MoreButton";
 
 const CollectionVSide: FC<TCollectionProps> = ({
   title,

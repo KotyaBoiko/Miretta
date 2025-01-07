@@ -1,4 +1,4 @@
-import HomePage from "../../pages/Home/HomePage";
+import HomePage from "@/pages/Home/HomePage";
 import { COMMON_ROUTES_NAMES } from "./commonRoutesNames";
 
 export const commonRouter = [

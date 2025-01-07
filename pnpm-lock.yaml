@@ -20,6 +20,9 @@ importers:
       sass:
         specifier: ^1.83.0
         version: 1.83.0
+      swiper:
+        specifier: ^11.2.0
+        version: 11.2.0
     devDependencies:
       '@eslint/js':
         specifier: ^9.17.0
@@ -57,6 +60,9 @@ importers:
       vite-plugin-svgr:
         specifier: ^4.3.0
         version: 4.3.0(rollup@4.29.1)(typescript@5.6.3)(vite@6.0.6(sass@1.83.0))
+      vite-tsconfig-paths:
+        specifier: ^5.1.4
+        version: 5.1.4(typescript@5.6.3)(vite@6.0.6(sass@1.83.0))
 
 packages:
 
@@ -966,6 +972,9 @@ packages:
     resolution: {integrity: sha512-OkToC372DtlQeje9/zHIo5CT8lRP/FUgEOKBEhU4e0abL7J7CD24fD9ohiLN5hagG/kWCYj4K5oaxxtj2Z0Dig==}
     engines: {node: '>=18'}
 
+  globrex@0.1.2:
+    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
+
   graphemer@1.4.0:
     resolution: {integrity: sha512-EtKwoO6kxCL9WO5xipiHTZlSzBm7WLT627TqC/uVRd0HKmq8NXyebnNYxDoBi7wt8eTWrUrKXCOVaFq9x1kgag==}
 
@@ -1240,6 +1249,10 @@ packages:
   svg-parser@2.0.4:
     resolution: {integrity: sha512-e4hG1hRwoOdRb37cIMSgzNsxyzKfayW6VOflrwvR+/bzrkyxY/31WkbgnQpgtrNp1SdpJvpUAGTa/ZoiPNDuRQ==}
 
+  swiper@11.2.0:
+    resolution: {integrity: sha512-rjjAKgDEs+grR2eQshVDCcE4KNPC7CI294nfcbV9gE8WCsLdvOYXDeZKUYevqAZZp8j5hE7kpT3dAGVKFBWlxQ==}
+    engines: {node: '>= 4.7.0'}
+
   to-regex-range@5.0.1:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
@@ -1249,6 +1262,16 @@ packages:
     engines: {node: '>=16'}
     peerDependencies:
       typescript: '>=4.2.0'
+
+  tsconfck@3.1.4:
+    resolution: {integrity: sha512-kdqWFGVJqe+KGYvlSO9NIaWn9jT1Ny4oKVzAJsKii5eoE9snzTJzL4+MMVOMn+fikWGFmKEylcXL710V/kIPJQ==}
+    engines: {node: ^18 || >=20}
+    hasBin: true
+    peerDependencies:
+      typescript: ^5.0.0
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
@@ -1285,6 +1308,14 @@ packages:
     resolution: {integrity: sha512-Jy9qLB2/PyWklpYy0xk0UU3TlU0t2UMpJXZvf+hWII1lAmRHrOUKi11Uw8N3rxoNk7atZNYO3pR3vI1f7oi+6w==}
     peerDependencies:
       vite: '>=2.6.0'
+
+  vite-tsconfig-paths@5.1.4:
+    resolution: {integrity: sha512-cYj0LRuLV2c2sMqhqhGpaO3LretdtMn/BVX4cPLanIZuwwrkVl+lK84E/miEXkCHWXuq65rhNN4rXsBcOB3S4w==}
+    peerDependencies:
+      vite: '*'
+    peerDependenciesMeta:
+      vite:
+        optional: true
 
   vite@6.0.6:
     resolution: {integrity: sha512-NSjmUuckPmDU18bHz7QZ+bTYhRR0iA72cs2QAxCqDpafJ0S6qetco0LB3WW2OxlMHS0JmAv+yZ/R3uPmMyGTjQ==}
@@ -2208,6 +2239,8 @@ snapshots:
 
   globals@15.14.0: {}
 
+  globrex@0.1.2: {}
+
   graphemer@1.4.0: {}
 
   has-flag@4.0.0: {}
@@ -2452,12 +2485,18 @@ snapshots:
 
   svg-parser@2.0.4: {}
 
+  swiper@11.2.0: {}
+
   to-regex-range@5.0.1:
     dependencies:
       is-number: 7.0.0
 
   ts-api-utils@1.4.3(typescript@5.6.3):
     dependencies:
+      typescript: 5.6.3
+
+  tsconfck@3.1.4(typescript@5.6.3):
+    optionalDependencies:
       typescript: 5.6.3
 
   tslib@2.8.1: {}
@@ -2498,6 +2537,17 @@ snapshots:
       vite: 6.0.6(sass@1.83.0)
     transitivePeerDependencies:
       - rollup
+      - supports-color
+      - typescript
+
+  vite-tsconfig-paths@5.1.4(typescript@5.6.3)(vite@6.0.6(sass@1.83.0)):
+    dependencies:
+      debug: 4.4.0
+      globrex: 0.1.2
+      tsconfck: 3.1.4(typescript@5.6.3)
+    optionalDependencies:
+      vite: 6.0.6(sass@1.83.0)
+    transitivePeerDependencies:
       - supports-color
       - typescript
 

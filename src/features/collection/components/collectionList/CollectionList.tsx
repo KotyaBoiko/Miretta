@@ -1,12 +1,18 @@
 import { FC } from "react";
-import {  CollectionVSide, TCollectionProps } from "../collectionItem";
+import {
+  CollectionVCenter,
+  CollectionVSide,
+  TCollectionProps,
+} from "../collectionItem";
+
 import mainImg1 from "@/assets/img/171960011-dynamic1-pdp.webp";
-import capsImg from "@/assets/img/ccapescapr-capldhelcap-vgoEPFKHiJU-unsplcapsh.jpg"
+import capsImg from "@/assets/img/ccapescapr-capldhelcap-vgoEPFKHiJU-unsplcapsh.jpg";
+
 import classes from "./collectionsList.module.scss";
-import CollectionVCenter from "../collectionItem/CollectionVCenter/CollectionVCenter";
+
 type Props = {};
 
-const collections:TCollectionProps[] = [
+const collections: TCollectionProps[] = [
   {
     title: "SHIRTS, T-SHIRTS & POLO SHIRTS",
     description:
@@ -41,34 +47,34 @@ const collections:TCollectionProps[] = [
   },
 ];
 
-const CollectionList:FC<Props> = ({}) => {
+const CollectionList: FC<Props> = ({}) => {
   return (
     <section className={classes.collections}>
-    {collections.map((collection, index) => {
-      if(collection.variant == "center") {
-        return (
-          <CollectionVCenter
-          key={index}
-          title={collection.title}
-          description={collection.description}
-          mainImageUrl={collection.mainImageUrl}
-        />
-        )
-      }
+      {collections.map((collection, index) => {
+        if (collection.variant == "center") {
+          return (
+            <CollectionVCenter
+              key={index}
+              title={collection.title}
+              description={collection.description}
+              mainImageUrl={collection.mainImageUrl}
+            />
+          );
+        }
 
-      return (
-        <CollectionVSide
-          key={index}
-          title={collection.title}
-          description={collection.description}
-          mainImageUrl={collection.mainImageUrl}
-          smallImageUrl={collection.smallImageUrl}
-          variant={collection.variant}
-        />
-      );
-    })}
+        return (
+          <CollectionVSide
+            key={index}
+            title={collection.title}
+            description={collection.description}
+            mainImageUrl={collection.mainImageUrl}
+            smallImageUrl={collection.smallImageUrl}
+            variant={collection.variant}
+          />
+        );
+      })}
     </section>
-  )
+  );
 };
 
 export { CollectionList };

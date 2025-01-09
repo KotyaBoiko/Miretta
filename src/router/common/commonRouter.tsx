@@ -1,4 +1,5 @@
 import HomePage from "@/pages/Home/HomePage";
+import SignUpPage from "@/pages/SignUp/SignUpPage";
 import { COMMON_ROUTES_NAMES } from "./commonRoutesNames";
 
 export const commonRouter = [
@@ -25,5 +26,9 @@ export const commonRouter = [
   {
     path: COMMON_ROUTES_NAMES.Cart,
     element: <div>Cart</div>,
+  },
+  {
+    path: COMMON_ROUTES_NAMES.Auth,
+    element: <SignUpPage/>,
   },
 ];

@@ -1,5 +1,5 @@
-import { FC, useState } from "react";
-import { Scrollbar, Autoplay, Keyboard, EffectFade } from "swiper/modules";
+import { FC } from "react";
+import { Autoplay, EffectFade, Keyboard, Scrollbar } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import classes from "./mySwiper.module.scss";
@@ -12,8 +12,7 @@ type Props = {
 const MySwiper: FC<Props> = ({ slides }) => {
   return (
     <Swiper
-      modules={[Scrollbar, Autoplay, EffectFade, Keyboard]}
-      scrollbar={{ draggable: true }}
+      modules={[ Autoplay, EffectFade, Keyboard]}
       loop={true}
       // cssMode={true}
       // keyboard={true}

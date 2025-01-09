@@ -19,16 +19,20 @@ const CollectionVCenter: FC<Omit<TCollectionProps, "variant" | "smallImg">> = ({
           <p>{description}</p>
         </div>
         <div className={classes.collection_btn}>
-          <MoreButton path="/caps" text="Discover Collection" color={mainLightColor}/>
+          <MoreButton
+            path="/caps"
+            text="Discover Collection"
+            color={mainLightColor}
+          />
         </div>
       </div>
-        <img
-          src={mainImageUrl}
-          alt={title}
-          className={classes.collection_mainImg}
-        />
+      <img
+        src={mainImageUrl}
+        alt={title}
+        className={classes.collection_mainImg}
+      />
     </div>
   );
 };
 
-export default CollectionVCenter;
+export { CollectionVCenter };

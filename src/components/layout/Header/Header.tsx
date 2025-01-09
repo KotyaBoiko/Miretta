@@ -43,7 +43,9 @@ const Header: FC = () => {
             </Link>
           )}
           <div className={classes.header_interactive}>
-            <ProfileIcon className={classes.header_profile} />
+            <Link to={COMMON_ROUTES_NAMES.Auth}>
+              <ProfileIcon className={classes.header_profile} />
+            </Link>
             <CartIcon className={classes.header_cart} />
           </div>
         </div>

@@ -7,6 +7,7 @@ type Props = {
   text: string;
   color?: string;
 };
+import ArrowIcon from "@/assets/img/icons/arrow-right.svg?react"
 
 const MoreButton: FC<Props> = ({ path, text, color = mainDarkColor }) => {
   return (
@@ -16,6 +17,7 @@ const MoreButton: FC<Props> = ({ path, text, color = mainDarkColor }) => {
       style={{ color: color, border: `1px solid ${color}` }}
     >
       {text}
+      <ArrowIcon className={classes.arrow} style={{ stroke: color }}/>
     </Link>
   );
 };

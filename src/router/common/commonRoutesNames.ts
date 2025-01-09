@@ -5,4 +5,5 @@ export enum COMMON_ROUTES_NAMES {
   Bottoms = '/bottoms',
   Caps = '/caps',
   Cart = '/cart',
+  Auth = '/auth',
 }

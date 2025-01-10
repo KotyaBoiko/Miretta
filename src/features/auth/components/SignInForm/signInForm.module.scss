@@ -1,27 +1,16 @@
 @use "/src/assets/styles/variables.scss" as *;
 
 .signin {
-  &_wrapper {
-    position: absolute;
-    z-index: 900;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  &_container {
-    padding: 30px 30px;
-    position: absolute;
-    top: 30%;
-    z-index: 100;
+  &_container {   
+    width: 360px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    background: $main-light-color;
+    padding: 30px 30px;
+
     border: 1px solid $main-dark-color;
+    background: $main-light-color;
     color: $main-dark-color;
-    width: 400px;
-    max-width: 400px;
   }
 
   &_form {
@@ -52,8 +41,10 @@
       gap: 20px; 
       justify-content: center;
       svg {
+        transition: all 0.3s;
         &:hover {
           cursor: pointer;
+          transform: scale(1.1);
         }
       }
     }

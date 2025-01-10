@@ -3,7 +3,7 @@
 .header {
   color: $main-dark-color;
   position: relative;
-  z-index: 100;
+  z-index: 10;
 
   &_container {
     height: 100px;
@@ -14,7 +14,7 @@
     font-weight: 600;
     font-size: 18px;
     position: relative;
-    z-index: 100;
+    z-index: 10;
   }
 
   &_nav {
@@ -60,7 +60,14 @@
   &_interactive {
     margin-left: auto;
     display: flex;
-    gap: 0.625rem;
+    gap: 1.25rem;
+    svg {
+      transition: all 0.3s;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
   }
 
   &_profile {
@@ -71,5 +78,24 @@
 
   &_cart {
     color: $main-dark-color;
+  }
+
+  &_auth {
+    top: 85px;
+    right: 5vw;
+    padding: 0 !important;
+    &::after {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background: $main-light-color;
+      transform: rotate(45deg);
+      border: 1px solid $main-dark-color;
+      border-bottom: none;
+      border-right: none;
+      position: absolute;
+      top: -10px;
+      right: calc(139px - 5vw);
+    }
   }
 }

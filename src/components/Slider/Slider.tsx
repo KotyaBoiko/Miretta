@@ -2,14 +2,14 @@ import { FC } from "react";
 import { Autoplay, EffectFade, Keyboard } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
-import classes from "./mySwiper.module.scss";
+import classes from "./slider.module.scss";
 
 type Props = {
   slides: string[];
   options?: string[]
 };
 
-const MySwiper: FC<Props> = ({ slides }) => {
+const Slider: FC<Props> = ({ slides }) => {
   return (
     <Swiper
       modules={[ Autoplay, EffectFade, Keyboard]}
@@ -17,6 +17,7 @@ const MySwiper: FC<Props> = ({ slides }) => {
       // cssMode={true}
       // keyboard={true}
       effect={"fade"}
+      allowTouchMove={false}
       autoplay={{
         delay: 9500,
         disableOnInteraction: false,
@@ -34,4 +35,4 @@ const MySwiper: FC<Props> = ({ slides }) => {
   );
 };
 
-export default MySwiper;
+export default Slider;

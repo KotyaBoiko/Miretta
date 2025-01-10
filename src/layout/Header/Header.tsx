@@ -10,9 +10,9 @@ import Modal from "@/components/ui/Modal/Modal";
 
 const Header: FC = () => {
   const location = useLocation();
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(true);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
-  const onCloseAuthModal = () => {
+  const closeAuthModal = () => {
     setIsAuthModalOpen(false);
   };
 
@@ -56,9 +56,9 @@ const Header: FC = () => {
               className={classes.header_profile}
               onClick={() => setIsAuthModalOpen(true)}
             />
-            {isAuthModalOpen &&
-              <SignInForm setIsVisibleForm={onCloseAuthModal}/>
-            }
+            <Modal isOpen={isAuthModalOpen} onClose={closeAuthModal} classNameContent={classes.header_auth}>
+              <SignInForm />
+            </Modal>
             <CartIcon className={classes.header_cart} />
           </div>
         </div>

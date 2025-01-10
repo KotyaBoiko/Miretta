@@ -1,29 +1,26 @@
 import { FC } from 'react'
-
-import classes from "./signInForm.module.scss"
-import { COMMON_ROUTES_NAMES } from '@/router/common/commonRoutesNames'
 import { Link } from 'react-router'
+
+import { COMMON_ROUTES_NAMES } from '@/router/common/commonRoutesNames'
 import CommonInput from '@/components/ui/Input/CommonInput'
 import MainButton from '@/components/ui/Buttons/MainButton/MainButton'
+
+import classes from "./signInForm.module.scss"
 import GoogleIcon from "@/assets/icons/Google.svg?react"
 import GitHubIcon from "@/assets/icons/GitHub.svg?react"
-type Props = {
-  setIsVisibleForm: React.Dispatch<React.SetStateAction<boolean>>
-}
 
-const SignInForm:FC<Props> = ({setIsVisibleForm}) => {
+const SignInForm:FC = () => {
 
   return (
-    <div className={classes.signin_wrapper}>
       <div className={classes.signin_container}>
         <form action="" className={classes.signin_form}>
           <div className={classes.signin_field}>
             <label htmlFor="signin-email">Email:</label>
-            <CommonInput type="email" id="signin-email" placeholder='collet.email@gmail.com'/>
+            <CommonInput type="email" id="signin-email" placeholder='skibidi@gmail.com'/>
           </div>
           <div className={classes.signin_field}>
             <label htmlFor="signin-password">Password:</label>
-            <CommonInput type="text" id="signin-password" placeholder='Something genius'/>
+            <CommonInput type="text" id="signin-password" placeholder='******'/>
           </div>
           <div className={classes.signin_entry}>
             <MainButton text='Sign In' width='full'/>
@@ -43,7 +40,6 @@ const SignInForm:FC<Props> = ({setIsVisibleForm}) => {
           </Link>
         </div>
       </div>
-    </div>
   )
 }
 

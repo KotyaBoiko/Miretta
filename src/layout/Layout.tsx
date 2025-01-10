@@ -2,7 +2,6 @@ import { FC } from "react";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import { Outlet } from "react-router";
-import MySwiper from "../MySwiper/MySwiper";
 
 const Layout: FC = () => {
   return (

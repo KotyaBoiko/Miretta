@@ -1,0 +1,12 @@
+@use "/src/assets/styles/_variables.scss" as *;
+
+.commonInput {
+  padding: 5px 10px;
+  padding-top: 10px;
+  border: 1px solid $main-dark-color;
+  width: 100%;
+  background-color: $main-light-color;
+  &::placeholder {
+    color: $main-text-color;
+  }
+}

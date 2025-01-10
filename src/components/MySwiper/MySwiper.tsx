@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Autoplay, EffectFade, Keyboard, Scrollbar } from "swiper/modules";
+import { Autoplay, EffectFade, Keyboard } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import classes from "./mySwiper.module.scss";

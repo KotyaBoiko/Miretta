@@ -1,0 +1,26 @@
+@use "/src//assets/styles/variables" as *;
+
+.main-btn {
+  text-align: center;
+  height: 40px;
+  padding: 10px;
+  border: 1px solid $main-dark-color;
+  color: $main-dark-color;
+  font-weight: 600;
+  transition: all 0.3s;
+  &:hover {
+    background-color: $main-dark-color;
+    color: $main-light-color;
+    cursor: pointer;
+  }
+  &_content {
+    width: 20px;
+    height: 20px;
+  }
+  &_medium {
+    width: 75px;
+  }
+  &_full {
+    width: 100%;
+  }
+}

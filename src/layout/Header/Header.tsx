@@ -1,12 +1,21 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Link, useLocation } from "react-router";
 
 import classes from "./header.module.scss";
-import ProfileIcon from "@/assets/img/icons/Profile.svg?react";
-import CartIcon from "@/assets/img/icons/Cart.svg?react";
+import ProfileIcon from "@/assets/icons/Profile.svg?react";
+import CartIcon from "@/assets/icons/Cart.svg?react";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
+import SignInForm from "@/features/auth/components/SignInForm/SignInForm";
+import Modal from "@/components/ui/Modal/Modal";
 
 const Header: FC = () => {
+  const location = useLocation();
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(true);
+
+  const onCloseAuthModal = () => {
+    setIsAuthModalOpen(false);
+  };
+
   return (
     <header className={classes.header}>
       <div className="wrapper">
@@ -43,9 +52,13 @@ const Header: FC = () => {
             </Link>
           )}
           <div className={classes.header_interactive}>
-            <Link to={COMMON_ROUTES_NAMES.Auth}>
-              <ProfileIcon className={classes.header_profile} />
-            </Link>
+            <ProfileIcon
+              className={classes.header_profile}
+              onClick={() => setIsAuthModalOpen(true)}
+            />
+            {isAuthModalOpen &&
+              <SignInForm setIsVisibleForm={onCloseAuthModal}/>
+            }
             <CartIcon className={classes.header_cart} />
           </div>
         </div>

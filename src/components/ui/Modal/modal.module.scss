@@ -1,0 +1,28 @@
+@use "/src/assets/styles/variables" as *;
+
+.modal {
+  &_container {
+    background: rgba(0, 0, 0, 0.144);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 900;
+  }
+
+  &_content {
+    position: absolute;
+    z-index: 1000;
+    min-width: 340px;
+    padding: 40px 20px;
+    background: $main-light-color;
+    margin-left: auto;
+  }
+
+  &_center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

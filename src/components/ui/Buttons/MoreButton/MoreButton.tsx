@@ -1,13 +1,13 @@
 import { FC } from "react";
 import { Link } from "react-router";
 import classes from "./moreButton.module.scss";
-import { mainDarkColor } from "@/styles/_variables";
+import { mainDarkColor } from "@/assets/styles/_variables";
 type Props = {
   path: string;
   text: string;
   color?: string;
 };
-import ArrowIcon from "@/assets/img/icons/arrow-right.svg?react"
+import ArrowIcon from "@/assets/icons/arrow-right.svg?react"
 
 const MoreButton: FC<Props> = ({ path, text, color = mainDarkColor }) => {
   return (

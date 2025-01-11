@@ -2,7 +2,7 @@ import { FC } from 'react'
 import classes from "./mainButton.module.scss"
 type Props = {
   text: string,
-  width: 'content' | "medium" | "full"
+  width?: 'content' | "medium" | "full"
 }
 
 const MainButton:FC<Props> = ({text, width = "medium"}) => {

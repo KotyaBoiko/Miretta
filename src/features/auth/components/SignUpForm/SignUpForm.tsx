@@ -9,7 +9,7 @@ const SignUpForm: FC<Props> = ({}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const signUpWithEmailAndPAssword =  async () => {
+  const signUpWithEmailAndPassword =  async () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password)
       console.log(userCredential)
@@ -55,7 +55,7 @@ const SignUpForm: FC<Props> = ({}) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={signUpWithEmailAndPAssword}>Sign Up</button>
+      <button onClick={signUpWithEmailAndPassword}>Sign Up</button>
       <button onClick={signUpWithGoogle}>Sign Up with Google</button>
       <button onClick={signOutUser}>Sign Out</button>
     </div>

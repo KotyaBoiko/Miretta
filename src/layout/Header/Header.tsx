@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Link, useLocation } from "react-router";
+import { Link, redirect, useLocation, useNavigate } from "react-router";
 
 import classes from "./header.module.scss";
 import ProfileIcon from "@/assets/icons/Profile.svg?react";
@@ -7,10 +7,21 @@ import CartIcon from "@/assets/icons/Cart.svg?react";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import SignInForm from "@/features/auth/components/SignInForm/SignInForm";
 import Modal from "@/components/ui/Modal/Modal";
+import { auth } from "@/firebase/firebase-config";
+import { USER_ROUTES_NAMES } from "@/router/user/userRoutesNames";
 
 const Header: FC = () => {
+  let navigate = useNavigate();
   const location = useLocation();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
+  const openProfile = () => {
+    if(auth.currentUser) {
+      navigate(USER_ROUTES_NAMES.Profile)
+    } else {
+      setIsAuthModalOpen(true)
+    }
+  }
 
   const closeAuthModal = () => {
     setIsAuthModalOpen(false);
@@ -54,7 +65,7 @@ const Header: FC = () => {
           <div className={classes.header_interactive}>
             <ProfileIcon
               className={classes.header_profile}
-              onClick={() => setIsAuthModalOpen(true)}
+              onClick={openProfile}
             />
             <Modal isOpen={isAuthModalOpen} onClose={closeAuthModal} classNameContent={classes.header_auth}>
               <SignInForm />

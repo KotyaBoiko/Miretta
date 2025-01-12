@@ -1,22 +1,23 @@
 import { FC, useState } from "react";
-import { Link, redirect, useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
-import classes from "./header.module.scss";
-import ProfileIcon from "@/assets/icons/Profile.svg?react";
 import CartIcon from "@/assets/icons/Cart.svg?react";
-import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
-import SignInForm from "@/features/auth/components/SignInForm/SignInForm";
+import ProfileIcon from "@/assets/icons/Profile.svg?react";
 import Modal from "@/components/ui/Modal/Modal";
-import { auth } from "@/firebase/firebase-config";
+import SignInForm from "@/features/auth/components/SignInForm/SignInForm";
+import { useAppSelector } from "@/redux/store";
+import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import { USER_ROUTES_NAMES } from "@/router/user/userRoutesNames";
+import classes from "./header.module.scss";
 
 const Header: FC = () => {
+  const isAuth = useAppSelector(state => state.user.isAuth)
   let navigate = useNavigate();
   const location = useLocation();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const openProfile = () => {
-    if(auth.currentUser) {
+    if(isAuth) {
       navigate(USER_ROUTES_NAMES.Profile)
     } else {
       setIsAuthModalOpen(true)
@@ -67,8 +68,8 @@ const Header: FC = () => {
               className={classes.header_profile}
               onClick={openProfile}
             />
-            <Modal isOpen={isAuthModalOpen} onClose={closeAuthModal} classNameContent={classes.header_auth}>
-              <SignInForm />
+            <Modal isOpen={isAuthModalOpen && !isAuth} onClose={closeAuthModal} classNameContent={classes.header_auth}>
+              <SignInForm isFormVisible={setIsAuthModalOpen}/>
             </Modal>
             <CartIcon className={classes.header_cart} />
           </div>

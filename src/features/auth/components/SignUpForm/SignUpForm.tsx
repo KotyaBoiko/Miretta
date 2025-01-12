@@ -1,45 +1,11 @@
 import { FC, useState } from "react";
-import { auth, googleProvider } from "@/firebase/firebase-config";
-import { createUserWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
-type Props = {};
+import { authService } from "../../services";
 
-console.log(auth.currentUser)
+type Props = {};
 
 const SignUpForm: FC<Props> = ({}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  const signUpWithEmailAndPassword =  async () => {
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password)
-      console.log(userCredential)
-      const user = auth.currentUser;
-      console.log(user)
-      setEmail("")
-      setPassword("")
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const signUpWithGoogle =  async () => {
-    try {
-      const userCredential = await signInWithPopup(auth, googleProvider)
-      console.log(userCredential)
-      const user = auth.currentUser;
-      console.log(user)
-    } catch (error) {
-      console.log(error)
-    }
-  }
-  const signOutUser =  async () => {
-    try {
-      const result = await signOut(auth)
-      console.log(result)
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   return (
     <div className="wrapper">
@@ -55,9 +21,14 @@ const SignUpForm: FC<Props> = ({}) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={signUpWithEmailAndPassword}>Sign Up</button>
-      <button onClick={signUpWithGoogle}>Sign Up with Google</button>
-      <button onClick={signOutUser}>Sign Out</button>
+      <button
+        onClick={() => authService.signUpWithEmailAndPassword(email, password)}
+      >
+        Sign Up
+      </button>
+      <button onClick={authService.signInWithGoogle}>
+        Sign Up with Google
+      </button>
     </div>
   );
 };

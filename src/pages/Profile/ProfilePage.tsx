@@ -1,25 +1,17 @@
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
+import { signOutUser } from "@/features/auth/services/authService";
 import { auth } from "@/firebase/firebase-config";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
-import { signOut } from "firebase/auth";
 import { FC } from "react";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 const ProfilePage: FC = ({}) => {
-  const navigate = useNavigate() 
-  const signOutUser =  async () => {
-    try {
-      await signOut(auth)
-      navigate(COMMON_ROUTES_NAMES.Home)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+
   return <div>
     {auth.currentUser ? auth.currentUser.email: "no user"}
-    <div onClick={signOutUser}>
+    <Link to={COMMON_ROUTES_NAMES.Home} onClick={signOutUser}>
       <MainButton text="SignOut" width="content"/>
-    </div>
+    </Link>
     </div>;
 };
 

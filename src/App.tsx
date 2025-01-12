@@ -1,31 +1,29 @@
 import Layout from "@/layout/Layout";
 import { commonRouter } from "@/router/common/commonRouter";
 import { onAuthStateChanged } from "firebase/auth";
-import { useEffect, useState } from "react";
-import { createBrowserRouter, redirect, RouterProvider, useNavigate } from "react-router";
+import { useEffect } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router";
 import { auth } from "./firebase/firebase-config";
+import { setAuth } from "./redux/slices/userSlice";
+import { useAppDispatch, useAppSelector } from "./redux/store";
 import { userRouter } from "./router/user/userRouter";
-import { USER_ROUTES_NAMES } from "./router/user/userRoutesNames";
-import { COMMON_ROUTES_NAMES } from "./router/common/commonRoutesNames";
 
 const App = () => {
-  const [isAuth, setIsAuth] = useState(true)
+  const isAuth = useAppSelector((state) => state.user.isAuth);
+  const dispatch = useAppDispatch();
   useEffect(() => {
     const listener = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user)
-        setIsAuth(true)
-        redirect(USER_ROUTES_NAMES.Profile)
+        dispatch(setAuth(true));
       } else {
-        setIsAuth(false)
-        redirect(COMMON_ROUTES_NAMES.Home)
+        dispatch(setAuth(false));
       }
     });
 
     return () => {
-      listener()
-    }
-  }, [])
+      listener();
+    };
+  }, []);
 
   const router = createBrowserRouter([
     {

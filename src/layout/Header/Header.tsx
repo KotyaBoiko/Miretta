@@ -11,7 +11,7 @@ import { USER_ROUTES_NAMES } from "@/router/user/userRoutesNames";
 import classes from "./header.module.scss";
 
 const Header: FC = () => {
-  const isAuth = useAppSelector(state => state.user.isAuth)
+  const isAuth = useAppSelector(state => state.auth.isAuth)
   let navigate = useNavigate();
   const location = useLocation();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);

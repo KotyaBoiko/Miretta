@@ -18,7 +18,6 @@ type Props = {
 const SignInForm: FC<Props> = ({ isFormVisible }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const handleSignUp = () => {
     isFormVisible(false);
   };
@@ -43,7 +42,7 @@ const SignInForm: FC<Props> = ({ isFormVisible }) => {
         <div className={classes.signin_field}>
           <label htmlFor="signin-password">Password:</label>
           <CommonInput
-            type="text"
+            type="password"
             id="signin-password"
             placeholder="******"
             value={password}

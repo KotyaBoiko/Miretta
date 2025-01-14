@@ -6,7 +6,7 @@ import {
   signOut,
 } from "firebase/auth";
 
-export const signUpWithEmailAndPassword = async (
+export const signUpWithEmailPassword = async (
   email: string,
   password: string
 ) => {
@@ -16,6 +16,7 @@ export const signUpWithEmailAndPassword = async (
       email,
       password
     );
+    return userCredential
   } catch (error) {
     if (error instanceof Error) {
       alert(error.message);
@@ -26,6 +27,7 @@ export const signUpWithEmailAndPassword = async (
 export const signInWithGoogle = async () => {
   try {
     const userCredential = await signInWithPopup(auth, googleProvider);
+    return userCredential
   } catch (error) {
     if (error instanceof Error) {
       alert(error.message);
@@ -38,7 +40,8 @@ export const signInWithEmailPassword = async (
   password: string
 ) => {
   try {
-    const data = await signInWithEmailAndPassword(auth, email, password);
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return userCredential
   } catch (error) {
     if (error instanceof Error) {
       alert(error.message);

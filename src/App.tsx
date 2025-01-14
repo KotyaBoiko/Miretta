@@ -4,12 +4,13 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { auth } from "./firebase/firebase-config";
-import { setAuth } from "./redux/slices/userSlice";
+
 import { useAppDispatch, useAppSelector } from "./redux/store";
 import { userRouter } from "./router/user/userRouter";
+import { setAuth } from "./features/auth/slices/authSlice";
 
 const App = () => {
-  const isAuth = useAppSelector((state) => state.user.isAuth);
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
   const dispatch = useAppDispatch();
   useEffect(() => {
     const listener = onAuthStateChanged(auth, (user) => {

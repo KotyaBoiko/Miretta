@@ -1,5 +1,5 @@
 import SignUpForm from '@/features/auth/components/SignUpForm/SignUpForm'
-import { useAppSelector } from '@/redux/store'
+import { useAppSelector } from '@/redux/types'
 import { USER_ROUTES_NAMES } from '@/router/user/userRoutesNames'
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router'

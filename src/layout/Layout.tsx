@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 import { Outlet, useNavigate } from "react-router";
-import { useAppSelector } from "@/redux/store";
+import { useAppSelector } from "@/redux/types";
 import { USER_ROUTES_NAMES } from "@/router/user/userRoutesNames";
 
 const Layout: FC = () => {

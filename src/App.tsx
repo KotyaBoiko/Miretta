@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { auth } from "./firebase/firebase-config";
 
-import { useAppDispatch, useAppSelector } from "./redux/store";
+import { useAppDispatch, useAppSelector } from "./redux/types";
 import { userRouter } from "./router/user/userRouter";
 import { setAuth } from "./features/auth/slices/authSlice";
 

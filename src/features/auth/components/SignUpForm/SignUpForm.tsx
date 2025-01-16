@@ -1,11 +1,15 @@
 import { FC, useState } from "react";
 import { authService } from "../../services";
+import { useAppDispatch } from "@/redux/types";
+import { authWithEmailPassword, authWithProvider } from "../../slices/authSlice";
 
 type Props = {};
 
 const SignUpForm: FC<Props> = ({}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useAppDispatch();
 
   return (
     <div className="wrapper">
@@ -22,11 +26,17 @@ const SignUpForm: FC<Props> = ({}) => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button
-        onClick={() => authService.signUpWithEmailPassword(email, password)}
+        onClick={() =>
+          dispatch(authWithEmailPassword({ type: "signUp", email, password }))
+        }
       >
         Sign Up
       </button>
-      <button onClick={authService.signInWithGoogle}>
+      <button
+        onClick={() =>
+          dispatch(authWithProvider({ type: 'google' }))
+        }
+      >
         Sign Up with Google
       </button>
     </div>

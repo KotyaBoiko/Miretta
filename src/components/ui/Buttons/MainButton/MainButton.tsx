@@ -1,13 +1,13 @@
 import { FC } from 'react'
 import classes from "./mainButton.module.scss"
 type Props = {
-  text: string,
+  children: string | React.ReactNode,
   width?: 'content' | "medium" | "full"
 }
 
-const MainButton:FC<Props> = ({text, width = "medium"}) => {
+const MainButton:FC<Props> = ({children, width = "medium"}) => {
   return (
-    <button className={classes["main-btn"] + " " + classes[`main-btn_${width}`]}>{text}</button>
+    <button className={classes["main-btn"] + " " + classes[`main-btn_${width}`]}>{children}</button>
   )
 }
 

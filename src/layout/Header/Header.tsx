@@ -5,7 +5,7 @@ import CartIcon from "@/assets/icons/Cart.svg?react";
 import ProfileIcon from "@/assets/icons/Profile.svg?react";
 import Modal from "@/components/ui/Modal/Modal";
 import SignInForm from "@/features/auth/components/SignInForm/SignInForm";
-import { useAppSelector } from "@/redux/store";
+import { useAppSelector } from "@/redux/types";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import { USER_ROUTES_NAMES } from "@/router/user/userRoutesNames";
 import classes from "./header.module.scss";

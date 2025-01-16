@@ -5,10 +5,10 @@ import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
 import CommonInput from "@/components/ui/Input/CommonInput";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 
-import { authService } from "../../services";
-
 import GitHubIcon from "@/assets/icons/GitHub.svg?react";
 import GoogleIcon from "@/assets/icons/Google.svg?react";
+import { useAppDispatch, useAppSelector } from "@/redux/types";
+import { authWithEmailPassword, authWithProvider } from "../../slices/authSlice";
 import classes from "./signInForm.module.scss";
 
 type Props = {
@@ -18,6 +18,11 @@ type Props = {
 const SignInForm: FC<Props> = ({ isFormVisible }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const loading = useAppSelector(state => state.auth.loading)
+
+  const dispatch = useAppDispatch()
+
   const handleSignUp = () => {
     isFormVisible(false);
   };
@@ -51,9 +56,9 @@ const SignInForm: FC<Props> = ({ isFormVisible }) => {
         </div>
         <div
           className={classes.signin_entry}
-          onClick={() => authService.signInWithEmailPassword(email, password)}
+          onClick={() => dispatch(authWithEmailPassword({type: 'signIn', email, password}))}
         >
-          <MainButton text="Sign In" width="full" />
+          <MainButton width="full">{loading === 'pending' ? "..." : "Sign In"}</MainButton>
         </div>
       </form>
       <div className={classes.signin_other}>
@@ -62,7 +67,7 @@ const SignInForm: FC<Props> = ({ isFormVisible }) => {
           <GoogleIcon
             width={40}
             height={40}
-            onClick={authService.signInWithGoogle}
+            onClick={() => dispatch(authWithProvider({type: 'google'}))}
           />
           <GitHubIcon width={40} height={40} />
         </div>
@@ -70,7 +75,7 @@ const SignInForm: FC<Props> = ({ isFormVisible }) => {
       <div className={classes.signin_signup}>
         <p className={classes.signin_signup__text}>-or-</p>
         <Link to={COMMON_ROUTES_NAMES.Auth} onClick={handleSignUp}>
-          <MainButton text="Sign Up" width="full" />
+          <MainButton width="full">Sign Up</MainButton>
         </Link>
       </div>
     </div>

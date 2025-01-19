@@ -1,7 +1,7 @@
 import { createAppAsyncThunk } from "@/redux/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { UserCredential } from "firebase/auth";
 import { authService } from "../services";
+import { act } from "react";
 
 export interface IAuthWithEmailAndPassword {
   type: "signIn" | "signUp";
@@ -31,20 +31,24 @@ const initialState: IAuthState = {
 
 export const authWithEmailPassword = createAppAsyncThunk(
   "auth/authWithEmailPassword",
-  async (params: IAuthWithEmailAndPassword) => {
-    switch (params.type) {
+  async ({type, email, password}: IAuthWithEmailAndPassword) => {
+    switch (type) {
       case "signUp":
-        return await authService.signUpWithEmailPassword(
-          params.email,
-          params.password
+        const signInUser = await authService.signUpWithEmailPassword(
+          email,
+          password
         );
+        if (signInUser instanceof Error) return signInUser
+        return {email: signInUser.user.email, id: signInUser.user.uid}
       case "signIn":
-        return await authService.signInWithEmailPassword(
-          params.email,
-          params.password
+        const signUpUser = await authService.signInWithEmailPassword(
+          email,
+          password
         );
+        if (signUpUser instanceof Error) return signUpUser
+        return {email: signUpUser.user.email, id: signUpUser.user.uid}
       default:
-        break;
+        return Error('Incorrect method')
     }
   }
 );
@@ -54,9 +58,11 @@ export const authWithProvider = createAppAsyncThunk(
   async (params: IAuthWithProvider) => {
     switch (params.type) {
       case "google":
-        return await authService.signInWithGoogle();
+        const authWithGoogle = await authService.signInWithGoogle();
+        if (authWithGoogle instanceof Error) return Error;
+        return {email: authWithGoogle.user.email, id: authWithGoogle.user.uid}
       default:
-        break;
+        return Error('Incorrect provider')
     }
   }
 );
@@ -86,20 +92,23 @@ export const authSlice = createSlice({
       }
     );
     builder.addMatcher(
-      (action) => action.type.endsWith("rejected"),
-      (state) => {
+      (action): action is PayloadAction<Error> => action.type.endsWith("rejected"),
+      (state, action) => {
         state.loading = "failed";
+        alert(action.payload.message)
       }
     );
     builder.addMatcher(
-      (action): action is PayloadAction<UserCredential> =>
-        action.type === "authWithEmailPassword/fulfilled" ||
-        action.type === "authWithProvider/fulfilled",
+      (action): action is PayloadAction<IAuthData> =>
+        action.type === "auth/authWithEmailPassword/fulfilled" ||
+        action.type === "auth/authWithProvider/fulfilled",
       (state, action) => {
         state.loading = "succeeded";
+        state.email = action.payload.email
+        state.id = action.payload.id
         const userData = {
-          email: action.payload.user.email,
-          id: action.payload.user.uid,
+          email: action.payload.email,
+          id: action.payload.id,
         };
         localStorage.setItem(
           "authData",

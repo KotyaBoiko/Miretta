@@ -1,12 +1,6 @@
 @use "./reset.scss" as *;
 @use "./variables.scss" as *;
-
-@font-face {
-  font-family: "Mouzambik";
-  src: url("/src/assets/fonts/Mouzambik.woff2") format("woff2");
-  font-weight: normal;
-  font-style: normal;
-}
+@use "./fonts.scss" as *;
 
 * {
   scrollbar-width: none; /* Для Firefox */
@@ -75,7 +69,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Mouzambik", sans-serif;
+  font-family: $high-font;
   font-weight: 400;
   font-size: 120px;
   color: $main-dark-color;

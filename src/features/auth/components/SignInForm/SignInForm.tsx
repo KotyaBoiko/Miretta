@@ -7,6 +7,7 @@ import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 
 import GitHubIcon from "@/assets/icons/GitHub.svg?react";
 import GoogleIcon from "@/assets/icons/Google.svg?react";
+import Loader from "@/components/ui/Loader/Loader";
 import { useAppDispatch, useAppSelector } from "@/redux/types";
 import { authWithEmailPassword, authWithProvider } from "../../slices/authSlice";
 import classes from "./signInForm.module.scss";
@@ -22,7 +23,7 @@ const SignInForm: FC<Props> = ({ isFormVisible }) => {
   const loading = useAppSelector(state => state.auth.loading)
 
   const dispatch = useAppDispatch()
-
+  
   const handleSignUp = () => {
     isFormVisible(false);
   };
@@ -58,7 +59,7 @@ const SignInForm: FC<Props> = ({ isFormVisible }) => {
           className={classes.signin_entry}
           onClick={() => dispatch(authWithEmailPassword({type: 'signIn', email, password}))}
         >
-          <MainButton width="full">{loading === 'pending' ? "..." : "Sign In"}</MainButton>
+          <MainButton width="full" active={loading === 'pending'}>{loading === 'pending' ? <Loader/> : "Sign In"}</MainButton>
         </div>
       </form>
       <div className={classes.signin_other}>

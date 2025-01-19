@@ -35,7 +35,7 @@
         bottom: -5px;
         width: 100%;
         transform: scaleX(0);
-        height: 1.5px;
+        height: .0938rem;
         background-color: $main-dark-color;
         transition: all 0.3s ease-in;
       }
@@ -61,10 +61,10 @@
     margin-left: auto;
     display: flex;
     gap: 1.25rem;
+    cursor: pointer;
     svg {
       transition: all 0.3s;
       &:hover {
-        cursor: pointer;
         transform: scale(1.1);
       }
     }

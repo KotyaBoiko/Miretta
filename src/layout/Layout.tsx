@@ -1,25 +1,14 @@
-import { FC, useEffect } from "react";
-import Header from "./Header/Header";
+import { FC } from "react";
+import { Outlet } from "react-router";
 import Footer from "./Footer/Footer";
-import { Outlet, useNavigate } from "react-router";
-import { useAppSelector } from "@/redux/types";
-import { USER_ROUTES_NAMES } from "@/router/user/userRoutesNames";
+import Header from "./Header/Header";
+
 
 const Layout: FC = () => {
-
-  const isAuth = useAppSelector((state) => state.auth.isAuth);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (isAuth) {
-      navigate(USER_ROUTES_NAMES.Profile);
-    }
-  }, [isAuth]);
-
   return (
     <div className="global_wrapper">
       <Header />
-        <Outlet />
+      <Outlet />
       <Footer />
       <div className="line line_left"></div>
       <div className="line line_right"></div>

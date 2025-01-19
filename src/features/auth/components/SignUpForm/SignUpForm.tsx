@@ -1,6 +1,5 @@
-import { FC, useState } from "react";
-import { authService } from "../../services";
 import { useAppDispatch } from "@/redux/types";
+import { FC, useState } from "react";
 import { authWithEmailPassword, authWithProvider } from "../../slices/authSlice";
 
 type Props = {};
@@ -10,7 +9,6 @@ const SignUpForm: FC<Props> = ({}) => {
   const [password, setPassword] = useState("");
 
   const dispatch = useAppDispatch();
-
   return (
     <div className="wrapper">
       <input

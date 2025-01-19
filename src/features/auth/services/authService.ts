@@ -19,8 +19,9 @@ export const signUpWithEmailPassword = async (
     return userCredential
   } catch (error) {
     if (error instanceof Error) {
-      alert(error.message);
+      return error
     }
+    return Error("Unknown error")
   }
 };
 
@@ -30,8 +31,9 @@ export const signInWithGoogle = async () => {
     return userCredential
   } catch (error) {
     if (error instanceof Error) {
-      alert(error.message);
+      return error
     }
+    return Error("Unknown error")
   }
 };
 
@@ -44,8 +46,9 @@ export const signInWithEmailPassword = async (
     return userCredential
   } catch (error) {
     if (error instanceof Error) {
-      alert(error.message);
+      return error
     }
+    return Error("Unknown error")
   }
 };
 
@@ -54,7 +57,7 @@ export const signOutUser = async () => {
     await signOut(auth);
   } catch (error) {
     if (error instanceof Error) {
-      alert(error.message);
+     alert(error.message)
     }
   }
 };

@@ -1,0 +1,35 @@
+@use '/src/assets/styles/variables' as *;
+@use '/src/assets/styles/fonts' as *;
+
+.product {
+  &_container {
+    margin: 0 auto;
+    height: 430px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &_preview {
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+  }
+  &_describe {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &_name {
+    color: $main-text-color;
+    font-size: 24px;
+  }
+  &_price {
+    font-size: 40px;
+
+    color: $main-dark-color;
+  }
+
+}

@@ -39,7 +39,7 @@ body {
   &_left {
     margin-left: 99px;
     left: 0;
-    &::before {
+    &::after {
       content: '';
       display: block;
       height: 100%;
@@ -52,10 +52,9 @@ body {
   }
 
   &_right {
-    padding-right: 2px;
-    margin-right: 98px;
+    margin-right: 99px;
     right: 0;
-    &::after {
+    &::before {
       content: '';
       display: block;
       height: 100%;

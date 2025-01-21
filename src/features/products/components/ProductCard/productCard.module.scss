@@ -1,35 +1,46 @@
-@use '/src/assets/styles/variables' as *;
-@use '/src/assets/styles/fonts' as *;
+@use "/src/assets/styles/variables" as *;
+@use "/src/assets/styles/fonts" as *;
 
-.product {
-  &_container {
-    margin: 0 auto;
-    height: 430px;
-    width: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  &_preview {
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
+.card {
+  &__container {
+    transition: all 0.2s;
+    &:hover {
+      transform: scale(1.01);
     }
   }
-  &_describe {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+
+  &__link {
+    cursor: pointer;
   }
-  &_name {
+
+  &__preview {
+    aspect-ratio: 4 / 5;
+  }
+  &__img {
+    width: 100%;
+    height: 100%;
+  }
+  &__describe {
+    padding: 10px 0 ;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    white-space: nowrap;
+  }
+  &__name {
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: $main-text-color;
     font-size: 24px;
   }
-  &_price {
-    font-size: 40px;
-
+  &__price {
+    margin-top: 5px;
+    font-size: 30px;
+    font-weight: 600;
     color: $main-dark-color;
   }
-
+  &__add {
+    margin-top: 10px;
+  }
 }

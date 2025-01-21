@@ -6,4 +6,5 @@ export enum COMMON_ROUTES_NAMES {
   Caps = '/caps',
   Cart = '/cart',
   Auth = '/auth',
+  Product = '/caps/product',
 }

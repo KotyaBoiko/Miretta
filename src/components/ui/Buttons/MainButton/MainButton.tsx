@@ -4,9 +4,11 @@ type Props = {
   children: string | React.ReactNode;
   width?: "content" | "medium" | "full";
   active?: boolean;
+  action?: () => void;
+  className?: string;
 };
 
-const MainButton: FC<Props> = ({ children, width = "medium", active }) => {
+const MainButton: FC<Props> = ({ children, width = "medium", active, className, action }) => {
   return (
     <button
       className={
@@ -14,8 +16,11 @@ const MainButton: FC<Props> = ({ children, width = "medium", active }) => {
         " " +
         classes[`main-btn_${active ? "active" : ""}`] +
         " " +
-        classes[`main-btn_${width}`]
+        classes[`main-btn_${width}`] +
+        " " +
+        className
       }
+      onClick={action}
     >
       {children}
     </button>

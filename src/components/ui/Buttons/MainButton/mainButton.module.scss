@@ -1,17 +1,17 @@
 @use "/src//assets/styles/variables" as *;
 
 .main-btn {
-  // text-align: center;
   height: 50px;
   padding: 10px;
   border: 1px solid $main-dark-color;
   color: $main-dark-color;
   font-weight: 600;
   transition: all 0.3s;
+  cursor: pointer;
+  background: $main-light-color;
   &:hover {
     background-color: $main-dark-color;
     color: $main-light-color;
-    cursor: pointer;
   }
 
   &_active {
@@ -23,7 +23,8 @@
     padding: 5px;
   }
   &_medium {
-    height: 50px;
+    min-height: 50px;
+    min-width: 95px;
     width: 95px;
   }
   &_full {

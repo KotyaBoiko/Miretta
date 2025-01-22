@@ -21,7 +21,7 @@
     height: 100%;
   }
   &__describe {
-    padding: 10px 0 ;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -36,11 +36,8 @@
   }
   &__price {
     margin-top: 5px;
-    font-size: 30px;
-    font-weight: 600;
+    font-size: 50px;
     color: $main-dark-color;
-  }
-  &__add {
-    margin-top: 10px;
+    font-family: $numbers-font;
   }
 }

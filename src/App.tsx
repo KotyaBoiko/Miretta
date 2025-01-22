@@ -23,7 +23,7 @@ const App = () => {
     return () => listener();
   }, []);
 
-  const router = createBrowserRouter([
+const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout />,

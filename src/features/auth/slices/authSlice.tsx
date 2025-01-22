@@ -1,7 +1,6 @@
 import { createAppAsyncThunk } from "@/redux/types";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { authService } from "../services";
-import { act } from "react";
 
 export interface IAuthWithEmailAndPassword {
   type: "signIn" | "signUp";
@@ -32,44 +31,49 @@ const initialState: IAuthState = {
 export const authWithEmailPassword = createAppAsyncThunk(
   "auth/authWithEmailPassword",
   async ({type, email, password}: IAuthWithEmailAndPassword) => {
+    let authUser
     switch (type) {
       case "signUp":
-        const signInUser = await authService.signUpWithEmailPassword(
+        authUser = await authService.signUpWithEmailPassword(
           email,
           password
         );
-        if (signInUser instanceof Error) return signInUser
-        return {email: signInUser.user.email, id: signInUser.user.uid}
+        if (authUser instanceof Error) return authUser
+        break;
       case "signIn":
-        const signUpUser = await authService.signInWithEmailPassword(
+        authUser = await authService.signInWithEmailPassword(
           email,
           password
         );
-        if (signUpUser instanceof Error) return signUpUser
-        return {email: signUpUser.user.email, id: signUpUser.user.uid}
+        if (authUser instanceof Error) return authUser
+        break;
       default:
         return Error('Incorrect method')
     }
+    
+    return {email: authUser.user.email, id: authUser.user.uid}
   }
 );
 
 export const authWithProvider = createAppAsyncThunk(
   "auth/authWithProvider",
-  async (params: IAuthWithProvider) => {
-    switch (params.type) {
+  async ({type}: IAuthWithProvider) => {
+    let authUser;
+    switch (type) {
       case "google":
-        const authWithGoogle = await authService.signInWithGoogle();
-        if (authWithGoogle instanceof Error) return Error;
-        return {email: authWithGoogle.user.email, id: authWithGoogle.user.uid}
+        authUser = await authService.signInWithGoogle();
+        if (authUser instanceof Error) return Error;
+        break
       default:
-        return Error('Incorrect provider')
-    }
+        return Error('Incorrect provider');
+      }
+      return {email: authUser.user.email, id: authUser.user.uid} 
   }
 );
 
 export const logOut = createAppAsyncThunk("auth/logOut", async () => {
   const data = await authService.signOutUser();
-  return data;
+  return data
 });
 
 export const authSlice = createSlice({

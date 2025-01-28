@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Autoplay, EffectFade, Keyboard } from "swiper/modules";
+import { Autoplay, EffectFade } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import classes from "./fadeSlider.module.scss";
@@ -25,7 +25,7 @@ const FadeSlider: FC<Props> = ({ slides }) => {
       {slides.map((slide) => {
         return (
           <SwiperSlide key={slide}>
-            <img src={slide} alt="slide" className={classes.swiper_img} />
+            <img src={slide} alt="slide" className={classes.swiper__img} />
           </SwiperSlide>
         );
       })}

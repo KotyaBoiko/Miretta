@@ -5,7 +5,7 @@
   position: relative;
   z-index: 100;
 
-  &_container {
+  &__container {
     height: 100px;
     display: flex;
     justify-content: space-between;
@@ -16,8 +16,8 @@
     z-index: 10;
   }
 
-  &_nav {
-    &__link {
+  &__nav {
+    &_link {
       margin-right: 15px;
       text-decoration: none;
       position: relative;
@@ -40,7 +40,7 @@
     }
   }
 
-  &_logo {
+  &__logo {
     margin: 0 auto;
     color: $dark-green;
     font-family: "Mouzambik", sans-serif;
@@ -48,7 +48,7 @@
     font-weight: 300;
   }
 
-  &_interactive {
+  &__interactive {
     margin-left: auto;
     display: flex;
     gap: 1.25rem;
@@ -61,17 +61,17 @@
     }
   }
 
-  &_profile {
+  &__profile {
     width: 20px;
     height: 22px;
     color: $main-dark-color;
   }
 
-  &_cart {
+  &__cart {
     color: $main-dark-color;
   }
 
-  &_auth {
+  &__auth {
     top: 85px;
     right: 5vw;
     padding: 0 !important;

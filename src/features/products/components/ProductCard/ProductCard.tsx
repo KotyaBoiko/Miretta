@@ -11,19 +11,27 @@ type Props = {
   productId: number;
 };
 
-const ProductCard: FC<Props> = ({ productName, productImg, productPrice, productId }) => {
+const ProductCard: FC<Props> = ({
+  productName,
+  productImg,
+  productPrice,
+  productId,
+}) => {
   return (
     <div className={classes.card__container}>
-      <Link to={`${COMMON_ROUTES_NAMES.Product}/${productId}`} className={classes.card__link}>
-        <div className={classes.card__preview}>
-          <img src={productImg} alt={productName} className={classes.card__img}/>
-        </div>
+      <Link
+        to={`${COMMON_ROUTES_NAMES.Product}/${productId}`}
+        className={classes.card__link}
+      >
+        <img src={productImg} alt={productName} className={classes.card__img} />
         <div className={classes.card__describe}>
-          <p className={classes.card__name}>{productName}</p>
-          <p className={classes.card__price}>$ {productPrice}</p>
+          <span className={classes.card__name}>{productName}</span>
+          <span className={classes.card__price}>$ {productPrice}</span>
         </div>
       </Link>
-      <MainButton width="full" className={classes.card__add}>ADD TO CART</MainButton>
+      <MainButton width="full" className={classes.card__add}>
+        ADD TO CART
+      </MainButton>
     </div>
   );
 };

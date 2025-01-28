@@ -26,26 +26,26 @@ const ProductInfo:FC = () => {
   return (
           <div className={classes.product__data}>
             <h2 className={classes.product__title}>{title.toUpperCase()}</h2>
-            <div className={classes.product__describe}>{describe}</div>
-            <div className={classes.product__detail}>
-              <div className={classes.product_detail_info}>
-                <span className={classes.product__detail_key}>
+            <p className={classes.product__describe}>{describe}</p>
+            <div className={classes.product__specification}>
+              <div className={classes.product_specification_info}>
+                <span className={classes.product__specification_key}>
                   Color:
-                  <span className={classes["product__detail_value"]}>
+                  <span className={classes.product__specification_value}>
                     {" "}
                     Ecru
                   </span>
                 </span>
-                <span className={classes.product__detail_key}>
+                <span className={classes.product__specification_key}>
                   SKU:
-                  <span className={classes["product__detail_value"]}>
+                  <span className={classes.product__specification_value}>
                     {" "}
                     324254
                   </span>
                 </span>
-                <span className={classes.product__detail_key}>
+                <span className={classes.product__specification_key}>
                   Material:{" "}
-                  <span className={classes["product__detail_value"]}>
+                  <span className={classes.product__specification_value}>
                     100% cotton
                   </span>
                 </span>
@@ -53,7 +53,7 @@ const ProductInfo:FC = () => {
               <Sizes active={size} setActive={setSize} />
             </div>
             <h4 className={classes.product__price}>$ {price}</h4>
-            <div className={classes.product__buy}>
+            <div className={classes.product__buying}>
               <div className={classes.product__interactive}>
                 <MainButton
                   width="medium"

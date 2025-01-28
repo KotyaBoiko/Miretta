@@ -1,7 +1,7 @@
 @use "/src/assets/styles/variables.scss" as *;
 
 .signin {
-  &_container {   
+  &__container {   
     width: 360px;
     display: flex;
     flex-direction: column;
@@ -13,30 +13,30 @@
     color: $main-dark-color;
   }
 
-  &_form {
+  &__form {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
 
-  &_field {
+  &__field {
     display: flex;
     flex-direction: column;
     gap: 5px;
   }
 
-  &_entry {
+  &__entry {
     margin-top: 20px;
   }
 
-  &_other {
+  &__other {
     display: flex;
     flex-direction: column;
     gap: 10px;
     text-align: center;
     font-weight: 300;
     color: $main-text-color;
-    &__icons {
+    &_icons {
       display: flex;
       gap: 20px; 
       justify-content: center;
@@ -50,7 +50,7 @@
     }
   }
 
-  &_signup {
+  &__signup {
     display: flex;
     flex-direction: column;
     gap: 10px;

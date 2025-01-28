@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
 import CommonInput from "@/components/ui/Input/CommonInput";
@@ -9,33 +9,38 @@ import GitHubIcon from "@/assets/icons/GitHub.svg?react";
 import GoogleIcon from "@/assets/icons/Google.svg?react";
 import Loader from "@/components/ui/Loader/Loader";
 import { useAppDispatch, useAppSelector } from "@/redux/types";
-import { authWithEmailPassword, authWithProvider } from "../../slices/authSlice";
+import {
+  authWithEmailPassword,
+  authWithProvider,
+} from "../../slices/authSlice";
 import classes from "./signInForm.module.scss";
 
 type Props = {
-  isFormVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsFormVisible: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SignInForm: FC<Props> = ({ isFormVisible }) => {
+const SignInForm: FC<Props> = ({ setIsFormVisible }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const loading = useAppSelector(state => state.auth.loading)
+  const navigate = useNavigate()
+  const loading = useAppSelector((state) => state.auth.loading);
 
-  const dispatch = useAppDispatch()
-  
-  const handleSignUp = () => {
-    isFormVisible(false);
+  const dispatch = useAppDispatch();
+
+  const handleSignUpClick = () => {
+    setIsFormVisible(false);
+    navigate(COMMON_ROUTES_NAMES.Auth)
   };
 
   return (
-    <div className={classes.signin_container}>
+    <div className={classes.signin__container}>
       <form
         action=""
-        className={classes.signin_form}
+        className={classes.signin__form}
         onSubmit={(e) => e.preventDefault()}
       >
-        <div className={classes.signin_field}>
+        <div className={classes.signin__field}>
           <label htmlFor="signin-email">Email:</label>
           <CommonInput
             type="email"
@@ -45,7 +50,7 @@ const SignInForm: FC<Props> = ({ isFormVisible }) => {
             onChange={setEmail}
           />
         </div>
-        <div className={classes.signin_field}>
+        <div className={classes.signin__field}>
           <label htmlFor="signin-password">Password:</label>
           <CommonInput
             type="password"
@@ -55,29 +60,31 @@ const SignInForm: FC<Props> = ({ isFormVisible }) => {
             onChange={setPassword}
           />
         </div>
-        <div
-          className={classes.signin_entry}
-          onClick={() => dispatch(authWithEmailPassword({type: 'signIn', email, password}))}
+        <MainButton
+          width="full"
+          active={loading === "pending"}
+          className={classes.signin__entry}
+          action={() =>
+            dispatch(authWithEmailPassword({ type: "signIn", email, password }))
+          }
         >
-          <MainButton width="full" active={loading === 'pending'}>{loading === 'pending' ? <Loader/> : "Sign In"}</MainButton>
-        </div>
+          {loading === "pending" ? <Loader /> : "Sign In"}
+        </MainButton>
       </form>
-      <div className={classes.signin_other}>
-        <p className={classes.signin_other__title}>Fast method</p>
-        <div className={classes.signin_other__icons}>
+      <div className={classes.signin__other}>
+        <span>Fast method</span>
+        <div className={classes.signin__other_icons}>
           <GoogleIcon
             width={40}
             height={40}
-            onClick={() => dispatch(authWithProvider({type: 'google'}))}
+            onClick={() => dispatch(authWithProvider({ type: "google" }))}
           />
           <GitHubIcon width={40} height={40} />
         </div>
       </div>
-      <div className={classes.signin_signup}>
-        <p className={classes.signin_signup__text}>-or-</p>
-        <Link to={COMMON_ROUTES_NAMES.Auth} onClick={handleSignUp}>
-          <MainButton width="full">Sign Up</MainButton>
-        </Link>
+      <div className={classes.signin__signup}>
+        <span>-or-</span>
+          <MainButton width="full" action={handleSignUpClick}>Sign Up</MainButton>
       </div>
     </div>
   );

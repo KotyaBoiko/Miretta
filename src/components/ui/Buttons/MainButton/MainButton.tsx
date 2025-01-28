@@ -12,11 +12,11 @@ const MainButton: FC<Props> = ({ children, width = "medium", active, className, 
   return (
     <button
       className={
-        classes["main-btn"] +
+        classes.btn +
         " " +
-        classes[`main-btn_${active ? "active" : ""}`] +
+        classes[`btn-${active ? "active" : ""}`] +
         " " +
-        classes[`main-btn_${width}`] +
+        classes[`btn-${width}`] +
         " " +
         className
       }

@@ -13,12 +13,9 @@
     cursor: pointer;
   }
 
-  &__preview {
-    aspect-ratio: 4 / 5;
-  }
   &__img {
+    aspect-ratio: 4 / 5;
     width: 100%;
-    height: 100%;
   }
   &__describe {
     padding: 10px;

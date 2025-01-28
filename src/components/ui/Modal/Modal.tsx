@@ -18,12 +18,12 @@ const Modal: React.FC<ModalProps> = ({
   if (!isOpen) return null;
 
   return createPortal(
-    <div className={classes.modal_container} onClick={onClose}>
+    <div className={classes.modal__container} onClick={onClose}>
       <div
         className={
-          classes.modal_content +
+          classes.modal__content +
           " " +
-          (!classNameContent ? classes.modal_center : classNameContent)
+          (classNameContent ? classNameContent : classes[`modal__content-center`])
         }
         onClick={(e) => e.stopPropagation()}
       >

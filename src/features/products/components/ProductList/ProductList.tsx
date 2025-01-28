@@ -1,4 +1,4 @@
-import productImg1 from "@/assets/img/171960011-dynamic1-pdp.webp";
+import productImg1 from "@/assets/img/ccapescapr-capldhelcap-vgoEPFKHiJU-unsplcapsh.jpg";
 import productImg2 from "@/assets/img/ccapescapr-capldhelcap-vgoEPFKHiJU-unsplcapsh.jpg";
 import productImg3 from "@/assets/img/dmitry-kropcapchev-capghiyL-DQcapI-unsplcapsh.jpg";
 import productImg from "@/assets/img/jon-tyson-OCv_Rf0fZPo-unsplcapsh.jpg";

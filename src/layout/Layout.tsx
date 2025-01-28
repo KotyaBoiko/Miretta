@@ -6,12 +6,12 @@ import Header from "./Header/Header";
 
 const Layout: FC = () => {
   return (
-    <div className="global_wrapper">
+    <div className="global__wrapper">
       <Header />
       <Outlet />
       <Footer />
-      <div className="line line_left"></div>
-      <div className="line line_right"></div>
+      <div className="line line-left"></div>
+      <div className="line line-right"></div>
     </div>
   );
 };

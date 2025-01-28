@@ -31,47 +31,47 @@ const Header: FC = () => {
   return (
     <header className={classes.header}>
       <div className="wrapper">
-        <div className={classes.header_container}>
-          <nav className={classes.header_nav}>
+        <div className={classes.header__container}>
+          <nav className={classes.header__nav}>
             <Link
               to={COMMON_ROUTES_NAMES.Shirts}
-              className={classes.header_nav__link}
+              className={classes.header__nav_link}
             >
               Shirts & Tops
             </Link>
             <Link
               to={COMMON_ROUTES_NAMES.Outerwear}
-              className={classes.header_nav__link}
+              className={classes.header__nav_link}
             >
               Outerwear
             </Link>
             <Link
               to={COMMON_ROUTES_NAMES.Bottoms}
-              className={classes.header_nav__link}
+              className={classes.header__nav_link}
             >
               Bottoms
             </Link>
             <Link
               to={COMMON_ROUTES_NAMES.Caps}
-              className={classes.header_nav__link}
+              className={classes.header__nav_link}
             >
               Caps
             </Link>
           </nav>
           {location.pathname != "/" && (
-            <Link to={COMMON_ROUTES_NAMES.Home} className={classes.header_logo}>
+            <Link to={COMMON_ROUTES_NAMES.Home} className={classes.header__logo}>
               MIRETTA
             </Link>
           )}
-          <div className={classes.header_interactive}>
+          <div className={classes.header__interactive}>
             <ProfileIcon
-              className={classes.header_profile}
+              className={classes.header__profile}
               onClick={openProfile}
             />
-            <Modal isOpen={isAuthModalOpen && !isAuth} onClose={closeAuthModal} classNameContent={classes.header_auth}>
-              <SignInForm isFormVisible={setIsAuthModalOpen}/>
+            <Modal isOpen={isAuthModalOpen && !isAuth} onClose={closeAuthModal} classNameContent={classes.header__auth}>
+              <SignInForm setIsFormVisible={setIsAuthModalOpen}/>
             </Modal>
-            <CartIcon className={classes.header_cart} />
+            <CartIcon className={classes.header__cart} />
           </div>
         </div>
       </div>

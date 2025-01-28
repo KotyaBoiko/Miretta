@@ -7,8 +7,8 @@ import { MoreButton } from "@/components/ui/Buttons/MoreButton";
 const CollectionVSide: FC<TCollectionProps> = ({
   title,
   description,
-  mainImageUrl,
-  smallImageUrl = "",
+  mainImg,
+  additionalImg = "",
   variant,
 }) => {
   const mainImgClass = `${classes.collection__mainImg_picture} ${
@@ -25,7 +25,7 @@ const CollectionVSide: FC<TCollectionProps> = ({
   return (
     <div className="wrapper">
       <div className={classes.collection}>
-        <img src={mainImageUrl} alt={title} className={mainImgClass} />
+        <img src={mainImg} alt={title} className={mainImgClass} />
         <div className={textClass}>
           <h2 className={classes.collection__title}>{title}</h2>
           <div className={classes.collection__description}>
@@ -35,9 +35,9 @@ const CollectionVSide: FC<TCollectionProps> = ({
             <div className={classes.collection__more_btn}>
               <MoreButton path="/caps" text="Discover Collection" />
             </div>
-            {smallImageUrl != "" && (
+            {additionalImg != "" && (
               <img
-                src={smallImageUrl}
+                src={additionalImg}
                 alt={title}
                 className={classes.collection__more_smallImg}
               />

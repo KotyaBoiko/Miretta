@@ -12,10 +12,8 @@ import ArrowIcon from "@/assets/icons/arrow-right.svg?react"
 const MoreButton: FC<Props> = ({ path, text, className }) => {
   return (
     <Link
-      to={path}
-      // style={{ color: color, border: `1px solid ${color}` }}
-      
-      className={`${classes.btn} ${className ? className : ''}`}
+      to={path}      
+      className={`${classes.more} ${className ? className : ''}`}
     >
       {text}
       <ArrowIcon className={classes.arrow}/>

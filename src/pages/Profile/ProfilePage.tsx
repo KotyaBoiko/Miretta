@@ -3,9 +3,9 @@ import { logOut } from "@/features/auth/slices/authSlice";
 import { auth, db } from "@/firebase/firebase-config";
 import { useAppDispatch } from "@/redux/types";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
+import { collection, getDocs } from "firebase/firestore";
 import { FC } from "react";
 import { Link } from "react-router";
-import { collection, addDoc, getDocs } from "firebase/firestore";
 
 const ProfilePage: FC = ({}) => {
   const dispatch = useAppDispatch();

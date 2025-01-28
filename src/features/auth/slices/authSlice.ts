@@ -19,6 +19,7 @@ export interface IAuthData {
 export interface IAuthState extends IAuthData {
   isAuth: boolean;
   loading: "idle" | "pending" | "succeeded" | "failed";
+  loadingLogOut: "idle" | "pending" | "succeeded" | "failed";
 }
 
 const initialState: IAuthState = {
@@ -26,54 +27,49 @@ const initialState: IAuthState = {
   id: "",
   isAuth: false,
   loading: "idle",
+  loadingLogOut: "idle",
 };
 
 export const authWithEmailPassword = createAppAsyncThunk(
   "auth/authWithEmailPassword",
-  async ({type, email, password}: IAuthWithEmailAndPassword) => {
-    let authUser
+  async ({ type, email, password }: IAuthWithEmailAndPassword) => {
+    let authUser;
     switch (type) {
       case "signUp":
-        authUser = await authService.signUpWithEmailPassword(
-          email,
-          password
-        );
-        if (authUser instanceof Error) return authUser
+        authUser = await authService.signUpWithEmailPassword(email, password);
+        if (authUser instanceof Error) return authUser;
         break;
       case "signIn":
-        authUser = await authService.signInWithEmailPassword(
-          email,
-          password
-        );
-        if (authUser instanceof Error) return authUser
+        authUser = await authService.signInWithEmailPassword(email, password);
+        if (authUser instanceof Error) return authUser;
         break;
       default:
-        return Error('Incorrect method')
+        return Error("Incorrect method");
     }
-    
-    return {email: authUser.user.email, id: authUser.user.uid}
+
+    return { email: authUser.user.email, id: authUser.user.uid };
   }
 );
 
 export const authWithProvider = createAppAsyncThunk(
   "auth/authWithProvider",
-  async ({type}: IAuthWithProvider) => {
+  async ({ type }: IAuthWithProvider) => {
     let authUser;
     switch (type) {
       case "google":
         authUser = await authService.signInWithGoogle();
         if (authUser instanceof Error) return Error;
-        break
+        break;
       default:
-        return Error('Incorrect provider');
-      }
-      return {email: authUser.user.email, id: authUser.user.uid} 
+        return Error("Incorrect provider");
+    }
+    return { email: authUser.user.email, id: authUser.user.uid };
   }
 );
 
 export const logOut = createAppAsyncThunk("auth/logOut", async () => {
   const data = await authService.signOutUser();
-  return data
+  return data;
 });
 
 export const authSlice = createSlice({
@@ -85,21 +81,31 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
+    builder.addCase(logOut.pending, (state) => {
+      state.loadingLogOut = "pending";
+    });
     builder.addCase(logOut.fulfilled, (state) => {
-      state.loading = "succeeded";
+      state.loadingLogOut = "succeeded";
       localStorage.removeItem("authData");
     });
+    builder.addCase(logOut.rejected, (state) => {
+      state.loadingLogOut = "failed";
+    });
     builder.addMatcher(
-      (action) => action.type.endsWith("pending"),
-      (state) => {
-        state.loading = "pending";
+      (action): action is PayloadAction<Error> =>
+        action.type === "auth/authWithEmailPassword/rejected" ||
+        action.type === "auth/authWithProvider/rejected",
+      (state, action) => {
+        state.loading = "failed";
+        alert(action.payload.message);
       }
     );
     builder.addMatcher(
-      (action): action is PayloadAction<Error> => action.type.endsWith("rejected"),
-      (state, action) => {
-        state.loading = "failed";
-        alert(action.payload.message)
+      (action): action is PayloadAction<Error> =>
+        action.type === "auth/authWithEmailPassword/pending" ||
+        action.type === "auth/authWithProvider/pending",
+      (state) => {
+        state.loading = "pending";
       }
     );
     builder.addMatcher(
@@ -108,8 +114,8 @@ export const authSlice = createSlice({
         action.type === "auth/authWithProvider/fulfilled",
       (state, action) => {
         state.loading = "succeeded";
-        state.email = action.payload.email
-        state.id = action.payload.id
+        state.email = action.payload.email;
+        state.id = action.payload.id;
         const userData = {
           email: action.payload.email,
           id: action.payload.id,

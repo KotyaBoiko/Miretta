@@ -13,23 +13,10 @@
       $light-green 7%,
       rgba(49, 107, 72, 1) 38%
     );
-    &_background {
-      width: 100%;
-      height: auto;
-      z-index: 20;
-    }
-    &_top {
-      margin-top: -100px;
-      height: 100vh;
+    
+    &_logo {
       text-align: center;
       font-family: "Mouzambik", sans-serif;
-    }
-
-    &_bottom {
-      background: #c8bfae;
-    }
-
-    &_logo {
       color: $main-light-color;
       font-size: 550px;
       position: absolute;

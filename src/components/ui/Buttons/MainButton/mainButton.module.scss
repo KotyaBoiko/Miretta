@@ -1,6 +1,6 @@
 @use "/src//assets/styles/variables" as *;
 
-.main-btn {
+.btn {
   height: 50px;
   padding: 10px;
   border: 1px solid $main-dark-color;
@@ -14,20 +14,20 @@
     color: $main-light-color;
   }
 
-  &_active {
+  &-active {
     background-color: $main-dark-color;
     color: $main-light-color;
   }
 
-  &_content {
+  &-content {
     padding: 5px;
   }
-  &_medium {
+  &-medium {
     min-height: 50px;
     min-width: 95px;
     width: 95px;
   }
-  &_full {
+  &-full {
     width: 100%;
   }
 }

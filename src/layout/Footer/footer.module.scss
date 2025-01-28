@@ -6,7 +6,7 @@
   z-index: 9;
   position: relative;
   width: 100vw;
-  &_top {
+  &__top {
     display: flex;
     align-items: center;
     padding: 100px 100px;
@@ -15,22 +15,23 @@
     position: relative;
   }
 
-  &_logo {
+  &__logo {
+    color: $main-light-color;
     align-self: center;
     margin: auto;
     font-family: "Mouzambik", sans-serif;
     font-size: 150px;
     font-weight: 400;
-    position: absolute; /* Центруємо тільки середній елемент */
-    left: 50%; /* Встановлюємо центр по горизонталі */
-    transform: translateX(-50%); /* Вирівнюємо по центру */
+    position: absolute;
+    left: 50%; 
+    transform: translateX(-50%); 
   }
 
-  &_social {
+  &__social {
     margin-left: auto;
     display: flex;
     gap: .625rem;
-    &__icon {
+    &_icon {
       width: 35px;
       height: 35px;
       fill: white;

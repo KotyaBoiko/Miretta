@@ -1,0 +1,15 @@
+@use "/src/assets/styles/fonts" as *;
+
+.sizes {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+
+  &__size {
+    font-size: 40px;
+    font-family: $high-font;
+    font-weight: 400;
+    position: relative;
+    bottom: 4px;
+  }
+}

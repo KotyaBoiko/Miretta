@@ -2,15 +2,15 @@
 
 .collection {
   height: 100vh;
-  width: 100vw;
   position: relative;
   z-index: 80;
   overflow: hidden;
-  &:hover {
-    .collection_mainImg {
-      scale: 1.2;
-    }
-  }
+  margin: 50px 0;
+  // &:hover {
+  //   .collection_mainImg {
+  //     scale: 1.2;
+  //   }
+  // }
   &_container {
     padding: 0 40px;
     padding-top: 50px;
@@ -37,10 +37,20 @@
     color: $main-light-color;
   }
 
-  &_btn {
+  &__btn {
     margin-left: 10px;
     margin-top: 10px;
     color: $main-dark-color;
+
+
+    &_theme{
+      border: 1px solid $main-light-color;
+      color: $main-light-color;
+
+      svg {
+        stroke: $main-light-color;
+      }
+    }
   }
 
   &_imgContainer {
@@ -52,8 +62,6 @@
     left: 0;
     z-index: 70;
     width: 100%;
-    filter: blur(5px);
-    scale: 1.1;
-    transition: all 2s;
+    height: 100%;
   }
 }

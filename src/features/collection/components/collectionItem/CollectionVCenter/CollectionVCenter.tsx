@@ -10,27 +10,29 @@ const CollectionVCenter: FC<Omit<TCollectionProps, "variant" | "smallImg">> = ({
   mainImageUrl,
 }) => {
   return (
+      <div className="wrapper">
     <div className={classes.collection}>
-      <h2 className={classes.collection_title}>
-        <span>{title}</span>
-      </h2>
-      <div className={classes.collection_container}>
-        <div className={classes.collection_description}>
-          <p>{description}</p>
+        <h2 className={classes.collection_title}>
+          <span>{title}</span>
+        </h2>
+        <div className={classes.collection_container}>
+          <div className={classes.collection_description}>
+            <p>{description}</p>
+          </div>
+          <div className={classes.collection_btn}>
+            <MoreButton
+              path="/caps"
+              text="Discover Collection"
+              className={classes.collection__btn_theme}
+            />
+          </div>
         </div>
-        <div className={classes.collection_btn}>
-          <MoreButton
-            path="/caps"
-            text="Discover Collection"
-            color={mainLightColor}
-          />
-        </div>
+        <img
+          src={mainImageUrl}
+          alt={title}
+          className={classes.collection_mainImg}
+        />
       </div>
-      <img
-        src={mainImageUrl}
-        alt={title}
-        className={classes.collection_mainImg}
-      />
     </div>
   );
 };

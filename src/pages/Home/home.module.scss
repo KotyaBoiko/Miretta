@@ -1,29 +1,42 @@
 @use "/src//assets/styles/variables" as *;
 
 .home {
-  &_main {
+  &__main {
+    overflow: hidden;
     position: relative;
-    &__top {
+    z-index: 20;
+    margin-top: -100px;
+    height: 100vh;
+    background: $light-green;
+    background: radial-gradient(
+      circle,
+      $light-green 7%,
+      rgba(49, 107, 72, 1) 38%
+    );
+    &_background {
+      width: 100%;
+      height: auto;
+      z-index: 20;
+    }
+    &_top {
       margin-top: -100px;
       height: 100vh;
       text-align: center;
       font-family: "Mouzambik", sans-serif;
     }
 
-    &__bottom {
+    &_bottom {
       background: #c8bfae;
     }
 
-    &__logo {
+    &_logo {
       color: $main-light-color;
       font-size: 550px;
       position: absolute;
-      z-index: 10;
+      z-index: 30;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
     }
-
-
   }
 }

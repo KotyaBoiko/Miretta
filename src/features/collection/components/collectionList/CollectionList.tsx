@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import {
   CollectionVCenter,
   CollectionVSide,
@@ -9,6 +9,9 @@ import mainImg1 from "@/assets/img/171960011-dynamic1-pdp.webp";
 import capsImg from "@/assets/img/ccapescapr-capldhelcap-vgoEPFKHiJU-unsplcapsh.jpg";
 
 import classes from "./collectionsList.module.scss";
+import { API } from "@/firebase/API";
+import { useLoaderData } from "react-router";
+import { useGetCollectionsQuery } from "../../collectionApi";
 
 type Props = {};
 
@@ -47,17 +50,30 @@ const collections: TCollectionProps[] = [
   },
 ];
 
+export type TCollection = {
+  title: string;
+  description: string;
+  mainImg: string;
+  additionalImg: string;
+  code: number;
+};
+
+// export const getCollections = async () =>
+//   API.getAllCollectionDocs<TCollection>("collections");
+
 const CollectionList: FC<Props> = ({}) => {
+  // const data:TCollection[] = useLoaderData();
+  const {data, isLoading, error} = useGetCollectionsQuery()
   return (
     <section className={classes.collections}>
-      {collections.map((collection, index) => {
+      {isLoading ? <>Loading...</> : !data ? <>No data</> : collections.map((collection, index) => {
         if (collection.variant == "center") {
           return (
             <CollectionVCenter
               key={index}
-              title={collection.title}
-              description={collection.description}
-              mainImageUrl={collection.mainImageUrl}
+              title={data[index].title.toUpperCase()}
+              description={data[index].description}
+              mainImageUrl={data[index].mainImg}
             />
           );
         }
@@ -65,10 +81,10 @@ const CollectionList: FC<Props> = ({}) => {
         return (
           <CollectionVSide
             key={index}
-            title={collection.title}
-            description={collection.description}
-            mainImageUrl={collection.mainImageUrl}
-            smallImageUrl={collection.smallImageUrl}
+            title={data[index].title.toUpperCase()}
+            description={data[index].description}
+            mainImageUrl={data[index].mainImg}
+            smallImageUrl={data[index].additionalImg}
             variant={collection.variant}
           />
         );

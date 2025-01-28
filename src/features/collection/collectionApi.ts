@@ -1,0 +1,21 @@
+import { API } from "@/firebase/API";
+import { baseApi } from "@/redux/baseApi";
+import { TCollection } from "./components/collectionList/CollectionList";
+
+export const collectionApi = baseApi.injectEndpoints({
+  endpoints: (builder) => ({
+    getCollections: builder.query<TCollection[], void>({
+      async queryFn() {
+        try {
+          const data = await API.getAllCollectionDocs<TCollection>("collections")
+          data.sort((a, b) => a.code - b.code);
+          return {data}
+        } catch (error) {
+          return {error}
+        }
+      }
+    })
+  })
+})
+
+export const {useGetCollectionsQuery} = collectionApi;

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import classes from "./collectionVSide.module.scss"
+import classes from "./collectionVSide.module.scss";
 
 import { TCollectionProps } from "../type";
 import { MoreButton } from "@/components/ui/Buttons/MoreButton";
@@ -9,37 +9,40 @@ const CollectionVSide: FC<TCollectionProps> = ({
   description,
   mainImageUrl,
   smallImageUrl = "",
-  variant
+  variant,
 }) => {
-  const mainImgClass =
-    `${classes.collection_mainImg} ${classes[`collection_mainImg__${variant}`]}`;
-  const textClass =
-    `${classes.collection_text} ${classes[`collection_text__${variant}`]}`;
+  const mainImgClass = `${classes.collection__mainImg_picture} ${
+    classes[`collection__mainImg_picture-${variant}`]
+  }`;
+  const textClass = `${classes.collection__text} ${
+    classes[`collection__text-${variant}`]
+  }`;
 
-  const moreClass = `${classes.collection_more
-  } ${classes[`collection_more__${variant}`]}`;
+  const moreClass = `${classes.collection__more} ${
+    classes[`collection__more-${variant}`]
+  }`;
 
   return (
-    <div className='wrapper'>
+    <div className="wrapper">
       <div className={classes.collection}>
         <img src={mainImageUrl} alt={title} className={mainImgClass} />
         <div className={textClass}>
-          <h2 className={classes.collection_title}>{title}</h2>
-          <div className={classes.collection_description}>
+          <h2 className={classes.collection__title}>{title}</h2>
+          <div className={classes.collection__description}>
             <p>{description}</p>
           </div>
-            <div className={moreClass}>
-              <div className={classes.collection_more__btn}>
-                <MoreButton path="/caps" text="Discover Collection" />
-              </div>
-              {smallImageUrl != "" && (
-                <img
-                  src={smallImageUrl}
-                  alt={title}
-                  className={classes.collection_more__smallImg}
-                />
-              )}
+          <div className={moreClass}>
+            <div className={classes.collection__more_btn}>
+              <MoreButton path="/caps" text="Discover Collection" />
             </div>
+            {smallImageUrl != "" && (
+              <img
+                src={smallImageUrl}
+                alt={title}
+                className={classes.collection__more_smallImg}
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

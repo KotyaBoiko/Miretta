@@ -3,30 +3,24 @@ import classes from "./productCard.module.scss";
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
 import { Link } from "react-router";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
+import { ProductBasic } from "../../types/product";
 
-type Props = {
-  productImg: string;
-  productName: string;
-  productPrice: number;
-  productId: number;
-};
-
-const ProductCard: FC<Props> = ({
-  productName,
-  productImg,
-  productPrice,
-  productId,
+const ProductCard: FC<ProductBasic> = ({
+  title,
+  img,
+  price,
+  id,
 }) => {
   return (
     <div className={classes.card__container}>
       <Link
-        to={`${COMMON_ROUTES_NAMES.Product}/${productId}`}
+        to={`${COMMON_ROUTES_NAMES.Product}/${id}`}
         className={classes.card__link}
       >
-        <img src={productImg} alt={productName} className={classes.card__img} />
+        <img src={img} alt={title} className={classes.card__img} />
         <div className={classes.card__describe}>
-          <span className={classes.card__name}>{productName}</span>
-          <span className={classes.card__price}>$ {productPrice}</span>
+          <span className={classes.card__name}>{title}</span>
+          <span className={classes.card__price}>$ {price}</span>
         </div>
       </Link>
       <MainButton width="full" className={classes.card__add}>

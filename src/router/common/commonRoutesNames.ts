@@ -1,10 +1,7 @@
 export enum COMMON_ROUTES_NAMES {
   Home = '/',
-  Shirts = '/shirts&tops',
-  Outerwear = '/outerwear',
-  Bottoms = '/bottoms',
-  Caps = '/caps',
+  Category = '/category',
   Cart = '/cart',
   Auth = '/auth',
-  Product = '/caps/product',
+  Product = '/product',
 }

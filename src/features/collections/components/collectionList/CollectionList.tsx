@@ -13,6 +13,7 @@ export type TCollection = {
   mainImg: string;
   additionalImg: string;
   code: number;
+  id: number;
 };
 
 const CollectionList:FC = ({}) => {
@@ -23,7 +24,7 @@ const CollectionList:FC = ({}) => {
         if (collection.code == 3) {
           return (
             <CollectionVCenter
-              key={index}
+              key={collection.id}
               title={collection.title.toUpperCase()}
               description={collection.description}
               mainImg={collection.mainImg}
@@ -33,7 +34,7 @@ const CollectionList:FC = ({}) => {
 
         return (
           <CollectionVSide
-            key={index}
+            key={collection.id}
             title={collection.title.toUpperCase()}
             description={collection.description}
             mainImg={collection.mainImg}

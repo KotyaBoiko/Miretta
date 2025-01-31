@@ -10,56 +10,61 @@ import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import { USER_ROUTES_NAMES } from "@/router/user/userRoutesNames";
 import classes from "./header.module.scss";
 
+const types = [
+  ["Tops", "Shirts & Tops"],
+  ["Sweaters", "Sweaters"],
+  ["Bottoms", "Bottoms"],
+  ["Caps", "Caps"],
+];
+
 const Header: FC = () => {
-  const isAuth = useAppSelector(state => state.auth.isAuth)
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
   let navigate = useNavigate();
   const location = useLocation();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const openProfile = () => {
-    if(isAuth) {
-      navigate(USER_ROUTES_NAMES.Profile)
+    if (isAuth) {
+      navigate(USER_ROUTES_NAMES.Profile);
     } else {
-      setIsAuthModalOpen(true)
+      setIsAuthModalOpen(true);
     }
-  }
+  };
 
   const closeAuthModal = () => {
     setIsAuthModalOpen(false);
   };
-
+  {
+    types.map((type) => {
+      return (
+        <Link to={COMMON_ROUTES_NAMES.Category + type[0]} key={type[0]}>
+          {type[1]}
+        </Link>
+      );
+    });
+  }
   return (
     <header className={classes.header}>
       <div className="wrapper">
         <div className={classes.header__container}>
           <nav className={classes.header__nav}>
-            <Link
-              to={COMMON_ROUTES_NAMES.Shirts}
-              className={classes.header__nav_link}
-            >
-              Shirts & Tops
-            </Link>
-            <Link
-              to={COMMON_ROUTES_NAMES.Outerwear}
-              className={classes.header__nav_link}
-            >
-              Outerwear
-            </Link>
-            <Link
-              to={COMMON_ROUTES_NAMES.Bottoms}
-              className={classes.header__nav_link}
-            >
-              Bottoms
-            </Link>
-            <Link
-              to={COMMON_ROUTES_NAMES.Caps}
-              className={classes.header__nav_link}
-            >
-              Caps
-            </Link>
+            {types.map((type) => {
+              return (
+                <Link
+                  to={COMMON_ROUTES_NAMES.Category + `/${type[0].toLowerCase()}`}
+                  key={type[0]}
+                  className={classes.header__nav_link}
+                >
+                  {type[1]}
+                </Link>
+              );
+            })}
           </nav>
           {location.pathname != "/" && (
-            <Link to={COMMON_ROUTES_NAMES.Home} className={classes.header__logo}>
+            <Link
+              to={COMMON_ROUTES_NAMES.Home}
+              className={classes.header__logo}
+            >
               MIRETTA
             </Link>
           )}
@@ -68,8 +73,12 @@ const Header: FC = () => {
               className={classes.header__profile}
               onClick={openProfile}
             />
-            <Modal isOpen={isAuthModalOpen && !isAuth} onClose={closeAuthModal} classNameContent={classes.header__auth}>
-              <SignInForm setIsFormVisible={setIsAuthModalOpen}/>
+            <Modal
+              isOpen={isAuthModalOpen && !isAuth}
+              onClose={closeAuthModal}
+              classNameContent={classes.header__auth}
+            >
+              <SignInForm setIsFormVisible={setIsAuthModalOpen} />
             </Modal>
             <CartIcon className={classes.header__cart} />
           </div>

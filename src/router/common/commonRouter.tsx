@@ -10,23 +10,11 @@ export const commonRouter = [
     element: <HomePage/>,
   },
   {
-    path: COMMON_ROUTES_NAMES.Shirts,
-    element: <div>Shirts</div>,
+    path: COMMON_ROUTES_NAMES.Category + '/:category',
+    element: <ProductsPage/>
   },
   {
-    path: COMMON_ROUTES_NAMES.Outerwear,
-    element: <div>Outerwear</div>,
-  },
-  {
-    path: COMMON_ROUTES_NAMES.Bottoms,
-    element: <div>Bottoms</div>,
-  },
-  {
-    path: COMMON_ROUTES_NAMES.Caps,
-    element: <ProductsPage/>,
-  },
-  {
-    path: COMMON_ROUTES_NAMES.Product + '/:productId',
+    path: COMMON_ROUTES_NAMES.Product + '/:id',
     element: <ProductDetailPage/>
   },
   {

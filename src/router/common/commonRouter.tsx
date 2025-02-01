@@ -14,6 +14,10 @@ export const commonRouter = [
     element: <ProductsPage/>
   },
   {
+    path: COMMON_ROUTES_NAMES.Collection + '/:collection',
+    element: <ProductsPage/>
+  },
+  {
     path: COMMON_ROUTES_NAMES.Product + '/:id',
     element: <ProductDetailPage/>
   },

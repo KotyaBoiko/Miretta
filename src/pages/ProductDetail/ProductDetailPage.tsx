@@ -31,6 +31,7 @@ const ProductDetailPage: FC = () => {
             sizes={data.sizes}
             title={data.title}
             type={data.type}
+            stock={data.stock}
           />
         </div>
       </div>

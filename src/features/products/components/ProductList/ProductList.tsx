@@ -1,23 +1,27 @@
+import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import { FC } from "react";
-import { useGetProductsByCategoryQuery } from "../../Api/productApi";
+import { useNavigate } from "react-router";
+import { useGetProductsByCategoryQuery, useGetProductsByCollectionQuery } from "../../Api/productApi";
 import ProductCard from "../ProductCard/ProductCard";
 import classes from "./productList.module.scss";
 
 type Props = {
-  title: string;
   category: string | undefined
+  collection: string | undefined
 };
 
-const ProductList: FC<Props> = ({ title, category }) => {
-
-  if (!category) {
-    return <>Not find products</>
+const ProductList: FC<Props> = ({ category, collection }) => {
+  const navigate = useNavigate()
+  
+  if (!collection && !category) {
+    navigate(COMMON_ROUTES_NAMES.Home)
   }
-  const {data, isLoading, error} = useGetProductsByCategoryQuery(category)
-
+  const {data, isLoading, error} = category ? useGetProductsByCategoryQuery(category) :  collection ? useGetProductsByCollectionQuery(collection) : {}
+  console.log(data)
+  
   return (
     <div className="wrapper">
-      <h2 className={classes.product__list_title}>{title}</h2>
+      <h2 className={classes.product__list_title}>{'Products'}</h2>
       <div className={classes.product__list}>
         {data ? data.map((p) => {
           return (
@@ -26,6 +30,7 @@ const ProductList: FC<Props> = ({ title, category }) => {
               title={p.title}
               price={p.price}
               id={p.id}
+              stock={p.stock}
             />
           );
         }) : <div>No data</div>}

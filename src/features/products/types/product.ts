@@ -2,6 +2,7 @@ export interface ProductBasic {
   img: string;
   title: string;
   price: number;
+  stock: number
   id: string;
 }
 
@@ -13,6 +14,7 @@ export interface Product extends Omit<ProductBasic, "img"> {
   description: string,
   images: string[],
   materials: string,
-  sizes: string[],
-  stock: number,
+  sizes: {
+    [key: string]: number
+  },
 } 

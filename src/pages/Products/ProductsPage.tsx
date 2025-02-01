@@ -2,11 +2,11 @@ import ProductList from '@/features/products/components/ProductList/ProductList'
 import classes from './productPage.module.scss'
 import { useParams } from 'react-router';
 const ProductsPage = () => {
-  const {category} = useParams();
-   console.log(category)
+  const {category, collection} = useParams();
+  console.log(category, collection)
   return (
     <div className={classes.products__page}>
-      <ProductList title='CAPS' category={category}/>
+      <ProductList category={category} collection={collection}/>
     </div>
   )
 }

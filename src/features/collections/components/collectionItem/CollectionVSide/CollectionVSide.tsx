@@ -3,6 +3,7 @@ import classes from "./collectionVSide.module.scss";
 
 import { TCollectionProps } from "../type";
 import { MoreButton } from "@/components/ui/Buttons/MoreButton";
+import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 
 const CollectionVSide: FC<TCollectionProps> = ({
   title,
@@ -10,6 +11,7 @@ const CollectionVSide: FC<TCollectionProps> = ({
   mainImg,
   additionalImg = "",
   variant,
+  id,
 }) => {
   const mainImgClass = `${classes.collection__mainImg_picture} ${
     classes[`collection__mainImg_picture-${variant}`]
@@ -33,7 +35,7 @@ const CollectionVSide: FC<TCollectionProps> = ({
           </div>
           <div className={moreClass}>
             <div className={classes.collection__more_btn}>
-              <MoreButton path="/caps" text="Discover Collection" />
+              <MoreButton path={COMMON_ROUTES_NAMES.Collection + `/${id}`} text="Discover Collection" />
             </div>
             {additionalImg != "" && (
               <img

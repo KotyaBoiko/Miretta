@@ -6,9 +6,17 @@ type Props = {
   active?: boolean;
   action?: () => void;
   className?: string;
+  disabled?: boolean;
 };
 
-const MainButton: FC<Props> = ({ children, width = "medium", active, className, action }) => {
+const MainButton: FC<Props> = ({
+  children,
+  width = "medium",
+  active,
+  className,
+  action,
+  disabled = false,
+}) => {
   return (
     <button
       className={
@@ -21,6 +29,7 @@ const MainButton: FC<Props> = ({ children, width = "medium", active, className, 
         className
       }
       onClick={action}
+      disabled={disabled}
     >
       {children}
     </button>

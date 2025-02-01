@@ -10,9 +10,10 @@ const ProductCard: FC<ProductBasic> = ({
   img,
   price,
   id,
+  stock
 }) => {
   return (
-    <div className={classes.card__container}>
+    <div className={classes.card__container + ' ' + (!stock ? classes['card-disable'] : '')}>
       <Link
         to={`${COMMON_ROUTES_NAMES.Product}/${id}`}
         className={classes.card__link}
@@ -23,8 +24,8 @@ const ProductCard: FC<ProductBasic> = ({
           <span className={classes.card__price}>$ {price}</span>
         </div>
       </Link>
-      <MainButton width="full" className={classes.card__add}>
-        ADD TO CART
+      <MainButton width="full" className={classes.card__add} disabled={!stock}>
+        {!stock ? 'NO PRODUCT' : 'ADD TO CART'}
       </MainButton>
     </div>
   );

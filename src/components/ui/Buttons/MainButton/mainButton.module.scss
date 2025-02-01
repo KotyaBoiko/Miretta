@@ -13,6 +13,10 @@
     background-color: $main-dark-color;
     color: $main-light-color;
   }
+  &:disabled {
+    opacity: 0.3;
+    pointer-events:none;
+  }
 
   &-active {
     background-color: $main-dark-color;

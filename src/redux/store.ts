@@ -1,4 +1,4 @@
-import { authSlice } from "@/features/auth/slices/authSlice";
+import { authSlice } from "@/features/auth/redux/slices/authSlice";
 import { configureStore } from "@reduxjs/toolkit";
 import { userSlice } from "../features/user/slices/userSlice";
 import { baseApi } from "./baseApi";

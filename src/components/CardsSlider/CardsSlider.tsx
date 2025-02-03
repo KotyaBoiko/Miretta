@@ -1,4 +1,4 @@
-import { mainLightColor } from "@/assets/styles/_variables";
+import { mainDarkColor, mainLightColor } from "@/assets/styles/_variables";
 import { FC, useState } from "react";
 import { FreeMode, Navigation, Scrollbar, Thumbs } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
@@ -16,7 +16,7 @@ const CardsSlider: FC<Props> = ({ slides }) => {
       <Swiper
         style={
           {
-            "--swiper-navigation-color": mainLightColor,
+            "--swiper-navigation-color": mainDarkColor,
           } as React.CSSProperties
         }
         className={classes.swiper__main}
@@ -43,10 +43,10 @@ const CardsSlider: FC<Props> = ({ slides }) => {
         }}
         modules={[FreeMode, Thumbs, Scrollbar]}
       >
-        {slides.map((slide) => {
+        {slides.map((slide, index) => {
           return (
-            <SwiperSlide key={slide} className={classes.slider__preview}>
-              <img src={slide} alt={slide[7]} />
+            <SwiperSlide key={index + slide} className={classes.slider__preview}>
+              <img src={slide} alt={slide[6]} />
             </SwiperSlide>
           );
         })}

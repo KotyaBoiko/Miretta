@@ -1,5 +1,5 @@
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
-import { logOut } from "@/features/auth/slices/authSlice";
+import { logOut } from "@/features/auth/redux/thunks";
 import { auth } from "@/firebase/firebase-config";
 import { useAppDispatch } from "@/redux/types";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";

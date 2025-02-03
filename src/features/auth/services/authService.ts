@@ -1,10 +1,17 @@
-import { auth, googleProvider } from "@/firebase/firebase-config";
+import { auth, db, googleProvider } from "@/firebase/firebase-config";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
 } from "firebase/auth";
+import { collection, doc, setDoc } from "firebase/firestore";
+import { IAuthData } from "../types";
+
+export const addUser = async (user:IAuthData) => {
+  const userCollectionRef = collection(db, 'users')
+  await setDoc(doc(userCollectionRef, user.id), user)
+} 
 
 export const signUpWithEmailPassword = async (
   email: string,

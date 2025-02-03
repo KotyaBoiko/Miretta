@@ -1,6 +1,6 @@
 import { useAppDispatch } from "@/redux/types";
 import { FC, useState } from "react";
-import { authWithEmailPassword, authWithProvider } from "../../slices/authSlice";
+import { authWithEmailPassword, authWithProvider } from "../../redux/thunks";
 
 type Props = {};
 

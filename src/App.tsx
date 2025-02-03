@@ -5,7 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router";
 import { auth } from "./firebase/firebase-config";
 
 import { useEffect } from "react";
-import { setAuth } from "./features/auth/slices/authSlice";
+import { setAuth } from "./features/auth/redux/slices/authSlice";
 import { useAppDispatch } from "./redux/types";
 import { userRouter } from "./router/user/userRouter";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";

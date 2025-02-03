@@ -9,11 +9,8 @@ import GitHubIcon from "@/assets/icons/GitHub.svg?react";
 import GoogleIcon from "@/assets/icons/Google.svg?react";
 import Loader from "@/components/ui/Loader/Loader";
 import { useAppDispatch, useAppSelector } from "@/redux/types";
-import {
-  authWithEmailPassword,
-  authWithProvider,
-} from "../../slices/authSlice";
 import classes from "./signInForm.module.scss";
+import { authWithEmailPassword, authWithProvider } from "../../redux/thunks";
 
 type Props = {
   setIsFormVisible: React.Dispatch<React.SetStateAction<boolean>>;

@@ -1,11 +1,14 @@
-import { db } from "@/firebase/firebase-config";
+import { auth, db } from "@/firebase/firebase-config";
 import { baseApi } from "@/redux/baseApi";
 import {
+  arrayRemove,
+  arrayUnion,
   collection,
   doc,
   getDoc,
   getDocs,
   query,
+  updateDoc,
   where,
 } from "firebase/firestore";
 import { Product } from "../types/product";
@@ -56,6 +59,26 @@ const productApi = baseApi.injectEndpoints({
         }
       },
     }),
+    toggleLikeProduct: builder.mutation<null, {isLiked: boolean, productId: string}>({
+      async queryFn({isLiked, productId}) {
+
+        try {
+          const docRef = doc(db, 'users', auth.currentUser!.uid)
+          if (isLiked) {
+            await updateDoc(docRef, {
+              likedProducts: arrayRemove(productId)
+            })
+          } else {
+            await updateDoc(docRef, {
+              likedProducts: arrayUnion(productId)
+            })
+          }
+          return {data: null}
+        } catch (error) {
+          return {error}
+        }
+      }
+    })
   }),
 });
 
@@ -63,4 +86,5 @@ export const {
   useGetProductsByCategoryQuery,
   useGetProductQuery,
   useGetProductsByCollectionQuery,
+  useToggleLikeProductMutation,
 } = productApi;

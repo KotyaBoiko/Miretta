@@ -3,8 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 
 import CartIcon from "@/assets/icons/Cart.svg?react";
 import ProfileIcon from "@/assets/icons/Profile.svg?react";
-import Modal from "@/components/ui/Modal/Modal";
-import SignInForm from "@/features/auth/components/SignInForm/SignInForm";
+import AuthModal from "@/features/auth/components/AuthModal/AuthModal";
 import { useAppSelector } from "@/redux/types";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import { USER_ROUTES_NAMES } from "@/router/user/userRoutesNames";
@@ -22,7 +21,7 @@ const Header: FC = () => {
   let navigate = useNavigate();
   const location = useLocation();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-
+  const [authType, setAuthType] = useState<'signIn' | 'signUp'>('signIn')
   const openProfile = () => {
     if (isAuth) {
       navigate(USER_ROUTES_NAMES.Profile);
@@ -31,9 +30,6 @@ const Header: FC = () => {
     }
   };
 
-  const closeAuthModal = () => {
-    setIsAuthModalOpen(false);
-  };
   {
     types.map((type) => {
       return (
@@ -51,7 +47,9 @@ const Header: FC = () => {
             {types.map((type) => {
               return (
                 <Link
-                  to={COMMON_ROUTES_NAMES.Category + `/${type[0].toLowerCase()}`}
+                  to={
+                    COMMON_ROUTES_NAMES.Category + `/${type[0].toLowerCase()}`
+                  }
                   key={type[0]}
                   className={classes.header__nav_link}
                 >
@@ -73,13 +71,12 @@ const Header: FC = () => {
               className={classes.header__profile}
               onClick={openProfile}
             />
-            <Modal
-              isOpen={isAuthModalOpen && !isAuth}
-              onClose={closeAuthModal}
-              classNameContent={classes.header__auth}
-            >
-              <SignInForm setIsFormVisible={setIsAuthModalOpen} />
-            </Modal>
+            <AuthModal
+              type={authType}
+              setAuthType={setAuthType}
+              closeAuthModal={setIsAuthModalOpen}
+              isAuthModalOpen={isAuthModalOpen}
+            />
             <CartIcon className={classes.header__cart} />
           </div>
         </div>

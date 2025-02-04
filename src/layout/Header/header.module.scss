@@ -70,23 +70,4 @@
   &__cart {
     color: $main-dark-color;
   }
-
-  &__auth {
-    top: 85px;
-    right: 5vw;
-    padding: 0 !important;
-    &::after {
-      content: "";
-      width: 20px;
-      height: 20px;
-      background: $main-light-color;
-      transform: rotate(45deg);
-      border: 1px solid $main-dark-color;
-      border-bottom: none;
-      border-right: none;
-      position: absolute;
-      top: -10px;
-      right: calc(139px - 5vw);
-    }
-  }
 }

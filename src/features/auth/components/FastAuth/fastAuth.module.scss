@@ -1,0 +1,22 @@
+@use "/src/assets/styles/variables.scss" as *;
+
+.auth__fast {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  font-weight: 300;
+  color: $main-text-color;
+  &_icons {
+    display: flex;
+    gap: 20px; 
+    justify-content: center;
+    svg {
+      transition: all 0.3s;
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+    }
+  }
+}

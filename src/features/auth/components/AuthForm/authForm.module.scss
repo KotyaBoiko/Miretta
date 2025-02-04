@@ -1,0 +1,15 @@
+.auth {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    &_field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    &_submit {
+      margin-top: 20px;
+    }
+  }
+}

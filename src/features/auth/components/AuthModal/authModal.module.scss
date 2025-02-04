@@ -1,0 +1,101 @@
+@use "/src/assets/styles/variables.scss" as *;
+
+.auth {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px 30px;
+  border: 1px solid $main-dark-color;
+  background: $main-light-color;
+  color: $main-dark-color;
+  &-signIn {
+    top: 85px;
+    right: 5vw;
+    animation: emerge 0.5s;
+    &::after {
+      content: "";
+      width: 20px;
+      height: 20px;
+      background: $main-light-color;
+      transform: rotate(45deg);
+      border: 1px solid $main-dark-color;
+      border-bottom: none;
+      border-right: none;
+      position: absolute;
+      top: -11px;
+      right: calc(139px - 5vw);
+    }
+  }
+
+  &-signUp {
+    width: 400px;
+    animation: emergeCenter 0.5s;
+  }
+
+  &__other {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    color: $main-text-color;
+    font-weight: 300;
+  }
+
+
+  &-close {
+    animation: close 0.6s;
+
+    &-center {
+      animation: closeCenter 0.6s;
+    }
+  }
+}
+
+
+@keyframes emerge {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes emergeCenter {
+  0% {
+    transform: translate(-50%, -50%) scale(0.4);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes close {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+}
+@keyframes closeCenter {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(-50%, -50%) scale(0.7);
+    opacity: 0;
+  }
+}
+

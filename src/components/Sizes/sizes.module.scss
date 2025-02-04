@@ -5,11 +5,17 @@
   display: flex;
   gap: 10px;
 
+  &__btn {
+    position: relative;
+  }
+
   &__size {
     font-size: 40px;
     font-family: $numbers-font;
     font-weight: 400;
-    position: relative;
-    bottom: 4px;
+    position: absolute;
+    top: 54%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }

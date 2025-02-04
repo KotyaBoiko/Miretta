@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { createPortal } from "react-dom";
 import classes from "./modal.module.scss";
 
@@ -7,6 +7,7 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   classNameContent?: string;
+  center?: boolean;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -14,6 +15,7 @@ const Modal: React.FC<ModalProps> = ({
   onClose,
   children,
   classNameContent,
+  center = false,
 }) => {
   if (!isOpen) return null;
 
@@ -23,7 +25,11 @@ const Modal: React.FC<ModalProps> = ({
         className={
           classes.modal__content +
           " " +
-          (classNameContent ? classNameContent : classes[`modal__content-center`])
+          (classNameContent
+            ? classNameContent
+            : classes[`modal__content-center`]) +
+          " " +
+          (center ? classes[`modal__content-center`] : "")
         }
         onClick={(e) => e.stopPropagation()}
       >

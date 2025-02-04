@@ -3,6 +3,5 @@ export enum COMMON_ROUTES_NAMES {
   Category = '/category',
   Collection = '/collection',
   Cart = '/cart',
-  Auth = '/auth',
   Product = '/product',
 }

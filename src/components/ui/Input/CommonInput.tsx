@@ -20,7 +20,7 @@ const CommonInput: FC<Props> = ({
       type={type}
       placeholder={placeholder}
       className={classes[`common-input`]}
-      id={id ? id : ""}
+      id={id ? id : undefined}
       value={value}
       onChange={(e) => onChange(e.target.value)}
     />

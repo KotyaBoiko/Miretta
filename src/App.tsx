@@ -6,12 +6,13 @@ import { auth } from "./firebase/firebase-config";
 
 import { useEffect } from "react";
 import { setAuth } from "./features/auth/redux/slices/authSlice";
-import { useAppDispatch } from "./redux/types";
+import { useAppDispatch, useAppSelector } from "./redux/types";
 import { userRouter } from "./router/user/userRouter";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 const App = () => {
   const dispatch = useAppDispatch();
+  const isAuth = useAppSelector(state => state.auth.isAuth)
   useEffect(() => {
     const listener = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -27,7 +28,7 @@ const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout />,
-      children: auth.currentUser ? userRouter : commonRouter,
+      children: auth.currentUser || isAuth ? userRouter : commonRouter,
       errorElement: <ErrorPage/>,
     },
   ]);

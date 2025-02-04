@@ -15,7 +15,10 @@ body {
   font-size: 16px;
   color: $main-text-color;
   background-color: $main-light-color;
+}
 
+.modal-active {
+  overflow: hidden;
 }
 
 .global__wrapper {

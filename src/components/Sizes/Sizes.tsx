@@ -20,6 +20,7 @@ const Sizes: FC<Props> = ({ active, setActive, sizes }) => {
           width="full"
           key={size[0]}
           disabled={true}
+          className={classes.sizes__btn}
         >
           <span className={classes.sizes__size}>{size[0]}</span>
         </MainButton>
@@ -29,6 +30,7 @@ const Sizes: FC<Props> = ({ active, setActive, sizes }) => {
           key={size[0]}
           action={() => setActive(size[0])}
           active={active === size[0]}
+          className={classes.sizes__btn}
         >
           <span className={classes.sizes__size}>{size[0]}</span>
         </MainButton>

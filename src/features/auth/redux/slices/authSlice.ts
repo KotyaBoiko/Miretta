@@ -30,7 +30,6 @@ export const authSlice = createSlice({
     });
     builder.addCase(logOut.fulfilled, (state) => {
       state.loadingLogOut = "succeeded";
-      localStorage.removeItem("authData");
     });
     builder.addCase(logOut.rejected, (state) => {
       state.loadingLogOut = "failed";
@@ -60,14 +59,6 @@ export const authSlice = createSlice({
         state.loading = "succeeded";
         state.email = action.payload.email;
         state.id = action.payload.id;
-        const userData = {
-          email: action.payload.email,
-          id: action.payload.id,
-        };
-        localStorage.setItem(
-          "authData",
-          JSON.stringify({ ...userData, isAuth: true })
-        );
       }
     );
   },

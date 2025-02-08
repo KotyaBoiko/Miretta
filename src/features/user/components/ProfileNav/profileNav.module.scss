@@ -1,0 +1,39 @@
+@use "/src/assets/styles/variables.scss" as *;
+
+.profile__menu {
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  font-size: 24px;
+  &_item {
+    margin-left: 5px;
+    position: relative;
+    transition: all 0.3s ease-in;
+    &::after {
+      content: "";
+      position: absolute;
+      left: -7px;
+      bottom: 0;
+      height: 100%;
+      transform: scaleY(0);
+      width: 3px;
+      background-color: $main-dark-color;
+      transition: all 0.3s ease-in;
+    }
+    &:hover {
+      transform: scale(1.01);
+      color: $main-dark-color;
+    }
+    &-active::after {
+      transform: scaleY(1); 
+    }
+    &-active {
+      transform: scale(1.03);
+      color: $main-dark-color; 
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+  }
+}

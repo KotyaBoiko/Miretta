@@ -1,24 +1,42 @@
-import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
-import { logOut } from "@/features/auth/redux/thunks";
-import { auth } from "@/firebase/firebase-config";
-import { useAppDispatch } from "@/redux/types";
-import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
-import { FC } from "react";
-import { Link } from "react-router";
-
+import { FC, useState } from "react";
+import classes from "./profile.module.scss";
+import ProfileNav from "@/features/user/components/ProfileNav/ProfileNav";
+import { Outlet } from "react-router";
+import { profileMenu } from "@/features/user/libs/profileMenu";
 
 const ProfilePage: FC = ({}) => {
-  const dispatch = useAppDispatch();
+  const [menuItem, setMenuItem] = useState(profileMenu[0]);
+  const [editMode, setEditMode] = useState(false);
+
   return (
-    <div>
-      {auth.currentUser?.email}
-      <Link to={COMMON_ROUTES_NAMES.Home} onClick={() => dispatch(logOut())}>
-        <MainButton width="content">Sign Out</MainButton>
-      </Link>
-      <MainButton width="content">
-        Add
-      </MainButton>
-    </div>
+    <section className={classes.profile}>
+      <div className="wrapper">
+        <div className={classes.profile__container}>
+          <h2 className={classes.profile__title}>
+            {menuItem.title}
+            <span
+              className={classes.profile__edit}
+              onClick={() => setEditMode((prev) => !prev)}
+            >
+              
+              {editMode ? (
+                <>
+                  <span className={classes.profile__edit_btn}>Save</span>
+                  <span className={classes.profile__edit_btn}>Cancel</span>
+                </>
+              ) : (
+                <span className={classes.profile__edit_btn}>Change</span>
+              )}
+              
+            </span>
+          </h2>
+          <ProfileNav active={menuItem} setActive={setMenuItem} />
+          <div className={classes.profile__content}>
+            <Outlet context={editMode} />
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

@@ -1,0 +1,44 @@
+@use '/src/assets/styles/variables' as *;
+
+.profile {
+  margin: 50px 0;
+  &__container {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 40px;
+    column-gap: 100px;
+  }
+
+  &__title {
+    font-size: 100px;
+    grid-column-start: 2;
+  }
+
+  &__edit {
+    cursor: pointer;   
+    margin-left: 10px;
+    font-size: 30px; 
+    display: inline-flex;
+    gap: 10px;
+
+
+    &_btn {
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        transform: scaleX(0);
+        height: 0.0938rem;
+        background-color: $main-dark-color;
+        transition: all 0.3s ease-in;
+      }
+  
+      &:hover::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}

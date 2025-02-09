@@ -2,6 +2,7 @@ import HomePage from "@/pages/Home/HomePage";
 import { COMMON_ROUTES_NAMES } from "./commonRoutesNames";
 import ProductsPage from "@/pages/Products/ProductsPage";
 import ProductDetailPage from "@/pages/ProductDetail/ProductDetailPage";
+import ErrorPage from "@/pages/ErrorPage/ErrorPage";
 
 export const commonRouter = [
   {
@@ -23,5 +24,9 @@ export const commonRouter = [
   {
     path: COMMON_ROUTES_NAMES.Cart,
     element: <div>Cart</div>,
+  },
+  {
+    path: COMMON_ROUTES_NAMES.Error,
+    element: <ErrorPage/>,
   },
 ];

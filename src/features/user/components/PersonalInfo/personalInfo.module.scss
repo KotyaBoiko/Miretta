@@ -1,0 +1,55 @@
+@use "/src/assets/styles/variables" as *;
+
+.profile {
+  &__title {
+    font-size: 100px;
+    grid-column-start: 2;
+  }
+
+  &__edit {
+    cursor: pointer;   
+    margin-left: 10px;
+    font-size: 30px; 
+    display: inline-flex;
+    gap: 10px;
+
+
+    &_btn {
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        transform: scaleX(0);
+        height: 0.0938rem;
+        background-color: $main-dark-color;
+        transition: all 0.3s ease-in;
+      }
+  
+      &:hover::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+
+  &__info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 90px;
+    &_item {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    &_save {
+      grid-column-start: 2;
+    }
+    &_title {
+      font-size: 100px;
+      grid-column: 1/3;
+    }
+  }
+}

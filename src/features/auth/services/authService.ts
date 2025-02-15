@@ -1,6 +1,9 @@
 import { auth, db, googleProvider } from "@/firebase/firebase-config";
 import {
   createUserWithEmailAndPassword,
+  EmailAuthCredential,
+  EmailAuthProvider,
+  reauthenticateWithCredential,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,

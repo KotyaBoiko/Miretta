@@ -7,6 +7,7 @@ type Props = {
   value: string;
   onChange: Dispatch<SetStateAction<string>>;
   readOnly?: boolean,
+  className?:string,
 };
 
 const CommonInput: FC<Props> = ({
@@ -16,12 +17,13 @@ const CommonInput: FC<Props> = ({
   value,
   onChange,
   readOnly,
+  className,
 }) => {
   return (
     <input
       type={type}
       placeholder={placeholder}
-      className={classes[`common-input`]}
+      className={classes[`common-input`] + ' ' + (className ? className : "")}
       id={id ? id : undefined}
       value={value}
       onChange={(e) => onChange(e.target.value)}

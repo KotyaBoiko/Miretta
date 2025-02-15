@@ -1,6 +1,6 @@
 import CommonInput from "@/components/ui/Input/CommonInput";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router";
 import {
   useGetUserQuery,
@@ -11,9 +11,11 @@ import {
 import classes from "./personalInfo.module.scss";
 import { IUserPersonalInfo } from "../../API/types";
 import { TProfileMenu } from "../../libs/profileMenu";
+import Modal from "@/components/ui/Modal/Modal";
+import ConfirmPassword from "@/components/ConfirmPassword/ConfirmPassword";
 
 const PersonalInfo = () => {
-  const menuItem:TProfileMenu = useOutletContext();
+  const menuItem: TProfileMenu = useOutletContext();
   const { data, isError } = useGetUserQuery();
   const [setUserPersonalData, {}] = useSetUserPersonalDataMutation();
   const [setUserEmail, {}] = useSetUserEmailMutation();
@@ -24,6 +26,9 @@ const PersonalInfo = () => {
     navigate(COMMON_ROUTES_NAMES.Error);
     return null;
   }
+  const [checkingPassword, setCheckingPassword] = useState(false);
+  const [isConfirmedPassword, setIsConfirmedPassword] = useState(false);
+
   const [isEditPersonalInfo, setIsEditPersonalInfo] = useState(false);
   const [firstName, setFirstName] = useState(data.name || "");
   const [secondName, setSecondName] = useState(data.surname || "");
@@ -38,13 +43,13 @@ const PersonalInfo = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
 
   const savePersonalInfo = () => {
-    const data: Required<Omit<IUserPersonalInfo, "id" | "email">> = {
+    const newData: Required<Omit<IUserPersonalInfo, "id" | "email">> = {
       name: firstName,
       surname: secondName,
       phone,
       birth: dateOfBirth,
     };
-    setUserPersonalData(data);
+    setUserPersonalData(newData);
     setIsEditPersonalInfo(false);
   };
   const cancelEditPersonalInfo = () => {
@@ -54,8 +59,18 @@ const PersonalInfo = () => {
     setDateOfBirth(data.birth || "");
     setIsEditPersonalInfo(false);
   };
+
+  const controlSavingSensitiveData = (callback: () => void) => {
+    if (isConfirmedPassword) {
+      callback();
+      setIsConfirmedPassword(false);
+    } else {
+      setCheckingPassword(true);
+    }
+  };
+
   const saveEmail = () => {
-    setUserEmail(data.email || "");
+    setUserEmail(email);
     setIsEditEmail(false);
   };
   const cancelEditEmail = () => {
@@ -77,16 +92,29 @@ const PersonalInfo = () => {
     <>
       <h2 className={classes.profile__title}>
         {menuItem.title}
-        <span
-          className={classes.profile__edit}
-        >
+        <span className={classes.profile__edit}>
           {isEditPersonalInfo ? (
             <>
-              <span className={classes.profile__edit_btn} onClick={savePersonalInfo}>Save</span>
-              <span className={classes.profile__edit_btn} onClick={cancelEditPersonalInfo}>Cancel</span>
+              <span
+                className={classes.profile__edit_btn}
+                onClick={savePersonalInfo}
+              >
+                Save
+              </span>
+              <span
+                className={classes.profile__edit_btn}
+                onClick={cancelEditPersonalInfo}
+              >
+                Cancel
+              </span>
             </>
           ) : (
-            <span className={classes.profile__edit_btn} onClick={() => setIsEditPersonalInfo(true)}>Change</span>
+            <span
+              className={classes.profile__edit_btn}
+              onClick={() => setIsEditPersonalInfo(true)}
+            >
+              Change
+            </span>
           )}
         </span>
       </h2>
@@ -116,7 +144,7 @@ const PersonalInfo = () => {
           <CommonInput
             type="date"
             value={dateOfBirth}
-            onChange={(e) => setDateOfBirth(e)}
+            onChange={setDateOfBirth}
             readOnly={!isEditPersonalInfo}
           />
         </label>
@@ -132,16 +160,29 @@ const PersonalInfo = () => {
         </label>
         <h2 className={classes.profile__info_title}>
           Email
-          <div
-            className={classes.profile__edit}
-          >
+          <div className={classes.profile__edit}>
             {isEditEmail ? (
               <>
-                <span className={classes.profile__edit_btn} onClick={saveEmail}>Save</span>
-                <span className={classes.profile__edit_btn} onClick={cancelEditEmail}>Cancel</span>
+                <span
+                  className={classes.profile__edit_btn}
+                  onClick={() => controlSavingSensitiveData(saveEmail)}
+                >
+                  Save
+                </span>
+                <span
+                  className={classes.profile__edit_btn}
+                  onClick={cancelEditEmail}
+                >
+                  Cancel
+                </span>
               </>
             ) : (
-              <span className={classes.profile__edit_btn} onClick={() => setIsEditEmail(true)}>Change</span>
+              <span
+                className={classes.profile__edit_btn}
+                onClick={() => setIsEditEmail(true)}
+              >
+                Change
+              </span>
             )}
           </div>
         </h2>
@@ -157,16 +198,29 @@ const PersonalInfo = () => {
         </label>
         <h2 className={classes.profile__info_title}>
           Password
-          <div
-            className={classes.profile__edit}
-          >
+          <div className={classes.profile__edit}>
             {isEditPassword ? (
               <>
-                <span className={classes.profile__edit_btn} onClick={savePassword}>Save</span>
-                <span className={classes.profile__edit_btn} onClick={cancelEditPassword}>Cancel</span>
+                <span
+                  className={classes.profile__edit_btn}
+                  onClick={() => controlSavingSensitiveData(savePassword)}
+                >
+                  Save
+                </span>
+                <span
+                  className={classes.profile__edit_btn}
+                  onClick={cancelEditPassword}
+                >
+                  Cancel
+                </span>
               </>
             ) : (
-              <span className={classes.profile__edit_btn} onClick={() => setIsEditPassword(true)}>Change</span>
+              <span
+                className={classes.profile__edit_btn}
+                onClick={() => setIsEditPassword(true)}
+              >
+                Change
+              </span>
             )}
           </div>
         </h2>
@@ -191,6 +245,15 @@ const PersonalInfo = () => {
           />
         </label>
       </form>
+      <Modal
+        isOpen={checkingPassword}
+        onClose={() => setCheckingPassword(false)}
+      >
+        <ConfirmPassword
+          setIsConfirmedPassword={setIsConfirmedPassword}
+          setCheckingPassword={setCheckingPassword}
+        />
+      </Modal>
     </>
   );
 };

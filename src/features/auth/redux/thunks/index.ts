@@ -1,8 +1,8 @@
 import { createAppAsyncThunk } from "@/redux/types";
-import { IAuthWithEmailAndPassword, IAuthWithProvider } from "../../types";
+import type { UserCredential } from "firebase/auth";
 import { authService } from "../../services";
 import { addUser } from "../../services/authService";
-import type { UserCredential } from "firebase/auth";
+import { IAuthWithEmailAndPassword, IAuthWithProvider } from "../../types";
 
 export const authWithEmailPassword = createAppAsyncThunk(
   "auth/authWithEmailPassword",

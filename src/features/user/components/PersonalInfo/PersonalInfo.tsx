@@ -1,18 +1,18 @@
+import ConfirmPassword from "@/components/ConfirmPassword/ConfirmPassword";
 import CommonInput from "@/components/ui/Input/CommonInput";
+import Modal from "@/components/ui/Modal/Modal";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useOutletContext } from "react-router";
+import { IUserPersonalInfo } from "../../API/types";
 import {
   useGetUserQuery,
   useSetUserEmailMutation,
   useSetUserPasswordMutation,
   useSetUserPersonalDataMutation,
 } from "../../API/userApi";
-import classes from "./personalInfo.module.scss";
-import { IUserPersonalInfo } from "../../API/types";
 import { TProfileMenu } from "../../libs/profileMenu";
-import Modal from "@/components/ui/Modal/Modal";
-import ConfirmPassword from "@/components/ConfirmPassword/ConfirmPassword";
+import classes from "./personalInfo.module.scss";
 
 const PersonalInfo = () => {
   const menuItem: TProfileMenu = useOutletContext();

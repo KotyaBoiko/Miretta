@@ -4,6 +4,7 @@ import ProfilePage from "@/pages/Profile/ProfilePage";
 import { store } from "@/redux/store";
 import { commonRouter } from "../common/commonRouter";
 import { USER_ROUTES_NAMES } from "./userRoutesNames";
+import LogOutPage from "@/pages/LogOut/LogOutPage";
 
 export const userRouter = [
   ...commonRouter,
@@ -34,7 +35,7 @@ export const userRouter = [
       },
       {
         path: USER_ROUTES_NAMES.LogOut,
-        element: <PersonalInfo/>
+        element: <LogOutPage/>
       }
     ]
   },

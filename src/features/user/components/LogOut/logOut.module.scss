@@ -1,0 +1,11 @@
+.profile {
+  &__logout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    &_title {
+      font-size: 60px;
+    }
+  }
+}

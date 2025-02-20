@@ -1,0 +1,48 @@
+@use '/src/assets/styles/variables' as *;
+@use '/src/assets/styles/fonts' as *;
+
+.cart {
+  &__info {
+    margin-left: auto;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    border: 1px solid $main-dark-color;
+    background-color: $main-light-color;
+
+    &_title {
+      margin-bottom: 10px;
+      text-align: center;
+      font-size: 70px;
+    }
+    &_line {
+      margin: 20px 0;
+      height: 1px;
+      background: $main-dark-color;
+    }
+  }
+  &__results {
+    color: $main-text-color;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-bottom: 10px;
+    &_component {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &_price {
+      font-family: $numbers-font;
+      color: $main-dark-color;
+      font-size: 30px;
+      font-weight: lighter;
+    }
+    &_price-total {
+      font-weight: 500;
+      font-size: 40px;
+      color: $main-dark-color;
+    }
+  }
+}

@@ -3,7 +3,6 @@ import { commonRouter } from "@/router/common/commonRouter";
 import { createBrowserRouter, RouterProvider } from "react-router";
 import { auth } from "./firebase/firebase-config";
 
-import ErrorPage from "./pages/ErrorPage/ErrorPage";
 import { useAppSelector } from "./redux/types";
 import { userRouter } from "./router/user/userRouter";
 
@@ -15,7 +14,6 @@ const router = createBrowserRouter([
       path: "/",
       element: <Layout />,
       children: auth.currentUser || isAuth ? userRouter : commonRouter,
-      errorElement: <ErrorPage/>,
     },
   ]);
 

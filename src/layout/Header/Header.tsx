@@ -21,7 +21,7 @@ const Header: FC = () => {
   let navigate = useNavigate();
   const location = useLocation();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authType, setAuthType] = useState<'signIn' | 'signUp'>('signIn')
+  const [authType, setAuthType] = useState<"signIn" | "signUp">("signIn");
   const openProfile = () => {
     if (isAuth) {
       navigate(USER_ROUTES_NAMES.Profile);
@@ -77,7 +77,9 @@ const Header: FC = () => {
               closeAuthModal={setIsAuthModalOpen}
               isAuthModalOpen={isAuthModalOpen}
             />
-            <CartIcon className={classes.header__cart} />
+            <Link to={COMMON_ROUTES_NAMES.Cart}>
+              <CartIcon className={classes.header__cart} />
+            </Link>
           </div>
         </div>
       </div>

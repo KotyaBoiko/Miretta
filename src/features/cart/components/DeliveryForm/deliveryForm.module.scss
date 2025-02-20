@@ -1,0 +1,15 @@
+@use '/src/assets/styles/variables' as *;
+
+.cart {
+  &__form {
+    display: flex;
+    flex-direction: column;
+    color: $dark-text-color;
+    font-weight: 700;
+    gap: 10px;
+    
+    & input {
+      margin-top: 5px;
+    }
+  }
+}

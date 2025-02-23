@@ -5,6 +5,8 @@ import { FC, useState } from "react";
 import { Product } from "../../types/product";
 import classes from "./productInfo.module.scss";
 import { useToggleLikeProductMutation } from "../../Api/productApi";
+import { useAddProductToCartMutation } from "@/features/cart/API/cartApi";
+import Loader from "@/components/ui/Loader/Loader";
 
 const findFirst = (obj: { [key: string]: number }) => {
   const first = Object.entries(obj).find((i) => i[1] != 0);
@@ -15,7 +17,9 @@ const findFirst = (obj: { [key: string]: number }) => {
   }
 };
 
-const ProductInfo: FC<Omit<Product, "images">> = (data) => {
+const ProductInfo: FC<Product> = (data) => {
+  const [addToCart, {isLoading, isSuccess}] = useAddProductToCartMutation();
+
   const [isLiked, setIsLiked] = useState(false);
   const [size, setSize] = useState(findFirst(data.sizes));
   const [toggleLike, {}] = useToggleLikeProductMutation();
@@ -72,8 +76,18 @@ const ProductInfo: FC<Omit<Product, "images">> = (data) => {
           >
             <LikeImg />
           </MainButton>
-          <MainButton width="full" disabled={!data.stock}>
-            {!data.stock ? "No product" : "Add to cart"}
+          <MainButton width="full" disabled={!data.stock} action={() => addToCart({
+            id: data.id,
+            variantId: data.id + size + data.colors[0],
+            title: data.title,
+            price: data.price,
+            stock: data.stock,
+            quantity: 1,
+            size: size!,
+            image: data.images[0],
+            color: data.colors[0],
+          })}>
+            {isLoading ? <Loader/> : !data.stock ? "No product" : "Add to cart"}
           </MainButton>
         </div>
         <span className={classes.product__delivery}>

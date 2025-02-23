@@ -32,6 +32,7 @@ const ProductDetailPage: FC = () => {
             title={data.title}
             type={data.type}
             stock={data.stock}
+            images={data.images}
           />
         </div>
       </div>

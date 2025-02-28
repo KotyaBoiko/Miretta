@@ -1,0 +1,80 @@
+@use '/src/assets/styles/variables' as *;
+@use '/src/assets/styles/fonts' as *;
+
+.cart__product {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  z-index: 1;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: $line-color;
+  }
+  &:last-child {
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: $line-color;
+    }
+  }
+  &_preview {
+    width: $lines-gap;
+    text-align: center;
+  }
+
+  &_img {
+    position: relative;
+    z-index: 2;
+    margin: 0 auto;
+    width: 175px;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+  }
+  &_info {
+    padding: 30px;
+  }
+  &_title {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  &_price {
+    margin-bottom: 10px;
+    font-family: $numbers-font;
+    font-size: 50px;
+    color: $main-dark-color;
+  }
+  &_control {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  &_quantity {
+    font-size: 20px;
+    background: transparent;
+    color: $dark-text-color;
+    width: 25px;
+    text-align: center;
+  }
+  &_info {
+
+  }
+  &_delete {
+    width: 25px;
+    height: 25px;
+    fill: $main-dark-color;
+    transition: 0.3s;
+    &:hover {
+      fill: rgb(194, 9, 9);
+      scale: 1.07;
+    }
+  }
+}

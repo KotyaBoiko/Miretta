@@ -8,8 +8,7 @@ import { userRouter } from "./router/user/userRouter";
 
 const App = () => {
   const isAuth = useAppSelector(state => state.auth.isAuth)
-
-const router = createBrowserRouter([
+  const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout />,

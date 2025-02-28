@@ -6,12 +6,10 @@ import {
   collection,
   deleteDoc,
   doc,
-  DocumentData,
-  QuerySnapshot,
+  getDocs,
   setDoc,
   updateDoc,
 } from "firebase/firestore";
-import { getDocs } from "firebase/firestore/lite";
 import { ICartProduct } from "../types/cartTypes";
 
 export const cartApi = baseApi.injectEndpoints({
@@ -22,14 +20,13 @@ export const cartApi = baseApi.injectEndpoints({
           if (!auth.currentUser) throw new Error("User not authenticated");
           const cartRef = collection(db, "users", auth.currentUser.uid, "cart");
           const response = await getDocs(cartRef);
-          const data = getFirestoreDataWithId<ICartProduct>(
-            response as QuerySnapshot<DocumentData, DocumentData>
-          );
+          const data = getFirestoreDataWithId<ICartProduct>(response);
           return { data };
         } catch (error) {
           return { error };
         }
       },
+      providesTags: ["Cart"],
     }),
     addProductToCart: builder.mutation<null, ICartProduct>({
       async queryFn(cartProduct) {
@@ -45,6 +42,7 @@ export const cartApi = baseApi.injectEndpoints({
           return { error };
         }
       },
+      invalidatesTags: ["Cart"],
     }),
     updateCartItemVariant: builder.mutation<
       null,
@@ -77,6 +75,8 @@ export const cartApi = baseApi.injectEndpoints({
       async queryFn({ quantity, variantId }) {
         try {
           if (!auth.currentUser) throw new Error("User not authenticated");
+          if (Number.isNaN(quantity))
+            throw new Error("Quantity is not a number");
           const productRef = doc(
             collection(db, "users", auth.currentUser.uid, "cart"),
             variantId
@@ -87,6 +87,7 @@ export const cartApi = baseApi.injectEndpoints({
           return { error };
         }
       },
+      invalidatesTags: (_result, _error, { quantity }) => [{ type: "Cart", quantity }, "Cart"],
     }),
     clearCart: builder.mutation<null, void>({
       async queryFn() {
@@ -112,6 +113,7 @@ export const cartApi = baseApi.injectEndpoints({
           return { error };
         }
       },
+      invalidatesTags: ["Cart"],
     }),
   }),
 });

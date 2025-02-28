@@ -1,4 +1,4 @@
-import { mainDarkColor, mainLightColor } from "@/assets/styles/_variables";
+import { mainDarkColor } from "@/assets/styles/_variables";
 import { FC, useState } from "react";
 import { FreeMode, Navigation, Scrollbar, Thumbs } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";

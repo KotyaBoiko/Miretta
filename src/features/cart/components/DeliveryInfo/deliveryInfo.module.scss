@@ -3,8 +3,7 @@
 
 .cart {
   &__info {
-    margin-left: auto;
-    max-width: 450px;
+    min-width: 430px;
     display: flex;
     flex-direction: column;
     padding: 30px;

@@ -2,7 +2,7 @@ import { FC } from "react";
 import classes from "./mainButton.module.scss";
 type Props = {
   children: string | React.ReactNode;
-  width?: "content" | "medium" | "full";
+  width?: "small" | "medium" | "full";
   active?: boolean;
   action?: () => void;
   className?: string;

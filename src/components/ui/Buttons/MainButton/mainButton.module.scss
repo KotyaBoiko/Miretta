@@ -23,8 +23,10 @@
     color: $main-light-color;
   }
 
-  &-content {
-    padding: 5px;
+  &-small {
+    height: 35px;
+    width: 35px;
+    padding: 0;
   }
   &-medium {
     min-height: 50px;

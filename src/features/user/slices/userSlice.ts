@@ -1,3 +1,4 @@
+import { cartApi } from "@/features/cart/API/cartApi";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface IUserState  {

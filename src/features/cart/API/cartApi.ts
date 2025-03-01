@@ -67,6 +67,7 @@ export const cartApi = baseApi.injectEndpoints({
           return { error };
         }
       },
+      invalidatesTags: ["Cart"]
     }),
     updateProductQuantity: builder.mutation<
       null,
@@ -87,7 +88,7 @@ export const cartApi = baseApi.injectEndpoints({
           return { error };
         }
       },
-      invalidatesTags: (_result, _error, { quantity }) => [{ type: "Cart", quantity }, "Cart"],
+      invalidatesTags: ["Cart"],
     }),
     clearCart: builder.mutation<null, void>({
       async queryFn() {
@@ -98,6 +99,7 @@ export const cartApi = baseApi.injectEndpoints({
           return { error };
         }
       },
+      invalidatesTags: ["Cart"]
     }),
     removeProductFromCart: builder.mutation<null, string>({
       async queryFn(id) {

@@ -10,11 +10,11 @@ export interface Product extends Omit<ProductBasic, "img"> {
   type: string,
   category: string,
   collections: string[],
-  colors: string[],
   description: string,
   images: string[],
   materials: string,
   sizes: {
     [key: string]: number
   },
+  colors: string[],
 } 

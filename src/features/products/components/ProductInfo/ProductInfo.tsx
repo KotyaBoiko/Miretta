@@ -7,21 +7,14 @@ import classes from "./productInfo.module.scss";
 import { useToggleLikeProductMutation } from "../../Api/productApi";
 import { useAddProductToCartMutation } from "@/features/cart/API/cartApi";
 import Loader from "@/components/ui/Loader/Loader";
-
-const findFirst = (obj: { [key: string]: number }) => {
-  const first = Object.entries(obj).find((i) => i[1] != 0);
-  if (first) {
-    return first[0];
-  } else {
-    return null;
-  }
-};
+import { findFirstExistingKey } from "@/utils/findFirstExistingKey";
+import { createVariantId } from "@/utils/createVariantId";
 
 const ProductInfo: FC<Product> = (data) => {
-  const [addToCart, {isLoading, isSuccess}] = useAddProductToCartMutation();
+  const [addToCart, { isLoading, isSuccess }] = useAddProductToCartMutation();
 
   const [isLiked, setIsLiked] = useState(false);
-  const [size, setSize] = useState(findFirst(data.sizes));
+  const [size, setSize] = useState(findFirstExistingKey(data.sizes));
   const [toggleLike, {}] = useToggleLikeProductMutation();
   if (!data) {
     return <>No data</>;
@@ -30,7 +23,7 @@ const ProductInfo: FC<Product> = (data) => {
   const toggleLikeProduct = async (productId: string) => {
     await toggleLike({ isLiked, productId })
       .then(() => setIsLiked(!isLiked))
-      .catch(() => alert("Something went wrong"))
+      .catch(() => alert("Something went wrong"));
   };
 
   return (
@@ -76,18 +69,30 @@ const ProductInfo: FC<Product> = (data) => {
           >
             <LikeImg />
           </MainButton>
-          <MainButton width="full" disabled={!data.stock} action={() => addToCart({
-            id: data.id,
-            variantId: data.id + size + data.colors[0],
-            title: data.title,
-            price: data.price,
-            stock: data.stock,
-            quantity: 1,
-            size: size!,
-            image: data.images[0],
-            color: data.colors[0],
-          })}>
-            {isLoading ? <Loader/> : !data.stock ? "No product" : "Add to cart"}
+          <MainButton
+            width="full"
+            disabled={!data.stock}
+            action={() =>
+              addToCart({
+                id: data.id,
+                variantId: createVariantId(data.id, size!, data.colors[0]),
+                title: data.title,
+                price: data.price,
+                stock: data.stock,
+                quantity: 1,
+                size: size!,
+                image: data.images[0],
+                color: data.colors[0],
+              })
+            }
+          >
+            {isLoading ? (
+              <Loader />
+            ) : !data.stock ? (
+              "No product"
+            ) : (
+              "Add to cart"
+            )}
           </MainButton>
         </div>
         <span className={classes.product__delivery}>

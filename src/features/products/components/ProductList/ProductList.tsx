@@ -16,7 +16,7 @@ const ProductList: FC<Props> = ({ category, collection }) => {
   if (!collection && !category) {
     navigate(COMMON_ROUTES_NAMES.Home)
   }
-  const {data, isLoading, error} = category ? useGetProductsByCategoryQuery(category) :  collection ? useGetProductsByCollectionQuery(collection) : {}
+  const {data} = category ? useGetProductsByCategoryQuery(category) :  collection ? useGetProductsByCollectionQuery(collection) : {}
   console.log(data)
   
   return (

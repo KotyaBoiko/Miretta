@@ -23,7 +23,7 @@ const PersonalInfo = () => {
 
   const navigate = useNavigate();
   if (data === undefined || isError) {
-    navigate(COMMON_ROUTES_NAMES.Error);
+    navigate(COMMON_ROUTES_NAMES.Home);
     return null;
   }
   const [checkingPassword, setCheckingPassword] = useState(false);

@@ -5,14 +5,20 @@ import { auth } from "./firebase/firebase-config";
 
 import { useAppSelector } from "./redux/types";
 import { userRouter } from "./router/user/userRouter";
+import { store } from "./redux/store";
+import { cartApi } from "./features/cart/API/cartApi";
 
 const App = () => {
-  const isAuth = useAppSelector(state => state.auth.isAuth)
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout />,
       children: auth.currentUser || isAuth ? userRouter : commonRouter,
+      loader: () => {
+        store.dispatch(cartApi.util.prefetch('getCart', undefined, {}))
+        return null;
+      },
     },
   ]);
 

@@ -11,6 +11,7 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { ICartProduct } from "../types/cartTypes";
+import { setTotalQuantity } from "../slices/cartSlice";
 
 export const cartApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

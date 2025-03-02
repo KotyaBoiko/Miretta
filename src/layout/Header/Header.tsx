@@ -17,6 +17,8 @@ const types = [
 ];
 
 const Header: FC = () => {
+
+  const productsInCart = useAppSelector((state) => state.cart.totalQuantity);
   const isAuth = useAppSelector((state) => state.auth.isAuth);
   let navigate = useNavigate();
   const location = useLocation();
@@ -77,8 +79,9 @@ const Header: FC = () => {
               closeAuthModal={setIsAuthModalOpen}
               isAuthModalOpen={isAuthModalOpen}
             />
-            <Link to={COMMON_ROUTES_NAMES.Cart}>
-              <CartIcon className={classes.header__cart} />
+            <Link to={COMMON_ROUTES_NAMES.Cart} className={classes.header__cart}>
+              <CartIcon />
+              <span>{productsInCart}</span>
             </Link>
           </div>
         </div>

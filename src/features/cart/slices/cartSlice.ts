@@ -13,13 +13,28 @@ const initialState: initialStateType = {
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
-  reducers: {},
+  reducers: {
+    setTotalQuantity(state, action: PayloadAction<number>) {
+      state.totalQuantity = action.payload
+    }
+  },
   extraReducers: (builder) => {
     builder.addMatcher(cartApi.endpoints.getCart.matchFulfilled, (state, action: PayloadAction<ICartProduct[]>) => {
-      state.totalQuantity = action.payload.length
+      state.totalQuantity = action.payload.length;
+    })
+    builder.addMatcher(cartApi.endpoints.addProductToCart.matchFulfilled, (state) => {
+      state.totalQuantity++
+    })
+    builder.addMatcher(cartApi.endpoints.removeProductFromCart.matchFulfilled, (state) => {
+      state.totalQuantity--
+    })
+    builder.addMatcher(cartApi.endpoints.clearCart.matchFulfilled, (state) => {
+      state.totalQuantity = 0
     })
   }
 })
+
+export const {setTotalQuantity} = cartSlice.actions
 
 export default cartSlice.reducer;
 

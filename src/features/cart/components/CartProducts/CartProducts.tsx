@@ -3,7 +3,7 @@ import CartProductItem from "../CartProductItem/CartProductItem";
 import classes from "./cartProducts.module.scss";
 
 const CartProducts = () => {
-  const { data, isLoading, isError } = useGetCartQuery();
+  const { data } = useGetCartQuery();
   return (
     <div className={classes.cart__products}>
       {data ? (

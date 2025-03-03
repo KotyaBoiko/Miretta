@@ -1,18 +1,26 @@
 import LikeImg from "@/assets/icons/heart.svg?react";
 import Sizes from "@/components/Sizes/Sizes";
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
+import Loader from "@/components/ui/Loader/Loader";
+import {
+  useAddProductToCartMutation,
+  useGetCartQuery,
+  useRemoveProductFromCartMutation,
+} from "@/features/cart/API/cartApi";
+import { createVariantId } from "@/utils/createVariantId";
+import { findFirstExistingKey } from "@/utils/findFirstExistingKey";
 import { FC, useState } from "react";
+import { useToggleLikeProductMutation } from "../../Api/productApi";
 import { Product } from "../../types/product";
 import classes from "./productInfo.module.scss";
-import { useToggleLikeProductMutation } from "../../Api/productApi";
-import { useAddProductToCartMutation } from "@/features/cart/API/cartApi";
-import Loader from "@/components/ui/Loader/Loader";
-import { findFirstExistingKey } from "@/utils/findFirstExistingKey";
-import { createVariantId } from "@/utils/createVariantId";
+import { useAppSelector } from "@/redux/types";
+import { ICartProduct } from "@/features/cart/types/cartTypes";
 
 const ProductInfo: FC<Product> = (data) => {
-  const [addToCart, { isLoading, isSuccess }] = useAddProductToCartMutation();
-
+  const productsInCart = useAppSelector((state) => state.cart.productsInCart);
+  const [addToCart, { isLoading: isLoadingAdding }] = useAddProductToCartMutation();
+  const [removeFromCart, {isLoading: isLoadingRemoving}] =
+    useRemoveProductFromCartMutation();
   const [isLiked, setIsLiked] = useState(false);
   const [size, setSize] = useState(findFirstExistingKey(data.sizes));
   const [toggleLike, {}] = useToggleLikeProductMutation();
@@ -24,6 +32,14 @@ const ProductInfo: FC<Product> = (data) => {
     await toggleLike({ isLiked, productId })
       .then(() => setIsLiked(!isLiked))
       .catch(() => alert("Something went wrong"));
+  };
+
+  const toggleProductToCart = (productVariant: ICartProduct) => {
+    if (productsInCart.find((i) => i === productVariant.variantId)) {
+      removeFromCart(productVariant.variantId);
+    } else {
+      addToCart(productVariant);
+    }
   };
 
   return (
@@ -72,8 +88,13 @@ const ProductInfo: FC<Product> = (data) => {
           <MainButton
             width="full"
             disabled={!data.stock}
+            active={
+              !!productsInCart.find(
+                (i) => i == createVariantId(data.id, size!, data.colors[0])
+              )
+            }
             action={() =>
-              addToCart({
+              toggleProductToCart({
                 id: data.id,
                 variantId: createVariantId(data.id, size!, data.colors[0]),
                 title: data.title,
@@ -86,10 +107,14 @@ const ProductInfo: FC<Product> = (data) => {
               })
             }
           >
-            {isLoading ? (
+            {isLoadingAdding || isLoadingRemoving ? (
               <Loader />
             ) : !data.stock ? (
               "No product"
+            ) : productsInCart.find(
+                (i) => i === createVariantId(data.id, size!, data.colors[0])
+              ) ? (
+              "Remove from cart"
             ) : (
               "Add to cart"
             )}

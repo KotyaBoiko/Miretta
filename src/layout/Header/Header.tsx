@@ -81,7 +81,7 @@ const Header: FC = () => {
             />
             <Link to={COMMON_ROUTES_NAMES.Cart} className={classes.header__cart}>
               <CartIcon />
-              <span>{productsInCart}</span>
+              <span>{productsInCart ? productsInCart : ''}</span>
             </Link>
           </div>
         </div>

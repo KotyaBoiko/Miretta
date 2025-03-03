@@ -11,7 +11,6 @@ import {
   updateDoc,
 } from "firebase/firestore";
 import { ICartProduct } from "../types/cartTypes";
-import { setTotalQuantity } from "../slices/cartSlice";
 
 export const cartApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -29,7 +28,7 @@ export const cartApi = baseApi.injectEndpoints({
       },
       providesTags: ["Cart"],
     }),
-    addProductToCart: builder.mutation<null, ICartProduct>({
+    addProductToCart: builder.mutation<string, ICartProduct>({
       async queryFn(cartProduct) {
         try {
           if (!auth.currentUser) throw new Error("User not authenticated");
@@ -38,7 +37,7 @@ export const cartApi = baseApi.injectEndpoints({
             cartProduct.variantId
           );
           await setDoc(productRef, cartProduct);
-          return { data: null };
+          return { data: cartProduct.variantId };
         } catch (error) {
           return { error };
         }
@@ -46,7 +45,7 @@ export const cartApi = baseApi.injectEndpoints({
       invalidatesTags: ["Cart"],
     }),
     updateCartItemVariant: builder.mutation<
-      null,
+      {oldVariantId: string, newVariantId: string},
       { newCartProduct: ICartProduct; oldVariant: string }
     >({
       async queryFn({ newCartProduct, oldVariant }) {
@@ -63,7 +62,7 @@ export const cartApi = baseApi.injectEndpoints({
             )
           );
           await setDoc(productRef, newCartProduct);
-          return { data: null };
+          return { data: {oldVariantId: oldVariant, newVariantId: newCartProduct.variantId} };
         } catch (error) {
           return { error };
         }
@@ -102,7 +101,7 @@ export const cartApi = baseApi.injectEndpoints({
       },
       invalidatesTags: ["Cart"]
     }),
-    removeProductFromCart: builder.mutation<null, string>({
+    removeProductFromCart: builder.mutation<string, string>({
       async queryFn(id) {
         try {
           if (!auth.currentUser) throw new Error("User not authenticated");
@@ -111,7 +110,7 @@ export const cartApi = baseApi.injectEndpoints({
             id
           );
           await deleteDoc(productRef);
-          return { data: null };
+          return { data: id };
         } catch (error) {
           return { error };
         }

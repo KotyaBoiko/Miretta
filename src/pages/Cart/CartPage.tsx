@@ -7,6 +7,7 @@ import {
 } from "@/features/cart/API/cartApi";
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
 import Loader from "@/components/ui/Loader/Loader";
+import EmptyCart from "@/features/cart/components/EmptyCart/EmptyCart";
 const CartPage = () => {
   const [clearCart, {isLoading}] = useClearCartMutation();
   const { data } = useGetCartQuery();
@@ -32,7 +33,7 @@ const CartPage = () => {
               </div>
             </>
           ) : (
-            "Cart Empty"
+            <EmptyCart/>
           )}
         </div>
       </div>

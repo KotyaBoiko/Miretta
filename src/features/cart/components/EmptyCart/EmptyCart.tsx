@@ -1,9 +1,8 @@
-import React from 'react'
-import classes from './EmptyCart.module.scss';
-import MainButton from '@/components/ui/Buttons/MainButton/MainButton';
 import EmptyCartIcon from '@/assets/img/empty-cart.png';
-import { Link } from 'react-router';
+import MainButton from '@/components/ui/Buttons/MainButton/MainButton';
 import { COMMON_ROUTES_NAMES } from '@/router/common/commonRoutesNames';
+import { Link } from 'react-router';
+import classes from './EmptyCart.module.scss';
 const EmptyCart = () => {
   return (
     <div className={classes.cart__empty}>

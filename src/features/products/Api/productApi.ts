@@ -1,4 +1,6 @@
 import { auth, db } from "@/firebase/firebase-config";
+import { getFirestoreDataWithId } from "@/firebase/utils/getFirestoreDataWithId";
+import { getFirestoreDocDataWithId } from "@/firebase/utils/getFirestoreDocDataWithId";
 import { baseApi } from "@/redux/baseApi";
 import {
   arrayRemove,
@@ -12,10 +14,8 @@ import {
   where,
 } from "firebase/firestore";
 import { Product } from "../types/product";
-import { getFirestoreDataWithId } from "@/firebase/utils/getFirestoreDataWithId";
-import { getFirestoreDocDataWithId } from "@/firebase/utils/getFirestoreDocDataWithId";
 
-const productApi = baseApi.injectEndpoints({
+export const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getProductsByCategory: builder.query<Product[], string>({
       async queryFn(category) {
@@ -59,26 +59,46 @@ const productApi = baseApi.injectEndpoints({
         }
       },
     }),
-    toggleLikeProduct: builder.mutation<null, {isLiked: boolean, productId: string}>({
-      async queryFn({isLiked, productId}) {
-
+    getLikedProducts: builder.query<string[], void>({
+      async queryFn() {
         try {
-          const docRef = doc(db, 'users', auth.currentUser!.uid)
+          const docRef = doc(
+            collection(db, "users", auth.currentUser!.uid, "liked"),
+            "likedProducts"
+          );
+          const data = await getDoc(docRef);
+          const result = data.data() as { likedProducts: string[] };
+          return { data: result.likedProducts };
+        } catch (error) {
+          return { error };
+        }
+      },
+    }),
+    toggleLikeProduct: builder.mutation<
+    { isLiked: boolean; productId: string },
+      { isLiked: boolean; productId: string }
+    >({
+      async queryFn({ isLiked, productId }) {
+        try {
+          const docRef = doc(
+            collection(db, "users", auth.currentUser!.uid, "liked"),
+            "likedProducts"
+          );
           if (isLiked) {
             await updateDoc(docRef, {
-              likedProducts: arrayRemove(productId)
-            })
+              likedProducts: arrayRemove(productId),
+            });
           } else {
             await updateDoc(docRef, {
-              likedProducts: arrayUnion(productId)
-            })
+              likedProducts: arrayUnion(productId),
+            });
           }
-          return {data: null}
+          return { data: { isLiked, productId } };
         } catch (error) {
-          return {error}
+          return { error };
         }
-      }
-    })
+      },
+    }),
   }),
 });
 
@@ -86,5 +106,6 @@ export const {
   useGetProductsByCategoryQuery,
   useGetProductQuery,
   useGetProductsByCollectionQuery,
+  useGetLikedProductsQuery,
   useToggleLikeProductMutation,
 } = productApi;

@@ -7,6 +7,7 @@ import { useAppSelector } from "./redux/types";
 import { userRouter } from "./router/user/userRouter";
 import { store } from "./redux/store";
 import { cartApi } from "./features/cart/API/cartApi";
+import { productApi } from "./features/products/Api/productApi";
 
 const App = () => {
   const isAuth = useAppSelector((state) => state.auth.isAuth);
@@ -17,6 +18,7 @@ const App = () => {
       children: auth.currentUser || isAuth ? userRouter : commonRouter,
       loader: () => {
         store.dispatch(cartApi.util.prefetch('getCart', undefined, {}))
+        store.dispatch(productApi.util.prefetch('getLikedProducts', undefined, {}))
         return null;
       },
     },

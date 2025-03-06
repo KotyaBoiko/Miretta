@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IAuthData } from "../../types";
 import { logOut } from "../thunks";
-import { redirect } from "react-router";
-import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 
 export interface IAuthState extends IAuthData {
   isAuth: boolean;

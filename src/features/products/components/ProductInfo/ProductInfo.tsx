@@ -4,35 +4,33 @@ import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
 import Loader from "@/components/ui/Loader/Loader";
 import {
   useAddProductToCartMutation,
-  useGetCartQuery,
-  useRemoveProductFromCartMutation,
+  useRemoveProductFromCartMutation
 } from "@/features/cart/API/cartApi";
+import { ICartProduct } from "@/features/cart/types/cartTypes";
+import { useAppSelector } from "@/redux/types";
 import { createVariantId } from "@/utils/createVariantId";
 import { findFirstExistingKey } from "@/utils/findFirstExistingKey";
 import { FC, useState } from "react";
 import { useToggleLikeProductMutation } from "../../Api/productApi";
 import { Product } from "../../types/product";
 import classes from "./productInfo.module.scss";
-import { useAppSelector } from "@/redux/types";
-import { ICartProduct } from "@/features/cart/types/cartTypes";
 
 const ProductInfo: FC<Product> = (data) => {
   const productsInCart = useAppSelector((state) => state.cart.productsInCart);
+
+  const likedProducts = useAppSelector((state) => state.product.likedProducts);
+  const [toggleLike, {isLoading: isLoadingLiking}] = useToggleLikeProductMutation();
+  const isLiked = !!likedProducts.find(i => i === data.id)
+
   const [addToCart, { isLoading: isLoadingAdding }] = useAddProductToCartMutation();
   const [removeFromCart, {isLoading: isLoadingRemoving}] =
     useRemoveProductFromCartMutation();
-  const [isLiked, setIsLiked] = useState(false);
-  const [size, setSize] = useState(findFirstExistingKey(data.sizes));
-  const [toggleLike, {}] = useToggleLikeProductMutation();
+
+    const [size, setSize] = useState(findFirstExistingKey(data.sizes));
+
   if (!data) {
     return <>No data</>;
   }
-
-  const toggleLikeProduct = async (productId: string) => {
-    await toggleLike({ isLiked, productId })
-      .then(() => setIsLiked(!isLiked))
-      .catch(() => alert("Something went wrong"));
-  };
 
   const toggleProductToCart = (productVariant: ICartProduct) => {
     if (productsInCart.find((i) => i === productVariant.variantId)) {
@@ -76,14 +74,14 @@ const ProductInfo: FC<Product> = (data) => {
           <MainButton
             width="medium"
             active={isLiked}
-            action={() => toggleLikeProduct(data.id)}
+            action={() => toggleLike({ isLiked, productId: data.id })}
             className={
               classes[`product__liked-${isLiked ? "true" : "false"}`] +
               " " +
               classes.product__liked
             }
           >
-            <LikeImg />
+            {isLoadingLiking ? <Loader/> : <LikeImg />}
           </MainButton>
           <MainButton
             width="full"

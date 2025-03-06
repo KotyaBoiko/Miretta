@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { cartApi } from "../API/cartApi";
 import { ICartProduct } from "../types/cartTypes";
+import { logOut } from "@/features/auth/redux/thunks";
 
 type initialStateType = {
   totalQuantity: number;
@@ -21,9 +22,13 @@ export const cartSlice = createSlice({
   reducers: {
     setTotalQuantity(state, action: PayloadAction<number>) {
       state.totalQuantity = action.payload
-    }
+    },
   },
   extraReducers: (builder) => {
+    builder.addCase(logOut.fulfilled, (state) => {
+      state.totalQuantity = 0;
+      state.productsInCart = [];
+    })
     builder.addMatcher(cartApi.endpoints.getCart.matchFulfilled, (state, action: PayloadAction<ICartProduct[]>) => {
       state.totalQuantity = action.payload.length;
       localStorage.setItem('totalQuantity', String(action.payload.length))
@@ -68,5 +73,3 @@ export const cartSlice = createSlice({
 export const {setTotalQuantity} = cartSlice.actions
 
 export default cartSlice.reducer;
-
-

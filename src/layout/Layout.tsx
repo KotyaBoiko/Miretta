@@ -1,6 +1,7 @@
 import { setAuth } from "@/features/auth/redux/slices/authSlice";
 import { auth } from "@/firebase/firebase-config";
-import { useAppDispatch, useAppSelector } from "@/redux/types";
+import { baseApi } from "@/redux/baseApi";
+import { useAppDispatch } from "@/redux/types";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import { onAuthStateChanged } from "firebase/auth";
 import { FC, useEffect } from "react";
@@ -19,6 +20,8 @@ const Layout: FC = () => {
       } else {
         navigate(COMMON_ROUTES_NAMES.Home)
         dispatch(setAuth(false));
+        localStorage.clear();
+        dispatch(baseApi.util.resetApiState())
       }
     });
     return () => listener();

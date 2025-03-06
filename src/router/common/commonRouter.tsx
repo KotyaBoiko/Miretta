@@ -1,12 +1,10 @@
+import { cartApi } from "@/features/cart/API/cartApi";
 import CartPage from "@/pages/Cart/CartPage";
 import HomePage from "@/pages/Home/HomePage";
 import ProductDetailPage from "@/pages/ProductDetail/ProductDetailPage";
 import ProductsPage from "@/pages/Products/ProductsPage";
-import { COMMON_ROUTES_NAMES } from "./commonRoutesNames";
-import { loadBundle } from "firebase/firestore";
-import Loader from "@/components/ui/Loader/Loader";
 import { store } from "@/redux/store";
-import { cartApi } from "@/features/cart/API/cartApi";
+import { COMMON_ROUTES_NAMES } from "./commonRoutesNames";
 
 export const commonRouter = [
   {
@@ -32,6 +30,11 @@ export const commonRouter = [
       const result = store.dispatch(cartApi.endpoints.getCart.initiate());
       await result;
       result.unsubscribe();
+      return null;
     }
+  },
+  {
+    path: COMMON_ROUTES_NAMES.Liked,
+    element: <div>Liked</div>,
   },
 ];

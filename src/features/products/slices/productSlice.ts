@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { productApi } from "../Api/productApi";
+import { logOut } from "@/features/auth/redux/thunks";
 
 type TInitialState = {
   likedProducts: string[];
@@ -17,6 +18,9 @@ export const productSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+        builder.addCase(logOut.fulfilled, (state) => {
+          state.likedProducts = [];
+        })
     builder.addMatcher(
       productApi.endpoints.getLikedProducts.matchFulfilled,
       (state, action: PayloadAction<string[]>) => {

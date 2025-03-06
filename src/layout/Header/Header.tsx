@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 
 import CartIcon from "@/assets/icons/Cart.svg?react";
+import LikeIcon from '@/assets/icons/Heart (1).svg?react';
 import ProfileIcon from "@/assets/icons/Profile.svg?react";
 import AuthModal from "@/features/auth/components/AuthModal/AuthModal";
 import { useAppSelector } from "@/redux/types";
@@ -79,6 +80,9 @@ const Header: FC = () => {
               closeAuthModal={setIsAuthModalOpen}
               isAuthModalOpen={isAuthModalOpen}
             />
+            <Link to={COMMON_ROUTES_NAMES.Liked} className={classes.header__like}>
+              <LikeIcon />
+            </Link>
             <Link to={COMMON_ROUTES_NAMES.Cart} className={classes.header__cart}>
               <CartIcon />
               <span>{productsInCart ? productsInCart : ''}</span>

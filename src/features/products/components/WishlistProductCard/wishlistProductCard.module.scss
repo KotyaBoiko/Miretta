@@ -1,0 +1,53 @@
+@use '/src/assets/styles/variables' as *;
+@use '/src/assets/styles/fonts' as *;
+
+.products__wishlist {
+  display: flex;
+  gap: 20px;
+  outline: 1px solid $line-color;
+  background: $main-light-color;
+  padding: 30px;
+  color: $main-dark-color;
+  position: relative;
+  &:hover {
+    .products__wishlist_like {
+      // display: block;
+      width: 25px;
+      height: 25px;
+    }
+  }
+  &_info {
+    padding: 15px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  &_img {
+    height: 250px;
+    aspect-ratio: 3/4;
+  }
+  &_title {
+    font-size: 35px;
+  }
+  &_price {
+    font-family: $numbers-font;
+    font-size: 30px;
+   
+  }
+
+  &_btn {
+    margin-top: auto;
+  }
+  &_like {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    // display: none;
+    width: 0;
+    height: 0;
+    transition: all 0.2s;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}

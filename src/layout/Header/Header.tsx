@@ -80,7 +80,7 @@ const Header: FC = () => {
               closeAuthModal={setIsAuthModalOpen}
               isAuthModalOpen={isAuthModalOpen}
             />
-            <Link to={COMMON_ROUTES_NAMES.Liked} className={classes.header__like}>
+            <Link to={COMMON_ROUTES_NAMES.Wishlist} className={classes.header__like}>
               <LikeIcon />
             </Link>
             <Link to={COMMON_ROUTES_NAMES.Cart} className={classes.header__cart}>

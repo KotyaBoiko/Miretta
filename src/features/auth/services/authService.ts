@@ -11,10 +11,6 @@ import { IAuthData } from "../types";
 export const addUser = async (user:IAuthData) => {
   const userCollectionRef = collection(db, 'users')
   await setDoc(doc(userCollectionRef, user.id), user)
-  const likedCollectionRef = collection(db, 'users', auth.currentUser!.uid, 'liked')
-  await setDoc(doc(likedCollectionRef, 'likedProducts'), {
-    likedProducts: []
-  })
 } 
 
 export const signUpWithEmailPassword = async (

@@ -1,6 +1,9 @@
 @use "/src//assets/styles/variables" as *;
 
 .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 50px;
   padding: 10px;
   border: 1px solid $main-dark-color;

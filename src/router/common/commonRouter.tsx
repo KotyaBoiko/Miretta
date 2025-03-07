@@ -5,6 +5,7 @@ import ProductDetailPage from "@/pages/ProductDetail/ProductDetailPage";
 import ProductsPage from "@/pages/Products/ProductsPage";
 import { store } from "@/redux/store";
 import { COMMON_ROUTES_NAMES } from "./commonRoutesNames";
+import WishlistPage from "@/pages/Wishlist/WishlistPage";
 
 export const commonRouter = [
   {
@@ -34,7 +35,7 @@ export const commonRouter = [
     }
   },
   {
-    path: COMMON_ROUTES_NAMES.Liked,
-    element: <div>Liked</div>,
+    path: COMMON_ROUTES_NAMES.Wishlist,
+    element: <WishlistPage/>,
   },
 ];

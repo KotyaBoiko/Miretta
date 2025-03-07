@@ -1,32 +1,40 @@
-import LikeImg from "@/assets/icons/heart.svg?react";
+import { FC, useState } from "react";
+import {
+  useAddProductToCartMutation,
+  useRemoveProductFromCartMutation,
+} from "@/features/cart/API/cartApi";
+import {
+  useAddProductToWishlistMutation,
+  useRemoveProductFromWishlistMutation,
+} from "../../Api/productApi";
 import Sizes from "@/components/Sizes/Sizes";
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
 import Loader from "@/components/ui/Loader/Loader";
-import {
-  useAddProductToCartMutation,
-  useRemoveProductFromCartMutation
-} from "@/features/cart/API/cartApi";
 import { ICartProduct } from "@/features/cart/types/cartTypes";
+import { IProduct } from "../../types/product";
 import { useAppSelector } from "@/redux/types";
 import { createVariantId } from "@/utils/createVariantId";
 import { findFirstExistingKey } from "@/utils/findFirstExistingKey";
-import { FC, useState } from "react";
-import { useToggleLikeProductMutation } from "../../Api/productApi";
-import { Product } from "../../types/product";
+import { IWishlistProduct } from "../../types/wishlistProduct";
 import classes from "./productInfo.module.scss";
+import LikeImg from "@/assets/icons/heart.svg?react";
 
-const ProductInfo: FC<Product> = (data) => {
+const ProductInfo: FC<IProduct> = (data) => {
   const productsInCart = useAppSelector((state) => state.cart.productsInCart);
 
   const likedProducts = useAppSelector((state) => state.product.likedProducts);
-  const [toggleLike, {isLoading: isLoadingLiking}] = useToggleLikeProductMutation();
-  const isLiked = !!likedProducts.find(i => i === data.id)
+  const [addProductToWishlist, { isLoading: isLoadingLiking }] =
+    useAddProductToWishlistMutation();
+  const [removeProductFromWishlist, { isLoading: isLoadingDisliking }] =
+    useRemoveProductFromWishlistMutation();
+  const isLiked = !!likedProducts.find((i) => i === data.id);
 
-  const [addToCart, { isLoading: isLoadingAdding }] = useAddProductToCartMutation();
-  const [removeFromCart, {isLoading: isLoadingRemoving}] =
+  const [addToCart, { isLoading: isLoadingAdding }] =
+    useAddProductToCartMutation();
+  const [removeFromCart, { isLoading: isLoadingRemoving }] =
     useRemoveProductFromCartMutation();
 
-    const [size, setSize] = useState(findFirstExistingKey(data.sizes));
+  const [size, setSize] = useState(findFirstExistingKey(data.sizes));
 
   if (!data) {
     return <>No data</>;
@@ -37,6 +45,13 @@ const ProductInfo: FC<Product> = (data) => {
       removeFromCart(productVariant.variantId);
     } else {
       addToCart(productVariant);
+    }
+  };
+  const toggleLikeProduct = (product: IWishlistProduct) => {
+    if (isLiked) {
+      removeProductFromWishlist(product.id);
+    } else {
+      addProductToWishlist(product);
     }
   };
 
@@ -74,14 +89,21 @@ const ProductInfo: FC<Product> = (data) => {
           <MainButton
             width="medium"
             active={isLiked}
-            action={() => toggleLike({ isLiked, productId: data.id })}
+            action={() =>
+              toggleLikeProduct({
+                id: data.id,
+                title: data.title,
+                price: data.price,
+                img: data.images[0],
+              })
+            }
             className={
               classes[`product__liked-${isLiked ? "true" : "false"}`] +
               " " +
               classes.product__liked
             }
           >
-            {isLoadingLiking ? <Loader/> : <LikeImg />}
+            {isLoadingLiking || isLoadingDisliking ? <Loader /> : <LikeImg />}
           </MainButton>
           <MainButton
             width="full"

@@ -30,9 +30,10 @@ const ProductCard: FC<ProductBasic> = ({
         </div>
       <MainButton
         width="full"
-        className={classes.card__view} 
+        className={classes.card__view}
+        disabled={!stock}
       >
-        {!stock ? "NO PRODUCT" : "VIEW DETAILS"}
+        {!stock ? "NO PRODUCT" : "VIEW PRODUCT"}
       </MainButton>
       </Link>
     </div>

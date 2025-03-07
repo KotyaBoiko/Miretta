@@ -4,5 +4,5 @@ export enum COMMON_ROUTES_NAMES {
   Collection = '/collection',
   Cart = '/cart',
   Product = '/product',
-  Liked = '/liked'
+  Wishlist = '/wishlist'
 }

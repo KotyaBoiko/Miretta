@@ -1,4 +1,4 @@
-export interface ProductBasic {
+export interface IProductBasic {
   img: string;
   title: string;
   price: number;
@@ -6,7 +6,7 @@ export interface ProductBasic {
   id: string;
 }
 
-export interface Product extends Omit<ProductBasic, "img"> {
+export interface IProduct extends Omit<IProductBasic, "img"> {
   type: string,
   category: string,
   collections: string[],

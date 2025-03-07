@@ -18,7 +18,7 @@ const App = () => {
       children: auth.currentUser || isAuth ? userRouter : commonRouter,
       loader: () => {
         store.dispatch(cartApi.util.prefetch('getCart', undefined, {}))
-        store.dispatch(productApi.util.prefetch('getLikedProducts', undefined, {}))
+        store.dispatch(productApi.util.prefetch('getWishlist', undefined, {}))
         return null;
       },
     },

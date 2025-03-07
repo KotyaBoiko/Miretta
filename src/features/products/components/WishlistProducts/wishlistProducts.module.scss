@@ -1,0 +1,33 @@
+.products__wishlist {
+  &_list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    // gap: 1.875rem;
+  }
+
+  &_empty {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    font-size: 18px;
+  }
+
+  &_img {
+    height: 300px;
+  }
+
+  &_definition {
+    font-size: 70px;
+  }
+
+  &_describe {
+    max-width: 550px;
+  }
+
+  &_link {
+    width: 400px;
+  }
+}
+

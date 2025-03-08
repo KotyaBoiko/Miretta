@@ -6,7 +6,7 @@ import {
 } from "../../API/cartApi";
 import { validate } from "@/utils/validate";
 
-import Delete from "@/assets/icons/Shape.svg?react";
+import Delete from "@/assets/icons/delete.svg?react";
 import classes from "./cartProductItem.module.scss";
 type Props = {
   id: string;

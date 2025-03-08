@@ -1,6 +1,6 @@
 import classes from './fastAuth.module.scss'
-import GitHubIcon from "@/assets/icons/GitHub.svg?react";
-import GoogleIcon from "@/assets/icons/Google.svg?react";
+import GitHubIcon from "@/assets/icons/github.svg?react";
+import GoogleIcon from "@/assets/icons/google.svg?react";
 import { useAppDispatch } from '@/redux/types';
 import { FC } from 'react';
 import { authWithProvider } from '../../redux/thunks';

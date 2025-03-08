@@ -1,10 +1,6 @@
 @use "/src/assets/styles/variables" as *;
 
 .profile {
-  &__title {
-    font-size: 100px;
-    grid-column-start: 2;
-  }
 
   &__edit {
     cursor: pointer;   

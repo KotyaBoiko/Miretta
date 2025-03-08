@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 
-import CartIcon from "@/assets/icons/Cart.svg?react";
-import LikeIcon from '@/assets/icons/Heart (1).svg?react';
-import ProfileIcon from "@/assets/icons/Profile.svg?react";
+import CartIcon from "@/assets/icons/cart.svg?react";
+import LikeIcon from '@/assets/icons/heart2.svg?react';
+import ProfileIcon from "@/assets/icons/profile.svg?react";
 import AuthModal from "@/features/auth/components/AuthModal/AuthModal";
 import { useAppSelector } from "@/redux/types";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";

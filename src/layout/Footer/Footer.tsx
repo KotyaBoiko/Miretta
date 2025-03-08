@@ -1,7 +1,7 @@
 import classes from "./footer.module.scss";
-import GitHubIcon from "@/assets/icons/GitHub.svg?react";
-import GmailIcon from "@/assets/icons/Gmail.svg?react";
-import FacebookIcon from "@/assets/icons/Facebook.svg?react";
+import GitHubIcon from "@/assets/icons/github.svg?react";
+import GmailIcon from "@/assets/icons/gmail.svg?react";
+import FacebookIcon from "@/assets/icons/facebook.svg?react";
 const Footer = () => {
   return (
     <footer className={classes.footer}>

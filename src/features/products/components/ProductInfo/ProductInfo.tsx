@@ -17,6 +17,7 @@ import { createVariantId } from "@/utils/createVariantId";
 import { findFirstExistingKey } from "@/utils/findFirstExistingKey";
 import { IWishlistProduct } from "../../types/wishlistProduct";
 import classes from "./productInfo.module.scss";
+
 import LikeImg from "@/assets/icons/heart.svg?react";
 
 const ProductInfo: FC<IProduct> = (data) => {

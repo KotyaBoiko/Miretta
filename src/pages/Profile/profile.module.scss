@@ -8,4 +8,9 @@
     gap: 40px;
     column-gap: 100px;
   }
+
+  h2 {
+    font-size: 100px;
+    grid-column-start: 2;
+  }
 }

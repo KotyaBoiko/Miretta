@@ -1,31 +1,23 @@
 import ConfirmPassword from "@/components/ConfirmPassword/ConfirmPassword";
 import CommonInput from "@/components/ui/Input/CommonInput";
 import Modal from "@/components/ui/Modal/Modal";
-import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
+import { TOutletProfileData } from "@/pages/Profile/ProfilePage";
 import { useState } from "react";
-import { useNavigate, useOutletContext } from "react-router";
+import { useOutletContext } from "react-router";
 import { IUserPersonalInfo } from "../../API/types";
 import {
-  useGetUserQuery,
   useSetUserEmailMutation,
   useSetUserPasswordMutation,
-  useSetUserPersonalDataMutation,
+  useSetUserPersonalDataMutation
 } from "../../API/userApi";
-import { TProfileMenu } from "../../libs/profileMenu";
 import classes from "./personalInfo.module.scss";
 
 const PersonalInfo = () => {
-  const menuItem: TProfileMenu = useOutletContext();
-  const { data, isError } = useGetUserQuery();
+  const {menuItem, data}: TOutletProfileData = useOutletContext();
   const [setUserPersonalData, {}] = useSetUserPersonalDataMutation();
   const [setUserEmail, {}] = useSetUserEmailMutation();
   const [setUserPassword, {}] = useSetUserPasswordMutation();
 
-  const navigate = useNavigate();
-  if (data === undefined || isError) {
-    navigate(COMMON_ROUTES_NAMES.Home);
-    return null;
-  }
   const [checkingPassword, setCheckingPassword] = useState(false);
   const [isConfirmedPassword, setIsConfirmedPassword] = useState(false);
 

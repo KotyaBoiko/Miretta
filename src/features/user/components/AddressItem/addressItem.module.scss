@@ -25,6 +25,21 @@
     width: 25px;
     height: 25px;
   }
+  &__delete {
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      fill: rgb(194, 9, 9);
+      scale: 1.07;
+    }
+  }
+  &__edit {
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      scale: 1.07;
+    }
+  }
   &__info {
     display: flex;
     align-items: center;

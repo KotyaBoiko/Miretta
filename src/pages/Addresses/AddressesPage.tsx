@@ -6,7 +6,7 @@ const AddressesPage = () => {
   return (
     <>
       <h2>{menuItem.title}</h2>
-      <AddressesList/>
+      <AddressesList data={data}/>
     </>
   )
 }

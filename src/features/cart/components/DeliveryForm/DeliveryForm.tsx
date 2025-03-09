@@ -6,6 +6,7 @@ const DeliveryForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [mobile, setMobile] = useState("");
+  const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [address, setAddress] = useState("");
   const [postCode, setPostCode] = useState("");
@@ -37,6 +38,15 @@ const DeliveryForm = () => {
           placeholder="+380123456789"
           value={mobile}
           onChange={setMobile}
+        />
+      </label>
+      <label>
+        Country
+        <CommonInput
+          type="text"
+          placeholder="Ukraine"
+          value={country}
+          onChange={setCountry}
         />
       </label>
       <label>

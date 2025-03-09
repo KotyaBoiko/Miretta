@@ -1,0 +1,25 @@
+.address__add {
+  // padding: 30px 25px;
+
+  &_title {
+    font-size: 55px;
+    margin-bottom: 10px;
+  }
+  &_form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 10px;
+  }
+  &_item {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  &_controls {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    width: 100%;
+  }
+}

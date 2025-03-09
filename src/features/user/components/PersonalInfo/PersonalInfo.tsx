@@ -4,7 +4,7 @@ import Modal from "@/components/ui/Modal/Modal";
 import { TOutletProfileData } from "@/pages/Profile/ProfilePage";
 import { useState } from "react";
 import { useOutletContext } from "react-router";
-import { IUserPersonalInfo } from "../../API/types";
+import { IUser } from "../../API/types";
 import {
   useSetUserEmailMutation,
   useSetUserPasswordMutation,
@@ -35,7 +35,7 @@ const PersonalInfo = () => {
   const [repeatPassword, setRepeatPassword] = useState("");
 
   const savePersonalInfo = () => {
-    const newData: Required<Omit<IUserPersonalInfo, "id" | "email">> = {
+    const newData: Required<Omit<IUser, "id" | "email" | "addresses">> = {
       name: firstName,
       surname: secondName,
       phone,
@@ -150,7 +150,7 @@ const PersonalInfo = () => {
             readOnly={!isEditPersonalInfo}
           />
         </label>
-        <h2 className={classes.profile__info_title}>
+        <h2 className={classes[`profile__info_title-inside`]}>
           Email
           <div className={classes.profile__edit}>
             {isEditEmail ? (
@@ -188,7 +188,7 @@ const PersonalInfo = () => {
             readOnly={!isEditEmail}
           />
         </label>
-        <h2 className={classes.profile__info_title}>
+        <h2 className={classes[`profile__info_title-inside`]}>
           Password
           <div className={classes.profile__edit}>
             {isEditPassword ? (

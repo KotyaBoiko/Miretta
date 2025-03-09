@@ -5,8 +5,8 @@ import {
   updateEmail,
   updatePassword,
 } from "firebase/auth";
-import { doc, getDoc, updateDoc } from "firebase/firestore";
-import { IUser, IUserPersonalInfo } from "./types";
+import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { IAddress, IUser } from "./types";
 import { EmailAuthProvider } from "firebase/auth/web-extension";
 
 export const userApi = baseApi.injectEndpoints({
@@ -22,6 +22,7 @@ export const userApi = baseApi.injectEndpoints({
           return { error };
         }
       },
+      providesTags: ['User']
     }),
     setUserEmail: builder.mutation<null, string>({
       async queryFn(email) {
@@ -34,6 +35,7 @@ export const userApi = baseApi.injectEndpoints({
           return { error };
         }
       },
+      invalidatesTags: ['User']
     }),
     setUserPassword: builder.mutation<null, string>({
       async queryFn(password) {
@@ -45,10 +47,11 @@ export const userApi = baseApi.injectEndpoints({
           return { error };
         }
       },
+      invalidatesTags: ['User']
     }),
     setUserPersonalData: builder.mutation<
       null,
-      Omit<IUserPersonalInfo, "id" | "email">
+      Omit<IUser, "id" | "email" | 'addresses'>
     >({
       async queryFn(newUserData) {
         try {
@@ -60,6 +63,7 @@ export const userApi = baseApi.injectEndpoints({
           return { error };
         }
       },
+      invalidatesTags: ['User']
     }),
     reAuthUser: builder.mutation<boolean, string>({
       async queryFn(password) {
@@ -77,6 +81,21 @@ export const userApi = baseApi.injectEndpoints({
         }
       },
     }),
+    editAddress: builder.mutation<null, IAddress[]>({
+      async queryFn(addresses) {
+        try {
+          if (!auth.currentUser) throw Error("User not exist");
+          const userRef = doc(db, 'users', auth.currentUser.uid)
+          await updateDoc(userRef, {
+            addresses: addresses,
+          })
+          return {data: null}
+        } catch (error) {
+          return {error}
+        }
+      },
+      invalidatesTags: ['User']
+    }),
   }),
 });
 
@@ -86,4 +105,5 @@ export const {
   useSetUserPasswordMutation,
   useSetUserPersonalDataMutation,
   useReAuthUserMutation,
+  useEditAddressMutation
 } = userApi;

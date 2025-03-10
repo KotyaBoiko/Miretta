@@ -17,9 +17,11 @@ const AddressItem: FC<Props> = ({ address }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleDeleteAddress = async () => {
-    const newAddresses = data!.addresses.filter(
-      (i) => i.priority !== address.priority
-    );
+    const newAddresses = data!.addresses
+    .filter((i) => i.priority !== address.priority)
+    .sort((a, b) => a.priority - b.priority)
+    .map((item, index) => ({ ...item, priority: index + 1 }));
+
     editAddress(newAddresses);
   };
 

@@ -6,7 +6,7 @@ import classes from "./profile.module.scss";
 import { auth } from "@/firebase/firebase-config";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import { useGetUserQuery } from "@/features/user/API/userApi";
-import { IUser } from "@/features/user/API/types";
+import { IUser } from "@/features/user/types";
 
 export type TOutletProfileData = {
   menuItem: TProfileMenu,

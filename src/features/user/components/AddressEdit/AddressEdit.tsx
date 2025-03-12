@@ -4,7 +4,7 @@ import { FC, useState } from 'react';
 
 import classes from './addressEdit.module.scss';
 import { useEditAddressMutation } from '../../API/userApi';
-import { IAddress } from '../../API/types';
+import { IAddress } from '../../types';
 import Loader from '@/components/ui/Loader/Loader';
 type Props = {
   close: () => void,

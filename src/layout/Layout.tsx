@@ -8,6 +8,7 @@ import { FC, useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
+import { userApi } from "@/features/user/API/userApi";
 
 
 const Layout: FC = () => {
@@ -17,6 +18,7 @@ const Layout: FC = () => {
     const listener = onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(setAuth(true));
+        dispatch(userApi.util.prefetch('getUser', undefined, {}))
       } else {
         navigate(COMMON_ROUTES_NAMES.Home)
         dispatch(setAuth(false));

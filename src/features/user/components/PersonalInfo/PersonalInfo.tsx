@@ -4,7 +4,7 @@ import Modal from "@/components/ui/Modal/Modal";
 import { TOutletProfileData } from "@/pages/Profile/ProfilePage";
 import { useState } from "react";
 import { useOutletContext } from "react-router";
-import { IUser } from "../../API/types";
+import { IUser } from "../../types";
 import {
   useSetUserEmailMutation,
   useSetUserPasswordMutation,

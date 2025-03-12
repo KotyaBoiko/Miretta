@@ -12,6 +12,6 @@ export interface IUser {
   email: string,
   birth?: string,
   phone?: string,
-  id: number,
-  addresses: IAddress[],
+  id: string,
+  addresses?: IAddress[],
 }

@@ -1,6 +1,6 @@
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
 import { FC, useState } from "react";
-import { IUser } from "../../API/types";
+import { IUser } from "../../types";
 import AddressEdit from "../AddressEdit/AddressEdit";
 import AddressItem from "../AddressItem/AddressItem";
 import classes from './addressesList.module.scss';

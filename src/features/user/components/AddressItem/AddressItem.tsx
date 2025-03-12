@@ -3,7 +3,7 @@ import classes from "./addressItem.module.scss";
 import LocationIcon from "@/assets/icons/location.svg?react";
 import EditIcon from "@/assets/icons/edit.svg?react";
 import DeleteIcon from "@/assets/icons/delete.svg?react";
-import { IAddress } from "../../API/types";
+import { IAddress } from "../../types";
 import { useEditAddressMutation, useGetUserQuery } from "../../API/userApi";
 import AddressEdit from "../AddressEdit/AddressEdit";
 

@@ -5,9 +5,9 @@ import {
   updateEmail,
   updatePassword,
 } from "firebase/auth";
-import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
-import { IAddress, IUser } from "./types";
 import { EmailAuthProvider } from "firebase/auth/web-extension";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { IAddress, IUser } from "../types";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

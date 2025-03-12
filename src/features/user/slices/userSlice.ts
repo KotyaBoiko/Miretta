@@ -1,30 +1,32 @@
-import { cartApi } from "@/features/cart/API/cartApi";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { IUser } from "../types";
+import { userApi } from "../API/userApi";
 
-interface IUserState  {
-  id: string;
-  email: string;
-  name: string;
-  surname: string;
-}
 
-const initialState: IUserState = {
-    id: "",
-    email: "",
-    name: "",
-    surname: "",
+const initUser:IUser | '' = JSON.parse(localStorage.getItem('user') || '')
+
+const initialState: IUser = initUser ? initUser : {
+  name: "",
+  surname: "",
+  email: "",
+  birth: "",
+  phone: "",
+  id: "",
+  addresses: [],
 };
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
-  reducers: {
-    setUser: (state, action: PayloadAction<IUserState>) => {
-      state = action.payload;
-    }
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addMatcher(userApi.endpoints.getUser.matchFulfilled, (state, action: PayloadAction<IUser>) => {
+      localStorage.setItem('user', JSON.stringify(action.payload))
+      return {...action.payload}
+    });
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const {} = userSlice.actions;
 
 export default userSlice.reducer;

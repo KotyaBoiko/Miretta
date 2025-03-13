@@ -17,7 +17,8 @@ const AddressItem: FC<Props> = ({ address }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleDeleteAddress = async () => {
-    const newAddresses = data!.addresses
+    if (!data?.addresses) return 
+    const newAddresses = data.addresses
     .filter((i) => i.priority !== address.priority)
     .sort((a, b) => a.priority - b.priority)
     .map((item, index) => ({ ...item, priority: index + 1 }));
@@ -30,7 +31,7 @@ const AddressItem: FC<Props> = ({ address }) => {
     <div className={classes.address__item}>
       <AddressEdit
         close={() => setIsEditing(false)}
-        addresses={data!.addresses}
+        addresses={data!.addresses!}
         oldData={address}
       />
     </div>

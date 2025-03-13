@@ -16,7 +16,20 @@ const Modal: React.FC<ModalProps> = ({
   children,
   classNameContent,
   center = false,
+  
 }) => {
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add("modal-active");
+    } else {
+      document.body.classList.remove("modal-active");
+    }
+    return () => {
+      document.body.classList.remove("modal-active");
+    };
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return createPortal(

@@ -1,19 +1,18 @@
 import CommonInput from "@/components/ui/Input/CommonInput";
-import { useState } from "react";
-import classes from "./deliveryForm.module.scss";
-import { useAppSelector } from "@/redux/types";
 import { auth } from "@/firebase/firebase-config";
-import { Link } from "react-router";
+import { useAppSelector } from "@/redux/types";
 import { USER_ROUTES_NAMES } from "@/router/user/userRoutesNames";
-import Modal from "@/components/ui/Modal/Modal";
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router";
+import classes from "./deliveryForm.module.scss";
 
 const DeliveryForm = () => {
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
   const user = useAppSelector((state) => state.user);
   const userAddresses = user.addresses;
   const [activeAutofill, setActiveAutofill] = useState(
     userAddresses ? userAddresses[0] : undefined
   );
-  const [isOpenVariants, setIsOpenVariants] = useState(false);
   const [firstName, setFirstName] = useState(user.name || "");
   const [lastName, setLastName] = useState(user.surname || "");
   const [mobile, setMobile] = useState(user.phone || "");
@@ -22,33 +21,77 @@ const DeliveryForm = () => {
   const [address, setAddress] = useState(activeAutofill?.address || "");
   const [postCode, setPostCode] = useState(activeAutofill?.postCode || "");
 
+  const [activeElement, setActiveElement] = useState(0);
+  const [isOpenList, setIsOpenList] = useState(false);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpenList(false);
+      }
+    };
+
+    if (isOpenList) {
+      document.body.classList.add("modal-active");
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.body.classList.remove("modal-active");
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.body.classList.remove("modal-active");
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpenList]);
+
+  useEffect(() => {
+    if (activeAutofill) {
+      setCountry(activeAutofill.country)
+      setCity(activeAutofill.city)
+      setAddress(activeAutofill.address)
+      setPostCode(activeAutofill.postCode)
+    }
+  }, [activeAutofill])
+
   return (
     <>
       {auth.currentUser ? (
-        <div className={classes.cart__form_autofill}>
+        <div className={classes.cart__autofill_wrapper}>
           <span>Autofill:</span>
-          <span className={classes["cart__form_autofill-trigger"]}>
-            {userAddresses ? (
-              <span onClick={() => setIsOpenVariants(true)}>
-                Address {activeAutofill!.priority}
+          {userAddresses ? (
+            <div className={classes.cart__autofill} ref={dropdownRef}>
+              <span
+                onClick={() => {
+                  setIsOpenList((p) => !p);
+                }}
+              >
+                Address {userAddresses[activeElement].priority}
               </span>
-            ) : (
-              <Link to={USER_ROUTES_NAMES.Addresses}>Add addresses</Link>
-            )}
-          </span>
-          <Modal isOpen={isOpenVariants} onClose={() => setIsOpenVariants(false)} classNameContent={classes["cart__form_autofill-variant"]}>
-            <div className={classes["cart__form_autofill-content"]}>
-              {userAddresses
-                ? userAddresses.map((i) => {
-                    return (
-                      <span key={i.priority} onClick={() => setActiveAutofill(i)}>
-                        Address {i.priority}
-                      </span>
-                    );
-                  })
-                : ""}
+              <ul
+                className={`${classes.cart__autofill_list} ${
+                  isOpenList ? classes["cart__autofill_list-active"] : ""
+                }`}
+              >
+                {userAddresses.map((i, index) => {
+                  return (
+                    <li
+                      className={classes.cart__autofill_variant}
+                      key={i.priority}
+                      onClick={() => {
+                        setActiveAutofill(i);
+                        setActiveElement(index);
+                        setIsOpenList(false);
+                      }}
+                    >
+                      Address {i.priority}
+                    </li>
+                  );
+                })}
+              </ul>
             </div>
-          </Modal>
+          ) : (
+            <Link to={USER_ROUTES_NAMES.Addresses}>Add addresses</Link>
+          )}
         </div>
       ) : (
         ""

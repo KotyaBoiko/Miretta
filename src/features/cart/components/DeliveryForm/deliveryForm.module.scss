@@ -12,27 +12,43 @@
     & input {
       margin-top: 5px;
     }
+  }
+  &__autofill {
+    // text-decoration: underline;
+    font-weight: 600;
+    cursor: pointer;
 
-    &_autofill {
+    &_wrapper {
       font-size: 20px;
       margin-bottom: 10px;
       display: flex;
+      align-items: end;
       gap: 10px;
+      position: relative;
+    }
 
-      &-trigger {
-        text-decoration: underline;
-        font-weight: 600;
-      }
-      &-content {
+    &_list {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 74px;
+      transform: translateY(35%);
+      background-color: $main-light-color;
+      border: 1px solid $main-dark-color;
+      color: $main-dark-color;
+      &-active {
         display: flex;
         flex-direction: column;
-        gap: 15px;
       }
-      &-variant {
-        
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
+    }
+    &_variant {
+      padding: 10px 5px;
+      border-bottom: 1px solid $main-dark-color;
+      &:last-child {
+        border-bottom: none;
+      }
+      &:hover {
+        color: $main-text-color;
       }
     }
   }

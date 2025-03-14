@@ -26,7 +26,6 @@ const ProductList: FC<Props> = ({ category, collection }) => {
     : {};
   return (
     <div className="wrapper">
-      <h2 className={classes.product__list_title}>{"Products"}</h2>
       <div className={classes.product__list}>
         {data ? (
           data.map((p) => {

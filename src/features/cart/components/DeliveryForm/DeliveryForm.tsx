@@ -9,7 +9,13 @@ import classes from "./deliveryForm.module.scss";
 const DeliveryForm = () => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const user = useAppSelector((state) => state.user);
-  const userAddresses = user.addresses;
+
+  const userAddresses =
+    user.addresses === undefined
+      ? undefined
+      : user.addresses.length === 0
+      ? undefined
+      : user.addresses;
   const [activeAutofill, setActiveAutofill] = useState(
     userAddresses ? userAddresses[0] : undefined
   );
@@ -26,7 +32,10 @@ const DeliveryForm = () => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpenList(false);
       }
     };
@@ -46,12 +55,12 @@ const DeliveryForm = () => {
 
   useEffect(() => {
     if (activeAutofill) {
-      setCountry(activeAutofill.country)
-      setCity(activeAutofill.city)
-      setAddress(activeAutofill.address)
-      setPostCode(activeAutofill.postCode)
+      setCountry(activeAutofill.country);
+      setCity(activeAutofill.city);
+      setAddress(activeAutofill.address);
+      setPostCode(activeAutofill.postCode);
     }
-  }, [activeAutofill])
+  }, [activeAutofill]);
 
   return (
     <>

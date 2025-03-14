@@ -3,16 +3,16 @@ import { IUser } from "../types";
 import { userApi } from "../API/userApi";
 
 
-const initUser:IUser | '' = JSON.parse(localStorage.getItem('user') || '')
+const initUser:IUser | 'null' = JSON.parse(localStorage.getItem('user') || 'null')
 
-const initialState: IUser = initUser ? initUser : {
+const initialState: IUser = initUser !== 'null' ? initUser : {
   name: "",
   surname: "",
   email: "",
   birth: "",
   phone: "",
   id: "",
-  addresses: [],
+  addresses: undefined,
 };
 
 export const userSlice = createSlice({

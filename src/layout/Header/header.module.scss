@@ -37,6 +37,11 @@
       &:hover::after {
         transform: scaleX(1);
       }
+      &-active {
+        &::after {
+          transform: scaleX(1);
+        }
+      }
     }
   }
 

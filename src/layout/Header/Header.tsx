@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 
 import CartIcon from "@/assets/icons/cart.svg?react";
-import LikeIcon from '@/assets/icons/heart2.svg?react';
+import LikeIcon from "@/assets/icons/heart2.svg?react";
 import ProfileIcon from "@/assets/icons/profile.svg?react";
 import AuthModal from "@/features/auth/components/AuthModal/AuthModal";
 import { useAppSelector } from "@/redux/types";
@@ -18,7 +18,6 @@ const types = [
 ];
 
 const Header: FC = () => {
-
   const productsInCart = useAppSelector((state) => state.cart.totalQuantity);
   const isAuth = useAppSelector((state) => state.auth.isAuth);
   let navigate = useNavigate();
@@ -33,15 +32,6 @@ const Header: FC = () => {
     }
   };
 
-  {
-    types.map((type) => {
-      return (
-        <Link to={COMMON_ROUTES_NAMES.Category + type[0]} key={type[0]}>
-          {type[1]}
-        </Link>
-      );
-    });
-  }
   return (
     <header className={classes.header}>
       <div className="wrapper">
@@ -54,7 +44,14 @@ const Header: FC = () => {
                     COMMON_ROUTES_NAMES.Category + `/${type[0].toLowerCase()}`
                   }
                   key={type[0]}
-                  className={classes.header__nav_link}
+                  className={`
+                    ${classes.header__nav_link} ${
+                    location.pathname ==
+                    COMMON_ROUTES_NAMES.Category + `/${type[0].toLowerCase()}`
+                      ? classes["header__nav_link-active"]
+                      : ""
+                  }
+                      `}
                 >
                   {type[1]}
                 </Link>
@@ -80,12 +77,18 @@ const Header: FC = () => {
               closeAuthModal={setIsAuthModalOpen}
               isAuthModalOpen={isAuthModalOpen}
             />
-            <Link to={COMMON_ROUTES_NAMES.Wishlist} className={classes.header__like}>
+            <Link
+              to={COMMON_ROUTES_NAMES.Wishlist}
+              className={classes.header__like}
+            >
               <LikeIcon />
             </Link>
-            <Link to={COMMON_ROUTES_NAMES.Cart} className={classes.header__cart}>
+            <Link
+              to={COMMON_ROUTES_NAMES.Cart}
+              className={classes.header__cart}
+            >
               <CartIcon />
-              <span>{productsInCart ? productsInCart : ''}</span>
+              <span>{productsInCart ? productsInCart : ""}</span>
             </Link>
           </div>
         </div>

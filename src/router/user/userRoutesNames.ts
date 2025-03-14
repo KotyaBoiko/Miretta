@@ -1,7 +1,7 @@
 export const enum USER_ROUTES_NAMES {
   Profile = '/profile',
-  Orders = 'orders',
-  OrdersHistory = 'orders/history',
-  Addresses = 'addresses',
-  LogOut = 'logout',
+  Orders = '/profile/orders',
+  OrdersHistory = '/profile/orders/history',
+  Addresses = '/profile/addresses',
+  LogOut = '/profile/logout',
 }

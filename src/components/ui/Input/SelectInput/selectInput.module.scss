@@ -1,0 +1,57 @@
+@use "/src/assets/styles/variables" as *;
+
+.select {
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  color: $main-dark-color;
+  z-index: 90;
+  &__active {
+    padding: 5px;
+    padding-bottom: 0;
+    padding-right: 30px;
+  }
+
+  &__list {
+    width: 100%;
+    display: none;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(100%);
+    background-color: $main-light-color;
+    border: 1px solid $main-dark-color;
+    &_active {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__icon {
+    stroke: $main-dark-color;
+    transition: all 0.3s;
+    &_active {
+      transform: rotate(90deg);
+    }
+  }
+  &__variant {
+    padding: 10px 5px;
+    border-bottom: 1px solid $main-dark-color;
+    white-space: pre;
+    font-size: 16px;
+    position: relative;
+    &_active {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      width: 24px;
+      height: 24px;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+    &:hover {
+      color: $main-text-color;
+    }
+  }
+}

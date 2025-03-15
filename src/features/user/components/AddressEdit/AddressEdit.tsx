@@ -1,5 +1,5 @@
 import MainButton from '@/components/ui/Buttons/MainButton/MainButton';
-import CommonInput from '@/components/ui/Input/CommonInput';
+import {CommonInput} from '@/components/ui/Input';
 import { FC, useState } from 'react';
 
 import classes from './addressEdit.module.scss';

@@ -1,9 +1,9 @@
 import { FC, SetStateAction, useState } from "react";
-import CommonInput from "../ui/Input/CommonInput";
 import classes from "./confirmPassword.module.scss";
 import MainButton from "../ui/Buttons/MainButton/MainButton";
 import { useReAuthUserMutation } from "@/features/user/API/userApi";
 import Loader from "../ui/Loader/Loader";
+import { CommonInput } from "../ui/Input";
 
 type Props = {
   setIsConfirmedPassword: React.Dispatch<SetStateAction<boolean>>,

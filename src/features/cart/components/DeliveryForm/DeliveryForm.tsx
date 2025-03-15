@@ -1,10 +1,11 @@
-import CommonInput from "@/components/ui/Input/CommonInput";
+import {CommonInput} from "@/components/ui/Input";
 import { auth } from "@/firebase/firebase-config";
 import { useAppSelector } from "@/redux/types";
 import { USER_ROUTES_NAMES } from "@/router/user/userRoutesNames";
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import classes from "./deliveryForm.module.scss";
+import SelectInput from "@/components/ui/Input/SelectInput/SelectInput";
 
 const DeliveryForm = () => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -16,16 +17,14 @@ const DeliveryForm = () => {
       : user.addresses.length === 0
       ? undefined
       : user.addresses;
-  const [activeAutofill, setActiveAutofill] = useState(
-    userAddresses ? userAddresses[0] : undefined
-  );
+
   const [firstName, setFirstName] = useState(user.name || "");
   const [lastName, setLastName] = useState(user.surname || "");
   const [mobile, setMobile] = useState(user.phone || "");
-  const [country, setCountry] = useState(activeAutofill?.country || "");
-  const [city, setCity] = useState(activeAutofill?.city || "");
-  const [address, setAddress] = useState(activeAutofill?.address || "");
-  const [postCode, setPostCode] = useState(activeAutofill?.postCode || "");
+  const [country, setCountry] = useState(userAddresses ? userAddresses[0].country : "");
+  const [city, setCity] = useState(userAddresses ? userAddresses[0].city : "");
+  const [address, setAddress] = useState(userAddresses ? userAddresses[0].address : "");
+  const [postCode, setPostCode] = useState(userAddresses ? userAddresses[0].postCode : "");
 
   const [activeElement, setActiveElement] = useState(0);
   const [isOpenList, setIsOpenList] = useState(false);
@@ -54,13 +53,13 @@ const DeliveryForm = () => {
   }, [isOpenList]);
 
   useEffect(() => {
-    if (activeAutofill) {
-      setCountry(activeAutofill.country);
-      setCity(activeAutofill.city);
-      setAddress(activeAutofill.address);
-      setPostCode(activeAutofill.postCode);
+    if (userAddresses) {
+      setCountry(userAddresses[activeElement].country);
+      setCity(userAddresses[activeElement].city);
+      setAddress(userAddresses[activeElement].address);
+      setPostCode(userAddresses[activeElement].postCode);
     }
-  }, [activeAutofill]);
+  }, [activeElement]);
 
   return (
     <>
@@ -68,36 +67,37 @@ const DeliveryForm = () => {
         <div className={classes.cart__autofill_wrapper}>
           <span>Autofill:</span>
           {userAddresses ? (
-            <div className={classes.cart__autofill} ref={dropdownRef}>
-              <span
-                onClick={() => {
-                  setIsOpenList((p) => !p);
-                }}
-              >
-                Address {userAddresses[activeElement].priority}
-              </span>
-              <ul
-                className={`${classes.cart__autofill_list} ${
-                  isOpenList ? classes["cart__autofill_list-active"] : ""
-                }`}
-              >
-                {userAddresses.map((i, index) => {
-                  return (
-                    <li
-                      className={classes.cart__autofill_variant}
-                      key={i.priority}
-                      onClick={() => {
-                        setActiveAutofill(i);
-                        setActiveElement(index);
-                        setIsOpenList(false);
-                      }}
-                    >
-                      Address {i.priority}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
+            // <div className={classes.cart__autofill} ref={dropdownRef}>
+            //   <span
+            //     onClick={() => {
+            //       setIsOpenList((p) => !p);
+            //     }}
+            //   >
+            //     Address {userAddresses[activeElement].priority}
+            //   </span>
+            //   <ul
+            //     className={`${classes.cart__autofill_list} ${
+            //       isOpenList ? classes["cart__autofill_list-active"] : ""
+            //     }`}
+            //   >
+            //     {userAddresses.map((i, index) => {
+            //       return (
+            //         <li
+            //           className={classes.cart__autofill_variant}
+            //           key={i.priority}
+            //           onClick={() => {
+            //             setActiveAutofill(i);
+            //             setActiveElement(index);
+            //             setIsOpenList(false);
+            //           }}
+            //         >
+            //           Address {i.priority}
+            //         </li>
+            //       );
+            //     })}
+            //   </ul>
+            // </div>
+            <SelectInput freezing data={userAddresses.map(i => `Address ${i.priority}`)} activeElementIndex={activeElement} onChoose={setActiveElement}/>
           ) : (
             <Link to={USER_ROUTES_NAMES.Addresses}>Add addresses</Link>
           )}

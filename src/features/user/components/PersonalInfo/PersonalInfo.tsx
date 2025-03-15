@@ -1,5 +1,4 @@
 import ConfirmPassword from "@/components/ConfirmPassword/ConfirmPassword";
-import CommonInput from "@/components/ui/Input/CommonInput";
 import Modal from "@/components/ui/Modal/Modal";
 import { TOutletProfileData } from "@/pages/Profile/ProfilePage";
 import { useState } from "react";
@@ -11,6 +10,7 @@ import {
   useSetUserPersonalDataMutation
 } from "../../API/userApi";
 import classes from "./personalInfo.module.scss";
+import { CommonInput } from "@/components/ui/Input";
 
 const PersonalInfo = () => {
   const {menuItem, data}: TOutletProfileData = useOutletContext();

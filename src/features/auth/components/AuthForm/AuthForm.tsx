@@ -1,4 +1,4 @@
-import CommonInput from "@/components/ui/Input/CommonInput";
+import {CommonInput} from "@/components/ui/Input/";
 import classes from "./authForm.module.scss";
 import { FC, useEffect, useState } from "react";
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";

@@ -1,6 +1,6 @@
 @use "/src/assets/styles/_variables.scss" as *;
 
-.common-input {
+.input__common {
   padding: 10px 10px;
   padding-top: 12px;
   border: 1px solid $main-dark-color;
@@ -8,5 +8,18 @@
   background-color: $main-light-color;
   &::placeholder {
     color: $main-text-color;
+  }
+  &_wrapper {
+    position: relative;
+  }
+
+  &_icon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    svg {
+      width: 19px;
+      height: 19px;
+    }
   }
 }

@@ -15,7 +15,8 @@
 
   &_icon {
     position: absolute;
-    top: 5px;
+    top: 50%;
+    transform: translateY(-50%);
     right: 5px;
     svg {
       width: 19px;

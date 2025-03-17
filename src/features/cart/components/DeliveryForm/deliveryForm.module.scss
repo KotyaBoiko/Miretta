@@ -8,46 +8,19 @@
     color: $dark-text-color;
     font-weight: 700;
     gap: 10px;
-
     & input {
       margin-top: 5px;
     }
   }
   &__autofill {
-    // text-decoration: underline;
-    font-weight: 600;
-    cursor: pointer;
-
-    &_wrapper {
-      font-size: 20px;
       margin-bottom: 10px;
       display: flex;
-      align-items: end;
-      gap: 10px;
+      flex-direction: column;
+      gap: 5px;
       position: relative;
-    }
-
-    &_list {
-      display: none;
-      position: absolute;
-      top: 25px;
-      background-color: $main-light-color;
-      border: 1px solid $main-dark-color;
-      color: $main-dark-color;
-      &-active {
-        display: flex;
-        flex-direction: column;
-      }
-    }в
-    &_variant {
-      padding: 10px 5px;
-      border-bottom: 1px solid $main-dark-color;
-      &:last-child {
-        border-bottom: none;
-      }
-      &:hover {
-        color: $main-text-color;
-      }
+    &_title {
+      color: $dark-text-color;
+      font-weight: 700;
     }
   }
 }

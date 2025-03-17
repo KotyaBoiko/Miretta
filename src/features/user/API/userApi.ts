@@ -1,5 +1,5 @@
 import { auth, db } from "@/firebase/firebase-config";
-import { baseApi } from "@/redux/baseApi";
+import { baseApi } from "@/redux/API/baseApi";
 import {
   reauthenticateWithCredential,
   updateEmail,

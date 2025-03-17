@@ -64,40 +64,10 @@ const DeliveryForm = () => {
   return (
     <>
       {auth.currentUser ? (
-        <div className={classes.cart__autofill_wrapper}>
-          <span>Autofill:</span>
+        <div className={classes.cart__autofill}>
+          <span className={classes.cart__autofill_title}>Autofill:</span>
           {userAddresses ? (
-            // <div className={classes.cart__autofill} ref={dropdownRef}>
-            //   <span
-            //     onClick={() => {
-            //       setIsOpenList((p) => !p);
-            //     }}
-            //   >
-            //     Address {userAddresses[activeElement].priority}
-            //   </span>
-            //   <ul
-            //     className={`${classes.cart__autofill_list} ${
-            //       isOpenList ? classes["cart__autofill_list-active"] : ""
-            //     }`}
-            //   >
-            //     {userAddresses.map((i, index) => {
-            //       return (
-            //         <li
-            //           className={classes.cart__autofill_variant}
-            //           key={i.priority}
-            //           onClick={() => {
-            //             setActiveAutofill(i);
-            //             setActiveElement(index);
-            //             setIsOpenList(false);
-            //           }}
-            //         >
-            //           Address {i.priority}
-            //         </li>
-            //       );
-            //     })}
-            //   </ul>
-            // </div>
-            <SelectInput freezing data={userAddresses.map(i => `Address ${i.priority}`)} activeElementIndex={activeElement} onChoose={setActiveElement}/>
+            <SelectInput data={userAddresses.map(i => `Address ${i.priority}`)} activeElementIndex={activeElement} onChoose={setActiveElement}/>
           ) : (
             <Link to={USER_ROUTES_NAMES.Addresses}>Add addresses</Link>
           )}

@@ -1,5 +1,5 @@
 import { API } from "@/firebase/API";
-import { baseApi } from "@/redux/baseApi";
+import { baseApi } from "@/redux/API/baseApi";
 import { TCollection } from "./components/collectionItem/type";
 
 export const collectionApi = baseApi.injectEndpoints({

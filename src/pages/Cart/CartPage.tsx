@@ -14,7 +14,7 @@ const CartPage = () => {
   return (
     <div className={classes.cart}>
       <div className="wrapper">
-        <h1 className={classes.cart__title}>Shopping Cart</h1>
+        <h1 className={classes.cart__title}>SHOPPING CART</h1>
         <div className={classes.cart__container}>
           {data?.length ? (
             <>

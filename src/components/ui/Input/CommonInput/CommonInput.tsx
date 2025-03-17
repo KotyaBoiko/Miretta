@@ -1,20 +1,19 @@
 import { Dispatch, FC, ReactNode, SetStateAction } from "react";
 import classes from "./commonInput.module.scss";
 
-
 type BaseProps = {
   type?: string;
   placeholder?: string;
   id?: string;
   value: string;
   className?: string;
-  onClick?: () => void; 
-  icon?: ReactNode, 
+  onClick?: () => void;
+  icon?: ReactNode;
 };
 
 type ReadOnlyProps = BaseProps & {
   readOnly: true;
-  onChange?: Dispatch<SetStateAction<string>>;
+  onChange?: never;
 };
 
 type EditableProps = BaseProps & {
@@ -40,10 +39,16 @@ const CommonInput: FC<Props> = ({
       <input
         type={type}
         placeholder={placeholder}
-        className={classes.input__common + ' ' + (className ? className : "")}
+        className={classes.input__common + " " + (className ? className : "")}
         id={id ? id : undefined}
         value={value}
-        onChange={readOnly ? undefined : (e) => onChange(e.target.value)}
+        onChange={
+          readOnly
+            ? undefined
+            : (e) => {
+                onChange(e.target.value);
+              }
+        }
         readOnly={readOnly}
         onClick={onClick}
       />

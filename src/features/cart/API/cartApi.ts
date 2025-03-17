@@ -1,7 +1,7 @@
 import { auth, db } from "@/firebase/firebase-config";
 import { clearCollection } from "@/firebase/utils/clearCollection";
 import { getFirestoreDataWithId } from "@/firebase/utils/getFirestoreDataWithId";
-import { baseApi } from "@/redux/baseApi";
+import { baseApi } from "@/redux/API/baseApi";
 import {
   collection,
   deleteDoc,

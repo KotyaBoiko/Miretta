@@ -1,6 +1,6 @@
 import { setAuth } from "@/features/auth/redux/slices/authSlice";
 import { auth } from "@/firebase/firebase-config";
-import { baseApi } from "@/redux/baseApi";
+import { baseApi } from "@/redux/API/baseApi";
 import { useAppDispatch } from "@/redux/types";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import { onAuthStateChanged } from "firebase/auth";

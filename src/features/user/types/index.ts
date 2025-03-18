@@ -1,7 +1,11 @@
 export interface IAddress {
   country: string,
-  city: string,
+  cityDescription: string,
+  cityRef: string,
+  cityTitle: string,
   address: string,
+  postDescription: string,
+  postRef: string,
   postCode: string,
   priority: number,
 } 

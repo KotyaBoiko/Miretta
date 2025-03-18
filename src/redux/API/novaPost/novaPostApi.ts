@@ -16,17 +16,16 @@ export const novaPostApi = createApi({
         body: {
           apiKey: API_KEY_NOVA_POST,
           modelName: "AddressGeneral",
-          calledMethod: "getSettlements",
+          calledMethod: "getCities",
           methodProperties: {
             Page: "1",
-            Warehouse: "1",
             FindByString: str,
-            Limit: "20",
+            Limit: "10",
           },
         },
       }),
     }),
-    getDepartment: builder.query<INovaPostResponse<IDepartment>, { department: string; city: string }>({
+    getDepartments: builder.query<INovaPostResponse<IDepartment>, { department: string; city: string }>({
       query: ({ department, city }) => ({
         url: "",
         method: "POST",
@@ -35,7 +34,7 @@ export const novaPostApi = createApi({
           modelName: "AddressGeneral",
           calledMethod: "getWarehouses",
           methodProperties: {
-            CityName: city,
+            CityRef: city,
             WarehouseId: department,
           },
         },
@@ -44,4 +43,4 @@ export const novaPostApi = createApi({
   }),
 });
 
-export const { useLazyGetCitiesQuery, useLazyGetDepartmentQuery } = novaPostApi;
+export const { useLazyGetCitiesQuery, useLazyGetDepartmentsQuery } = novaPostApi;

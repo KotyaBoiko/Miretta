@@ -5,7 +5,11 @@ import DoneIcon from "@/assets/icons/done.svg?react";
 
 type Props = {
   freezing?: boolean;
-  data: {displayInfo: string, shortDisplayInfo: string, id: string | number}[];
+  data: {
+    displayInfo: string;
+    shortDisplayInfo: string;
+    id: string | number;
+  }[];
   value: string;
   activeItem?: number | string;
   setActiveItem?: (ref: number | string) => void;
@@ -30,7 +34,6 @@ const WritableSelectInput: FC<Props> = ({
 }) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [isOpenList, setIsOpenList] = useState(false);
-
   const debounceActionOnChange = actionOnChange
     ? debounce(actionOnChange, 1000)
     : undefined;
@@ -66,29 +69,43 @@ const WritableSelectInput: FC<Props> = ({
   }, [isOpenList]);
 
   useEffect(() => {
-    if (setActiveItem ) {
-      if (data.filter(i => i.shortDisplayInfo === value).length === 1) {
-        setActiveItem(data[0].id)
-      } else {
-        setActiveItem('')
+    if (setActiveItem) {
+      if (data.length === 1 && data[0].shortDisplayInfo === value) {
+        setActiveItem(data[0].id);
+      } else if (
+        data.find((i) => i.id === activeItem)?.shortDisplayInfo != value
+      ) {
+        setActiveItem("");
       }
-      
     }
-  }, [data])
+  }, [data]);
 
   return (
     <div className={classes.select} ref={dropdownRef}>
       <input
-        value={value}
+        value={
+          isOpenList
+            ? value
+            : completed
+            ? data.find((i) => i.id === activeItem)?.displayInfo
+            : value
+        }
         onChange={(e) => {
           const newValue = e.target.value;
           onChange(newValue);
-          if (debounceActionOnChange && minLengthVisible > 0 && newValue.length >= minLengthVisible) {
+          if (
+            debounceActionOnChange &&
+            minLengthVisible > 0 &&
+            newValue.length >= minLengthVisible
+          ) {
             debounceActionOnChange(newValue);
           }
         }}
-        onClick={() => {
+        onClick={(e) => {
           setIsOpenList(true);
+          if(value.length >= minLengthVisible && debounceActionOnChange) {
+            debounceActionOnChange(value)
+          }
         }}
         className={classes.select__active}
         placeholder={placeholder}
@@ -104,26 +121,28 @@ const WritableSelectInput: FC<Props> = ({
         {data.map((item) => {
           return (
             <li
-            className={`${classes.select__variant} ${
-              item.id == activeItem
-                ? classes.select__variant_active
-                : ""
-            }`}
+              className={`${classes.select__variant} ${
+                item.id == activeItem ? classes.select__variant_active : ""
+              }`}
               key={item.id}
               onClick={() => {
                 setTimeout(() => setIsOpenList(false), 0);
                 onChange(item.shortDisplayInfo);
                 setActiveItem && setActiveItem(item.id);
-                debounceActionOnChange && debounceActionOnChange(item.shortDisplayInfo);
+                debounceActionOnChange &&
+                  debounceActionOnChange(item.shortDisplayInfo);
               }}
             >
-              {item.id === activeItem 
-              ? <>
-                {item.displayInfo}
-                <DoneIcon className={classes['select__variant_active-icon']}/>
-              </>
-              : item.displayInfo 
-            }
+              {item.id === activeItem ? (
+                <>
+                  {item.displayInfo}
+                  <DoneIcon
+                    className={classes["select__variant_active-icon"]}
+                  />
+                </>
+              ) : (
+                item.displayInfo
+              )}
             </li>
           );
         })}

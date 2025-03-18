@@ -4,7 +4,6 @@
   cursor: pointer;
   position: relative;
   color: $main-dark-color;
-  z-index: 90;
 
   &__active {
     padding: 10px 10px;
@@ -32,6 +31,7 @@
     overflow: scroll;
     display: none;
     position: absolute;
+    z-index: 80;
     bottom: -5px;
     transform: translateY(100%);
     background-color: $main-light-color;

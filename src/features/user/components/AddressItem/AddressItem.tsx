@@ -25,8 +25,7 @@ const AddressItem: FC<Props> = ({ address }) => {
 
     editAddress(newAddresses);
   };
-
-  const addressText = `${address.country} ${address.city} ${address.address} ${address.postCode}`;
+  const addressText = `${address.country} ${address.cityDescription} ${address.postDescription}`;
   return isEditing ? (
     <div className={classes.address__item}>
       <AddressEdit

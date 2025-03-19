@@ -1,7 +1,6 @@
-import React, { FC, SetStateAction, useEffect, useRef, useState } from "react";
-import classes from "./writableSelectInput.module.scss";
-import { debounce } from "@/utils/debounce";
 import DoneIcon from "@/assets/icons/done.svg?react";
+import { FC, useEffect, useRef, useState } from "react";
+import classes from "./writableSelectInput.module.scss";
 
 type Props = {
   freezing?: boolean;
@@ -13,9 +12,9 @@ type Props = {
   value: string;
   activeItem?: number | string;
   setActiveItem?: (ref: number | string) => void;
-  onChange: React.Dispatch<SetStateAction<string>>;
+  onChange: (str: string) => void;
   placeholder?: string;
-  actionOnChange?: (value: string) => void;
+  getData?: (prompt: string) => void;
   minLengthVisible?: number;
   completed?: boolean;
 };
@@ -24,7 +23,7 @@ const WritableSelectInput: FC<Props> = ({
   data,
   value,
   onChange,
-  actionOnChange,
+  getData,
   activeItem,
   setActiveItem,
   completed = false,
@@ -34,9 +33,6 @@ const WritableSelectInput: FC<Props> = ({
 }) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [isOpenList, setIsOpenList] = useState(false);
-  const debounceActionOnChange = actionOnChange
-    ? debounce(actionOnChange, 1000)
-    : undefined;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -93,18 +89,14 @@ const WritableSelectInput: FC<Props> = ({
         onChange={(e) => {
           const newValue = e.target.value;
           onChange(newValue);
-          if (
-            debounceActionOnChange &&
-            minLengthVisible > 0 &&
-            newValue.length >= minLengthVisible
-          ) {
-            debounceActionOnChange(newValue);
+          if (getData && newValue.length >= minLengthVisible) {
+            getData(newValue);
           }
         }}
-        onClick={(e) => {
+        onClick={() => {
           setIsOpenList(true);
-          if(value.length >= minLengthVisible && debounceActionOnChange) {
-            debounceActionOnChange(value)
+          if (value.length >= minLengthVisible && getData) {
+            getData(value);
           }
         }}
         className={classes.select__active}
@@ -129,8 +121,7 @@ const WritableSelectInput: FC<Props> = ({
                 setTimeout(() => setIsOpenList(false), 0);
                 onChange(item.shortDisplayInfo);
                 setActiveItem && setActiveItem(item.id);
-                debounceActionOnChange &&
-                  debounceActionOnChange(item.shortDisplayInfo);
+                getData && getData(item.shortDisplayInfo);
               }}
             >
               {item.id === activeItem ? (

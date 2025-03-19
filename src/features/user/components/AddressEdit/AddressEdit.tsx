@@ -33,7 +33,7 @@ const AddressEdit: FC<Props> = ({ close, addresses, oldData }) => {
     debounce((department: string, city: string) => {
       getDepartments({ department, city });
     }, 300),
-    [getCities]
+    [getDepartments]
   );
   const [country, setCountry] = useState(oldData ? oldData.country : "Україна");
 
@@ -187,7 +187,7 @@ const AddressEdit: FC<Props> = ({ close, addresses, oldData }) => {
             placeholder="Kyiv"
             value={cityTitle}
             onChange={setCityTitle}
-            actionOnChange={debouncedGetCities}
+            getData={debouncedGetCities}
             minLengthVisible={2}
             completed={
               !!cities?.data.find((i) => i.Ref === cityRef) || oldData
@@ -230,7 +230,7 @@ const AddressEdit: FC<Props> = ({ close, addresses, oldData }) => {
             placeholder="143"
             value={postCode}
             onChange={setPostCode}
-            actionOnChange={(v) => debouncedGetDepartments(v, cityRef)}
+            getData={(d) => debouncedGetDepartments(d, cityRef)}
             minLengthVisible={1}
             completed={
               departments

@@ -21,8 +21,8 @@ const DeliveryForm = () => {
   const [firstName, setFirstName] = useState(user.name || "");
   const [lastName, setLastName] = useState(user.surname || "");
   const [mobile, setMobile] = useState(user.phone || "");
-  const [country, setCountry] = useState(userAddresses ? userAddresses[0].country : "");
-  const [city, setCity] = useState(userAddresses ? userAddresses[0].city : "");
+  const [country, setCountry] = useState(userAddresses ? userAddresses[0].country : "Україна");
+  const [city, setCity] = useState(userAddresses ? userAddresses[0].cityDescription : "");
   const [address, setAddress] = useState(userAddresses ? userAddresses[0].address : "");
   const [postCode, setPostCode] = useState(userAddresses ? userAddresses[0].postCode : "");
 
@@ -55,7 +55,7 @@ const DeliveryForm = () => {
   useEffect(() => {
     if (userAddresses) {
       setCountry(userAddresses[activeElement].country);
-      setCity(userAddresses[activeElement].city);
+      setCity(userAddresses[activeElement].cityDescription);
       setAddress(userAddresses[activeElement].address);
       setPostCode(userAddresses[activeElement].postCode);
     }
@@ -109,7 +109,8 @@ const DeliveryForm = () => {
             type="text"
             placeholder="Ukraine"
             value={country}
-            onChange={setCountry}
+            readOnly
+            // onChange={setCountry}
           />
         </label>
         <label>

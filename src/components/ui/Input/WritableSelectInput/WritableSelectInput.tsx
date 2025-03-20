@@ -66,7 +66,7 @@ const WritableSelectInput: FC<Props> = ({
 
   useEffect(() => {
     if (setActiveItem) {
-      if (data.length === 1 && data[0].shortDisplayInfo === value) {
+      if (data.length && data[0].shortDisplayInfo === value) {
         setActiveItem(data[0].id);
       } else if (
         data.find((i) => i.id === activeItem)?.shortDisplayInfo != value

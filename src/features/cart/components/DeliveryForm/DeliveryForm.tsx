@@ -1,13 +1,35 @@
-import {CommonInput} from "@/components/ui/Input";
+import { CommonInput } from "@/components/ui/Input";
+import SelectInput from "@/components/ui/Input/SelectInput/SelectInput";
+import AddressFields from "@/features/user/components/AddressFields/AddressFields";
 import { auth } from "@/firebase/firebase-config";
+import {
+  useLazyGetCitiesQuery,
+  useLazyGetDepartmentsQuery,
+} from "@/redux/API/novaPost/novaPostApi";
 import { useAppSelector } from "@/redux/types";
 import { USER_ROUTES_NAMES } from "@/router/user/userRoutesNames";
-import { useEffect, useRef, useState } from "react";
+import { debounce } from "@/utils/debounce";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import classes from "./deliveryForm.module.scss";
-import SelectInput from "@/components/ui/Input/SelectInput/SelectInput";
 
 const DeliveryForm = () => {
+  const [getCities, { data: cities }] = useLazyGetCitiesQuery();
+  const [getDepartments, { data: departments }] = useLazyGetDepartmentsQuery();
+
+  const debouncedGetCities = useCallback(
+    debounce((city: string) => {
+      getCities(city);
+    }, 300),
+    [getCities]
+  );
+  const debouncedGetDepartments = useCallback(
+    debounce((department: string, city: string) => {
+      getDepartments({ department, city });
+    }, 300),
+    [getDepartments]
+  );
+
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const user = useAppSelector((state) => state.user);
 
@@ -21,10 +43,56 @@ const DeliveryForm = () => {
   const [firstName, setFirstName] = useState(user.name || "");
   const [lastName, setLastName] = useState(user.surname || "");
   const [mobile, setMobile] = useState(user.phone || "");
-  const [country, setCountry] = useState(userAddresses ? userAddresses[0].country : "Україна");
-  const [city, setCity] = useState(userAddresses ? userAddresses[0].cityDescription : "");
-  const [address, setAddress] = useState(userAddresses ? userAddresses[0].address : "");
-  const [postCode, setPostCode] = useState(userAddresses ? userAddresses[0].postCode : "");
+  const [country, setCountry] = useState(
+    userAddresses ? userAddresses[0].country : "Україна"
+  );
+  const [address, setAddress] = useState(
+    userAddresses ? userAddresses[0].address : ""
+  );
+
+  const [cityDescription, setCityDescription] = useState(
+    userAddresses ? userAddresses[0].cityDescription : ""
+  );
+  const [cityRef, setCityRef] = useState(
+    userAddresses ? userAddresses[0].cityRef : ""
+  );
+  const [cityTitle, setCityTitle] = useState(
+    userAddresses ? userAddresses[0].cityTitle : ""
+  );
+
+  const [postRef, setPostRef] = useState(
+    userAddresses ? userAddresses[0].postCode : ""
+  );
+  const [postCode, setPostCode] = useState(
+    userAddresses ? userAddresses[0].postCode : ""
+  );
+  const [postDescription, setPostDescription] = useState(
+    userAddresses ? userAddresses[0].postDescription : ""
+  );
+
+  useEffect(() => {
+    if (cityRef !== "" && cities) {
+      const newCity = cities.data.find((i) => i.Ref === cityRef);
+      if (!newCity) return;
+      setCityDescription(
+        `${newCity.SettlementTypeDescription} ${newCity.Description} ${
+          newCity.RegionsDescription
+            ? newCity.RegionsDescription + " район"
+            : ""
+        } ${newCity.AreaDescription} область`
+      );
+    }
+  }, [cityRef]);
+
+  useEffect(() => {
+    if (postRef !== "" && departments) {
+      const newDepartment = departments.data.find(
+        (i) => i.SettlementRef === postRef
+      );
+      if (!newDepartment) return;
+      setPostDescription(newDepartment.Description);
+    }
+  }, [postRef]);
 
   const [activeElement, setActiveElement] = useState(0);
   const [isOpenList, setIsOpenList] = useState(false);
@@ -55,9 +123,15 @@ const DeliveryForm = () => {
   useEffect(() => {
     if (userAddresses) {
       setCountry(userAddresses[activeElement].country);
-      setCity(userAddresses[activeElement].cityDescription);
+      setCityDescription(userAddresses[activeElement].cityDescription);
+      setCityRef(userAddresses[activeElement].cityRef);
+      setCityTitle(userAddresses[activeElement].cityTitle);
       setAddress(userAddresses[activeElement].address);
       setPostCode(userAddresses[activeElement].postCode);
+      setPostRef(userAddresses[activeElement].postRef);
+      setPostDescription(userAddresses[activeElement].postDescription);
+      debouncedGetDepartments(userAddresses[activeElement].postCode, userAddresses[activeElement].cityRef);
+      debouncedGetCities(userAddresses[activeElement].cityTitle);
     }
   }, [activeElement]);
 
@@ -67,7 +141,11 @@ const DeliveryForm = () => {
         <div className={classes.cart__autofill}>
           <span className={classes.cart__autofill_title}>Autofill:</span>
           {userAddresses ? (
-            <SelectInput data={userAddresses.map(i => `Address ${i.priority}`)} activeElementIndex={activeElement} onChoose={setActiveElement}/>
+            <SelectInput
+              data={userAddresses.map((i) => `Address ${i.priority}`)}
+              activeElementIndex={activeElement}
+              onChoose={setActiveElement}
+            />
           ) : (
             <Link to={USER_ROUTES_NAMES.Addresses}>Add addresses</Link>
           )}
@@ -103,43 +181,26 @@ const DeliveryForm = () => {
             onChange={setMobile}
           />
         </label>
-        <label>
-          Country
-          <CommonInput
-            type="text"
-            placeholder="Ukraine"
-            value={country}
-            readOnly
-            // onChange={setCountry}
-          />
-        </label>
-        <label>
-          City
-          <CommonInput
-            type="text"
-            placeholder="Kyiv"
-            value={city}
-            onChange={setCity}
-          />
-        </label>
-        <label>
-          Address
-          <CommonInput
-            type="text"
-            placeholder="Shevchenka St, 10"
-            value={address}
-            onChange={setAddress}
-          />
-        </label>
-        <label>
-          Post Code
-          <CommonInput
-            type="text"
-            placeholder="01001"
-            value={postCode}
-            onChange={setPostCode}
-          />
-        </label>
+        <AddressFields
+          oldData={userAddresses ? userAddresses[activeElement] : undefined}
+          country={country}
+          cityTitle={cityTitle}
+          cityRef={cityRef}
+          cityDescription={cityDescription}
+          address={address}
+          postCode={postCode}
+          postRef={postRef}
+          postDescription={postDescription}
+          setCityTitle={setCityTitle}
+          setCityRef={setCityRef}
+          setAddress={setAddress}
+          setPostCode={setPostCode}
+          setPostRef={setPostRef}
+          cities={cities}
+          departments={departments}
+          debouncedGetCities={debouncedGetCities}
+          debouncedGetDepartments={debouncedGetDepartments}
+        />
       </form>
     </>
   );

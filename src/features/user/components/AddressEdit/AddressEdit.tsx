@@ -1,40 +1,41 @@
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
-import { CommonInput } from "@/components/ui/Input";
-import { FC, useCallback, useEffect, useState } from "react";
-
-import WritableSelectInput from "@/components/ui/Input/WritableSelectInput/WritableSelectInput";
 import Loader from "@/components/ui/Loader/Loader";
 import {
   useLazyGetCitiesQuery,
   useLazyGetDepartmentsQuery,
 } from "@/redux/API/novaPost/novaPostApi";
 import { debounce } from "@/utils/debounce";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useEditAddressMutation } from "../../API/userApi";
 import { IAddress } from "../../types";
+import AddressFields from "../AddressFields/AddressFields";
 import classes from "./addressEdit.module.scss";
+
 type Props = {
   close: () => void;
   addresses: IAddress[];
   oldData?: IAddress;
+  isPartForm?: boolean;
 };
 
 const AddressEdit: FC<Props> = ({ close, addresses, oldData }) => {
   const [addAddress, { isLoading }] = useEditAddressMutation();
-  const [getCities, { data: cities }] = useLazyGetCitiesQuery();
-  const [getDepartments, { data: departments }] = useLazyGetDepartmentsQuery();
+    const [getCities, { data: cities }] = useLazyGetCitiesQuery();
+    const [getDepartments, { data: departments }] = useLazyGetDepartmentsQuery();
+  
+    const debouncedGetCities = useCallback(
+      debounce((city: string) => {
+        getCities(city);
+      }, 300),
+      [getCities]
+    );
+    const debouncedGetDepartments = useCallback(
+      debounce((department: string, city: string) => {
+        getDepartments({ department, city });
+      }, 300),
+      [getDepartments]
+    );
 
-  const debouncedGetCities = useCallback(
-    debounce((city: string) => {
-      getCities(city);
-    }, 300),
-    [getCities]
-  );
-  const debouncedGetDepartments = useCallback(
-    debounce((department: string, city: string) => {
-      getDepartments({ department, city });
-    }, 300),
-    [getDepartments]
-  );
   const [country, setCountry] = useState(oldData ? oldData.country : "Україна");
 
   const [cityDescription, setCityDescription] = useState(
@@ -148,103 +149,26 @@ const AddressEdit: FC<Props> = ({ close, addresses, oldData }) => {
         onSubmit={(e) => e.preventDefault()}
         className={classes.address__add_form}
       >
-        <label className={classes.address__add_item}>
-          Country
-          <CommonInput
-            type="text"
-            placeholder="Ukraine"
-            value={country}
-            // onChange={setCountry}
-            readOnly
-          />
-        </label>
-        <label className={classes.address__add_item}>
-          City
-          <WritableSelectInput
-            data={
-              cities
-                ? cities.data.map((i) => ({
-                    displayInfo: `${i.SettlementTypeDescription} ${
-                      i.Description
-                    } ${
-                      i.RegionsDescription
-                        ? i.RegionsDescription + " район"
-                        : ""
-                    } ${i.AreaDescription} область`,
-                    shortDisplayInfo: i.Description,
-                    id: i.Ref,
-                  }))
-                : cityDescription
-                ? [
-                    {
-                      displayInfo: cityDescription,
-                      shortDisplayInfo: cityTitle,
-                      id: cityRef,
-                    },
-                  ]
-                : []
-            }
-            placeholder="Kyiv"
-            value={cityTitle}
-            onChange={setCityTitle}
-            getData={debouncedGetCities}
-            minLengthVisible={2}
-            completed={
-              !!cities?.data.find((i) => i.Ref === cityRef) || oldData
-                ? cityRef !== ""
-                : false
-            }
-            activeItem={cityRef}
-            setActiveItem={(id) => setCityRef(String(id))}
-          />
-        </label>
-        <label className={classes.address__add_item}>
-          Address
-          <CommonInput
-            type="text"
-            placeholder="Shevchenka St, 10"
-            value={address}
-            onChange={setAddress}
-          />
-        </label>
-        <label className={classes.address__add_item}>
-          Post Code
-          <WritableSelectInput
-            data={
-              departments
-                ? departments.data.map((i) => ({
-                    displayInfo: i.Description,
-                    shortDisplayInfo: i.Number,
-                    id: i.SettlementRef,
-                  }))
-                : postDescription
-                ? [
-                    {
-                      displayInfo: postDescription,
-                      shortDisplayInfo: postCode,
-                      id: postRef,
-                    },
-                  ]
-                : []
-            }
-            placeholder="143"
-            value={postCode}
-            onChange={setPostCode}
-            getData={(d) => debouncedGetDepartments(d, cityRef)}
-            minLengthVisible={1}
-            completed={
-              departments
-                ? !!departments.data.find(
-                    (i) => i.SettlementRef === postRef && i.CityRef === cityRef
-                  )
-                : oldData
-                ? postRef !== "" && oldData?.cityRef === cityRef
-                : false
-            }
-            activeItem={postRef}
-            setActiveItem={(id) => setPostRef(String(id))}
-          />
-        </label>
+        <AddressFields
+          oldData={oldData}
+          country={country}
+          cityTitle={cityTitle}
+          cityRef={cityRef}
+          cityDescription={cityDescription}
+          address={address}
+          postCode={postCode}
+          postRef={postRef}
+          postDescription={postDescription}
+          setCityTitle={setCityTitle}
+          setCityRef={setCityRef}
+          setAddress={setAddress}
+          setPostCode={setPostCode}
+          setPostRef={setPostRef}
+          cities={cities}
+          departments={departments}
+          debouncedGetCities={debouncedGetCities}
+          debouncedGetDepartments={debouncedGetDepartments}
+        />
         <div className={classes.address__add_controls}>
           <MainButton width={"full"} action={handleSave}>
             {isLoading ? <Loader /> : "Save"}

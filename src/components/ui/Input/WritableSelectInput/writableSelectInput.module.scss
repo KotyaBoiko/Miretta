@@ -8,6 +8,7 @@
   &__active {
     padding: 10px 10px;
     padding-top: 12px;
+    padding-right: 30px;
     border: 1px solid $main-dark-color;
     width: 100%;
     background-color: $main-light-color;
@@ -18,7 +19,7 @@
     &_completed {
       position: absolute;
       top: 50%;
-      transform: translateY(-50%);
+      transform: translateY(-35%);
       right: 5px;
       width: 19px;
       height: 19px;

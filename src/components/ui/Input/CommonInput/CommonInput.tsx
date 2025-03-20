@@ -18,7 +18,7 @@ type ReadOnlyProps = BaseProps & {
 
 type EditableProps = BaseProps & {
   readOnly?: false;
-  onChange: Dispatch<SetStateAction<string>>;
+  onChange: Dispatch<SetStateAction<string>> | ((value: string) => void);
 };
 
 type Props = ReadOnlyProps | EditableProps;

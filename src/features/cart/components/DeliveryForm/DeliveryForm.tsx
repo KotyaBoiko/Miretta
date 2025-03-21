@@ -32,7 +32,7 @@ const DeliveryForm = () => {
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const user = useAppSelector((state) => state.user);
-
+console.log(user)
   const userAddresses =
     user.addresses === undefined
       ? undefined

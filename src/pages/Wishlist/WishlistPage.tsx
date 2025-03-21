@@ -1,6 +1,6 @@
 import WishlistProducts from "@/features/products/components/WishlistProducts/WishlistProducts";
 import classes from './wishlistPage.module.scss';
-const Wishlist = () => {
+const WishlistPage = () => {
   return (
     <div className={classes.product__wishlist}>
       <div className="wrapper">
@@ -11,4 +11,4 @@ const Wishlist = () => {
   );
 };
 
-export default Wishlist;
+export default WishlistPage;

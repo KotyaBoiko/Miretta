@@ -5,7 +5,7 @@ import ProductDetailPage from "@/pages/ProductDetail/ProductDetailPage";
 import ProductsPage from "@/pages/Products/ProductsPage";
 import { store } from "@/redux/store";
 import { COMMON_ROUTES_NAMES } from "./commonRoutesNames";
-import WishlistPage from "@/pages/Wishlist/WishlistPage";
+import { auth } from "@/firebase/firebase-config";
 
 export const commonRouter = [
   {
@@ -28,14 +28,12 @@ export const commonRouter = [
     path: COMMON_ROUTES_NAMES.Cart,
     element: <CartPage/>,
     loader: async () => {
-      const result = store.dispatch(cartApi.endpoints.getCart.initiate());
-      await result;
-      result.unsubscribe();
+      if (auth.currentUser) {
+        const result = store.dispatch(cartApi.endpoints.getCart.initiate());
+        await result;
+        result.unsubscribe();
+      }
       return null;
     }
-  },
-  {
-    path: COMMON_ROUTES_NAMES.Wishlist,
-    element: <WishlistPage/>,
   },
 ];

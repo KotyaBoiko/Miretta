@@ -1,7 +1,6 @@
 @use "/src/assets/styles/variables.scss" as *;
 
 .auth {
-  width: 360px;
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -10,9 +9,10 @@
   background: $main-light-color;
   color: $main-dark-color;
   &-signIn {
-    top: 85px;
+    width: 360px;
+    top: 80px;
     right: 5vw;
-    animation: emerge 0.5s;
+    animation: emerge 0.3s;
     &::after {
       content: "";
       width: 20px;
@@ -24,13 +24,13 @@
       border-right: none;
       position: absolute;
       top: -11px;
-      right: calc(139px - 5vw);
+      right: calc(183px - 5vw);
     }
   }
 
   &-signUp {
     width: 400px;
-    animation: emergeCenter 0.5s;
+    animation: emergeCenter 0.3s;
   }
 
   &__other {
@@ -44,10 +44,10 @@
 
 
   &-close {
-    animation: close 0.6s;
+    animation: close 0.3s;
 
     &-center {
-      animation: closeCenter 0.6s;
+      animation: closeCenter 0.3s;
     }
   }
 }

@@ -9,6 +9,7 @@ import { useAppSelector } from "@/redux/types";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import { USER_ROUTES_NAMES } from "@/router/user/userRoutesNames";
 import classes from "./header.module.scss";
+import { auth } from "@/firebase/firebase-config";
 
 const types = [
   ["Tops", "Shirts & Tops"],
@@ -23,7 +24,6 @@ const Header: FC = () => {
   let navigate = useNavigate();
   const location = useLocation();
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authType, setAuthType] = useState<"signIn" | "signUp">("signIn");
   const openProfile = () => {
     if (isAuth) {
       navigate(USER_ROUTES_NAMES.Profile);
@@ -72,17 +72,21 @@ const Header: FC = () => {
               onClick={openProfile}
             />
             <AuthModal
-              type={authType}
-              setAuthType={setAuthType}
+              type={"signIn"}
               closeAuthModal={setIsAuthModalOpen}
               isAuthModalOpen={isAuthModalOpen}
+              underProfile
             />
-            <Link
-              to={COMMON_ROUTES_NAMES.Wishlist}
-              className={classes.header__like}
-            >
-              <LikeIcon />
-            </Link>
+            {auth.currentUser ? (
+              <Link
+                to={USER_ROUTES_NAMES.Wishlist}
+                className={classes.header__like}
+              >
+                <LikeIcon />
+              </Link>
+            ) : (
+              <LikeIcon onClick={() => setIsAuthModalOpen(true)} />
+            )}
             <Link
               to={COMMON_ROUTES_NAMES.Cart}
               className={classes.header__cart}

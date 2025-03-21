@@ -1,13 +1,19 @@
-import { FC, useState } from "react";
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
+import { validate } from "@/utils/validate";
+import { FC, useState } from "react";
 import {
   useRemoveProductFromCartMutation,
   useUpdateProductQuantityMutation,
 } from "../../API/cartApi";
-import { validate } from "@/utils/validate";
 
 import Delete from "@/assets/icons/delete.svg?react";
+import { useAppDispatch, useAppSelector } from "@/redux/types";
 import classes from "./cartProductItem.module.scss";
+import { auth } from "@/firebase/firebase-config";
+import {
+  updateCartItemQuantityLocal,
+  removeFromCartLocal,
+} from "../../slices/cartSlice";
 type Props = {
   id: string;
   variantId: string;
@@ -30,6 +36,8 @@ const CartProductItem: FC<Props> = ({
   const [updateQuantity, {}] = useUpdateProductQuantityMutation();
   const [removeProduct, {}] = useRemoveProductFromCartMutation();
 
+  const dispatch = useAppDispatch();
+  const totalQuantity = useAppSelector(state => state.cart.totalQuantity);
   const [quantity, setQuantity] = useState(startQuantity);
   const [inputValue, setInputValue] = useState(startQuantity);
 
@@ -45,7 +53,13 @@ const CartProductItem: FC<Props> = ({
       setInputValue(newQuantity);
       return;
     }
-    await updateQuantity({ quantity: newQuantity, variantId });
+    if (auth.currentUser) {
+      await updateQuantity({ quantity: newQuantity, variantId });
+    } else {
+      dispatch(
+        updateCartItemQuantityLocal({ quantity: newQuantity, variantId })
+      );
+    }
     setQuantity(newQuantity);
     setInputValue(newQuantity);
   };
@@ -87,7 +101,11 @@ const CartProductItem: FC<Props> = ({
           </MainButton>
           <Delete
             className={classes.cart__product_delete}
-            onClick={() => removeProduct(variantId)}
+            onClick={() =>
+              auth.currentUser
+                ? removeProduct(variantId)
+                : dispatch(removeFromCartLocal(variantId))
+            }
           />
         </div>
       </div>

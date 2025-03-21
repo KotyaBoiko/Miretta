@@ -1,4 +1,4 @@
-import { FC, SetStateAction } from "react";
+import { FC, SetStateAction, useEffect, useState } from "react";
 
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
 import AuthForm from "../AuthForm/AuthForm";
@@ -9,25 +9,27 @@ import { toggleAuthType } from "../../utils/toggleAuthType";
 
 import classes from "./authModal.module.scss";
 type Props = {
+  underProfile?: boolean
   type: "signIn" | "signUp";
-  setAuthType: React.Dispatch<SetStateAction<"signIn" | "signUp">>
   isAuthModalOpen: boolean;
   closeAuthModal: React.Dispatch<SetStateAction<boolean>>;
 }
 
-const AuthModal: FC<Props> = ({ type, isAuthModalOpen, closeAuthModal, setAuthType }) => {
+const AuthModal: FC<Props> = ({ type, isAuthModalOpen, closeAuthModal, underProfile = false }) => {
+
+  const [authType, setAuthType] = useState<'signIn' | "signUp">(type);
 
   const onCloseModal = () => {
-    if (type === 'signIn') {
+    if (authType === 'signIn') {
       document.querySelector(`.${classes.auth}`)?.classList.add(classes[`auth-close`])
       setTimeout(() => {
         closeAuthModal(false)
-      }, 500)
+      }, 290)
     } else {
       document.querySelector(`.${classes.auth}`)?.classList.add(classes[`auth-close-center`])
       setTimeout(() => {
         closeAuthModal(false)
-      }, 500)
+      }, 290)
     }
   }
 
@@ -35,15 +37,15 @@ const AuthModal: FC<Props> = ({ type, isAuthModalOpen, closeAuthModal, setAuthTy
     <Modal
       isOpen={isAuthModalOpen && !auth.currentUser}
       onClose={onCloseModal}
-      classNameContent={classes[`auth-${type}`] + " " + classes.auth}
-      center={type === 'signUp'}
+      classNameContent={underProfile ? classes[`auth-${authType}`] : classes['auth-signUp']+ " " + classes.auth}
+      center={underProfile ? authType === 'signUp': true}
     >
-        <AuthForm type={type} />
+        <AuthForm type={authType} />
         <FastAuth />
         <div className={classes.auth__other}>
           <span>-or-</span>
           <MainButton width="full" action={() => toggleAuthType(setAuthType)}>
-            {type === "signIn" ? "Sign Up" : "Sign In"}
+            {authType === "signIn" ? "Sign Up" : "Sign In"}
           </MainButton>
       </div>
     </Modal>

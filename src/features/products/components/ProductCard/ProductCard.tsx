@@ -2,10 +2,10 @@ import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import { FC } from "react";
 import { Link } from "react-router";
-import { ProductBasic } from "../../types/product";
+import { IProductBasic } from "../../types/product";
 import classes from "./productCard.module.scss";
 
-const ProductCard: FC<ProductBasic> = ({
+const ProductCard: FC<IProductBasic> = ({
   title,
   img,
   price,

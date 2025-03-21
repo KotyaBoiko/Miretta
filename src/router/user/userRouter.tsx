@@ -6,9 +6,14 @@ import { commonRouter } from "../common/commonRouter";
 import { USER_ROUTES_NAMES } from "./userRoutesNames";
 import LogOutPage from "@/pages/LogOut/LogOutPage";
 import AddressesPage from "@/pages/Addresses/AddressesPage";
+import WishlistPage from "@/pages/Wishlist/WishlistPage";
 
 export const userRouter = [
   ...commonRouter,
+  {
+    path: USER_ROUTES_NAMES.Wishlist,
+    element: <WishlistPage/>,
+  },
   {
     path: USER_ROUTES_NAMES.Profile,
     element: <ProfilePage />,

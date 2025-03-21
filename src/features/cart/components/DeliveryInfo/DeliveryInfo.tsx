@@ -2,17 +2,23 @@ import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
 import { useGetCartQuery } from "../../API/cartApi";
 import DeliveryForm from "../DeliveryForm/DeliveryForm";
 import classes from "./deliveryInfo.module.scss";
+import { auth } from "@/firebase/firebase-config";
+import { useAppSelector } from "@/redux/types";
+import { calculateAmount } from "@/utils/calculateAmount";
 
 const DELIVERY_COST = 20;
 
 const DeliveryInfo = () => {
-  const { data } = useGetCartQuery();
+  const { data } = useGetCartQuery(undefined, {
+    skip: auth.currentUser ? false : true,
+  });
+  const dataLocal = !auth.currentUser
+    ? useAppSelector((state) => state.cart.productsInCartNoAuthUser)
+    : null;
 
-  const totalPrice = Number(data!
-    .reduce((amount, item) => {
-      return amount + item.price * item.quantity;
-    }, 0)
-    .toFixed(2))
+  const totalPrice = auth.currentUser
+    ? calculateAmount(data!)
+    : calculateAmount(dataLocal!);
 
   return (
     <div className={classes.cart__info}>

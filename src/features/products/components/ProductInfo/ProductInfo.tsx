@@ -12,18 +12,23 @@ import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
 import Loader from "@/components/ui/Loader/Loader";
 import { ICartProduct } from "@/features/cart/types/cartTypes";
 import { IProduct } from "../../types/product";
-import { useAppSelector } from "@/redux/types";
+import { useAppDispatch, useAppSelector } from "@/redux/types";
 import { createVariantId } from "@/utils/createVariantId";
 import { findFirstExistingKey } from "@/utils/findFirstExistingKey";
 import { IWishlistProduct } from "../../types/wishlistProduct";
 import classes from "./productInfo.module.scss";
 
 import LikeImg from "@/assets/icons/heart.svg?react";
+import { auth } from "@/firebase/firebase-config";
+import AuthModal from "@/features/auth/components/AuthModal/AuthModal";
+import { addToCartLocal, removeFromCartLocal } from "@/features/cart/slices/cartSlice";
 
 const ProductInfo: FC<IProduct> = (data) => {
   const productsInCart = useAppSelector((state) => state.cart.productsInCart);
-
   const likedProducts = useAppSelector((state) => state.product.likedProducts);
+
+  const dispatch = useAppDispatch()
+
   const [addProductToWishlist, { isLoading: isLoadingLiking }] =
     useAddProductToWishlistMutation();
   const [removeProductFromWishlist, { isLoading: isLoadingDisliking }] =
@@ -36,18 +41,35 @@ const ProductInfo: FC<IProduct> = (data) => {
     useRemoveProductFromCartMutation();
 
   const [size, setSize] = useState(findFirstExistingKey(data.sizes));
-
+  const [isShowAuth, setIsShowAuth] = useState(false);
   if (!data) {
     return <>No data</>;
   }
 
   const toggleProductToCart = (productVariant: ICartProduct) => {
     if (productsInCart.find((i) => i === productVariant.variantId)) {
-      removeFromCart(productVariant.variantId);
+      if (auth.currentUser) {
+        removeFromCart(productVariant.variantId);
+      } else {
+       dispatch(removeFromCartLocal(productVariant.variantId)) 
+      }      
     } else {
-      addToCart(productVariant);
+      if (auth.currentUser) {
+        addToCart(productVariant);
+      } else {
+        dispatch(addToCartLocal(productVariant))
+      }
     }
   };
+
+  const likeProduct = (product: IWishlistProduct) => {
+    if (auth.currentUser) {
+      toggleLikeProduct(product);
+    } else {
+      setIsShowAuth(true);
+    }
+  };
+
   const toggleLikeProduct = (product: IWishlistProduct) => {
     if (isLiked) {
       removeProductFromWishlist(product.id);
@@ -91,7 +113,7 @@ const ProductInfo: FC<IProduct> = (data) => {
             width="medium"
             active={isLiked}
             action={() =>
-              toggleLikeProduct({
+              likeProduct({
                 id: data.id,
                 title: data.title,
                 price: data.price,
@@ -145,6 +167,11 @@ const ProductInfo: FC<IProduct> = (data) => {
           Delivery in 3-5 working days.
         </span>
       </div>
+      <AuthModal
+        type="signUp"
+        isAuthModalOpen={isShowAuth}
+        closeAuthModal={setIsShowAuth}
+      />
     </div>
   );
 };

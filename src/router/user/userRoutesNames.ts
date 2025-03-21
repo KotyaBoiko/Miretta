@@ -4,4 +4,5 @@ export const enum USER_ROUTES_NAMES {
   OrdersHistory = '/profile/orders/history',
   Addresses = '/profile/addresses',
   LogOut = '/profile/logout',
+  Wishlist = '/wishlist'
 }

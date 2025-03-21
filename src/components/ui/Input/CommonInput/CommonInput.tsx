@@ -13,7 +13,7 @@ type BaseProps = {
 
 type ReadOnlyProps = BaseProps & {
   readOnly: true;
-  onChange?: never;
+  onChange?: never | Dispatch<SetStateAction<string>> | ((value: string) => void);
 };
 
 type EditableProps = BaseProps & {

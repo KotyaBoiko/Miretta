@@ -1,14 +1,16 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import {
   CollectionVCenter,
   CollectionVSide,
 } from "../collectionItem";
 
-import { useGetCollectionsQuery } from "../../collectionApi";
+import { collectionApi, useGetCollectionsQuery } from "../../collectionApi";
 import classes from "./collectionsList.module.scss";
+import { useAppDispatch } from "@/redux/types";
 
-const CollectionList:FC = ({}) => {
+const CollectionList:FC = () => {
   const {data: collections, isLoading} = useGetCollectionsQuery()
+    const dispatch = useAppDispatch();
   return (
     <section className={classes.collections}>
       {isLoading ? <>Loading...</> : !collections ? <>No data</> : collections.map((collection, index) => {

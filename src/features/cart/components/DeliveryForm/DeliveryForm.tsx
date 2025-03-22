@@ -14,6 +14,7 @@ import { Link } from "react-router";
 import classes from "./deliveryForm.module.scss";
 
 const DeliveryForm = () => {
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
   const [getCities, { data: cities }] = useLazyGetCitiesQuery();
   const [getDepartments, { data: departments }] = useLazyGetDepartmentsQuery();
 
@@ -32,7 +33,6 @@ const DeliveryForm = () => {
 
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const user = useAppSelector((state) => state.user);
-console.log(user)
   const userAddresses =
     user.addresses === undefined
       ? undefined
@@ -137,7 +137,7 @@ console.log(user)
 
   return (
     <>
-      {auth.currentUser ? (
+      {isAuth ? (
         <div className={classes.cart__autofill}>
           <span className={classes.cart__autofill_title}>Autofill:</span>
           {userAddresses ? (

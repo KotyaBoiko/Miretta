@@ -1,7 +1,8 @@
+import { logOut } from "@/features/auth/redux/thunks";
+import { auth } from "@/firebase/firebase-config";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { cartApi } from "../API/cartApi";
 import { ICartProduct } from "../types/cartTypes";
-import { logOut } from "@/features/auth/redux/thunks";
 
 type initialStateType = {
   totalQuantity: number;
@@ -11,9 +12,9 @@ type initialStateType = {
 
 const totalQuantityLocal = localStorage.getItem("totalQuantity");
 const productsInCartLocal = localStorage.getItem("productsInCart");
-const productsInCartNoAuthUser = JSON.parse(
-  localStorage.getItem("productsInCartNoAuthUser") || "[]"
-);
+const productsInCartNoAuthUser = !auth.currentUser
+  ? JSON.parse(localStorage.getItem("productsInCartNoAuthUser") || "[]")
+  : [];
 const initialState: initialStateType = {
   totalQuantity: Number(totalQuantityLocal) ? Number(totalQuantityLocal) : 0,
   productsInCart: productsInCartLocal ? productsInCartLocal.split(" ") : [],
@@ -35,7 +36,6 @@ export const cartSlice = createSlice({
       state.productsInCartNoAuthUser = state.productsInCartNoAuthUser.filter(
         (i) => i.variantId !== action.payload
       );
-      console.log(state)
     },
     clearCartLocal(state) {
       state.totalQuantity = 0;
@@ -47,10 +47,10 @@ export const cartSlice = createSlice({
       action: PayloadAction<{ oldVariantId: string; newVariant: ICartProduct }>
     ) {
       const without = state.productsInCartNoAuthUser.filter(
-        (i) => i.id !== action.payload.oldVariantId
+        (i) => i.variantId !== action.payload.oldVariantId
       );
       const newExist = without.findIndex(
-        (i) => i.id === action.payload.newVariant.id
+        (i) => i.variantId === action.payload.newVariant.id
       );
 
       if (newExist === -1) {
@@ -67,9 +67,9 @@ export const cartSlice = createSlice({
       action: PayloadAction<{ quantity: number, variantId: string; }>
     ) {
       const index = state.productsInCartNoAuthUser.findIndex(
-        (i) => i.id === action.payload.variantId
+        (i) => i.variantId === action.payload.variantId
       );
-      if (index !== -1) {
+      if (index != -1) {
         state.productsInCartNoAuthUser[index].quantity =
           action.payload.quantity;
       }
@@ -77,9 +77,21 @@ export const cartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(logOut.fulfilled, (state) => {
-      state.totalQuantity = 0;
-      state.productsInCart = [];
+      const localData:ICartProduct[] = JSON.parse(localStorage.getItem("productsInCartNoAuthUser") || "[]")
+      state.totalQuantity = localData.length;
+      state.productsInCart = localData.map((product) => product.variantId);
+      localStorage.setItem("totalQuantity", String(state.totalQuantity));
+      localStorage.setItem("productsInCart", state.productsInCart.join(" "));
     });
+    builder.addMatcher(
+      (action): action is PayloadAction<any> => (
+        action.type.startsWith('cart/')
+      ), (state) => {
+      localStorage.setItem("totalQuantity", String(state.totalQuantity));
+      localStorage.setItem("productsInCart", state.productsInCart.join(" "));
+      localStorage.setItem("productsInCartNoAuthUser", JSON.stringify(state.productsInCartNoAuthUser));
+      }
+    )
     builder.addMatcher(
       cartApi.endpoints.getCart.matchFulfilled,
       (state, action: PayloadAction<ICartProduct[]>) => {
@@ -96,8 +108,8 @@ export const cartSlice = createSlice({
       cartApi.endpoints.addProductToCart.matchFulfilled,
       (state, action: PayloadAction<string>) => {
         ++state.totalQuantity;
-        localStorage.setItem("totalQuantity", String(state.totalQuantity));
         state.productsInCart.push(action.payload);
+        localStorage.setItem("totalQuantity", String(state.totalQuantity));
         localStorage.setItem("productsInCart", state.productsInCart.join(" "));
       }
     );

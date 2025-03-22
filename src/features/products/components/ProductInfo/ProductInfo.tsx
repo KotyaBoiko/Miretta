@@ -24,6 +24,7 @@ import AuthModal from "@/features/auth/components/AuthModal/AuthModal";
 import { addToCartLocal, removeFromCartLocal } from "@/features/cart/slices/cartSlice";
 
 const ProductInfo: FC<IProduct> = (data) => {
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
   const productsInCart = useAppSelector((state) => state.cart.productsInCart);
   const likedProducts = useAppSelector((state) => state.product.likedProducts);
 
@@ -48,13 +49,13 @@ const ProductInfo: FC<IProduct> = (data) => {
 
   const toggleProductToCart = (productVariant: ICartProduct) => {
     if (productsInCart.find((i) => i === productVariant.variantId)) {
-      if (auth.currentUser) {
+      if (isAuth) {
         removeFromCart(productVariant.variantId);
       } else {
        dispatch(removeFromCartLocal(productVariant.variantId)) 
       }      
     } else {
-      if (auth.currentUser) {
+      if (isAuth) {
         addToCart(productVariant);
       } else {
         dispatch(addToCartLocal(productVariant))
@@ -63,7 +64,7 @@ const ProductInfo: FC<IProduct> = (data) => {
   };
 
   const likeProduct = (product: IWishlistProduct) => {
-    if (auth.currentUser) {
+    if (isAuth) {
       toggleLikeProduct(product);
     } else {
       setIsShowAuth(true);

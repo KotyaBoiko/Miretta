@@ -7,13 +7,15 @@ export const collectionApi = baseApi.injectEndpoints({
     getCollections: builder.query<TCollection[], void>({
       async queryFn() {
         try {
+          console.log('try to get collections')
           const data = await API.getAllDocs<TCollection>("collections")
           data.sort((a, b) => a.code - b.code);
           return {data}
         } catch (error) {
           return {error}
         }
-      }
+      },
+      providesTags: ['Collection']
     })
   })
 })

@@ -77,7 +77,7 @@ const Header: FC = () => {
               isAuthModalOpen={isAuthModalOpen}
               underProfile
             />
-            {auth.currentUser ? (
+            {isAuth ? (
               <Link
                 to={USER_ROUTES_NAMES.Wishlist}
                 className={classes.header__like}

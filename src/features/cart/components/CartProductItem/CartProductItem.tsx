@@ -33,11 +33,11 @@ const CartProductItem: FC<Props> = ({
   startQuantity,
   stock,
 }) => {
+  const isAuth = useAppSelector((state) => state.auth.isAuth);
   const [updateQuantity, {}] = useUpdateProductQuantityMutation();
   const [removeProduct, {}] = useRemoveProductFromCartMutation();
 
   const dispatch = useAppDispatch();
-  const totalQuantity = useAppSelector(state => state.cart.totalQuantity);
   const [quantity, setQuantity] = useState(startQuantity);
   const [inputValue, setInputValue] = useState(startQuantity);
 
@@ -53,7 +53,7 @@ const CartProductItem: FC<Props> = ({
       setInputValue(newQuantity);
       return;
     }
-    if (auth.currentUser) {
+    if (isAuth) {
       await updateQuantity({ quantity: newQuantity, variantId });
     } else {
       dispatch(
@@ -102,7 +102,7 @@ const CartProductItem: FC<Props> = ({
           <Delete
             className={classes.cart__product_delete}
             onClick={() =>
-              auth.currentUser
+              isAuth
                 ? removeProduct(variantId)
                 : dispatch(removeFromCartLocal(variantId))
             }

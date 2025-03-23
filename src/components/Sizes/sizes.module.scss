@@ -7,6 +7,11 @@
 
   &__btn {
     position: relative;
+
+    &_minimalistic {
+      padding: 10px 20px;
+      height: 40px;
+    };
   }
 
   &__size {
@@ -17,5 +22,8 @@
     top: 54%;
     left: 50%;
     transform: translate(-50%, -50%);
+      &_minimalistic {
+        font-size: 30px;
+      }
   }
 }

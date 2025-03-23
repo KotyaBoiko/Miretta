@@ -9,7 +9,6 @@ import { useAppSelector } from "@/redux/types";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import { USER_ROUTES_NAMES } from "@/router/user/userRoutesNames";
 import classes from "./header.module.scss";
-import { auth } from "@/firebase/firebase-config";
 
 const types = [
   ["Tops", "Shirts & Tops"],
@@ -19,7 +18,9 @@ const types = [
 ];
 
 const Header: FC = () => {
-  const productsInCart = useAppSelector((state) => state.cart.totalQuantity);
+  const totalQuantityProductsInCart = useAppSelector(
+    (state) => state.cart.totalQuantity
+  );
   const isAuth = useAppSelector((state) => state.auth.isAuth);
   let navigate = useNavigate();
   const location = useLocation();
@@ -92,7 +93,9 @@ const Header: FC = () => {
               className={classes.header__cart}
             >
               <CartIcon />
-              <span>{productsInCart ? productsInCart : ""}</span>
+              <span>
+                {totalQuantityProductsInCart ? totalQuantityProductsInCart : ""}
+              </span>
             </Link>
           </div>
         </div>

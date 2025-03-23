@@ -19,7 +19,6 @@ import { IWishlistProduct } from "../../types/wishlistProduct";
 import classes from "./productInfo.module.scss";
 
 import LikeImg from "@/assets/icons/heart.svg?react";
-import { auth } from "@/firebase/firebase-config";
 import AuthModal from "@/features/auth/components/AuthModal/AuthModal";
 import { addToCartLocal, removeFromCartLocal } from "@/features/cart/slices/cartSlice";
 
@@ -48,7 +47,7 @@ const ProductInfo: FC<IProduct> = (data) => {
   }
 
   const toggleProductToCart = (productVariant: ICartProduct) => {
-    if (productsInCart.find((i) => i === productVariant.variantId)) {
+    if (productsInCart.find((i) => i[0] === productVariant.variantId)) {
       if (isAuth) {
         removeFromCart(productVariant.variantId);
       } else {
@@ -134,7 +133,7 @@ const ProductInfo: FC<IProduct> = (data) => {
             disabled={!data.stock}
             active={
               !!productsInCart.find(
-                (i) => i == createVariantId(data.id, size!, data.colors[0])
+                (i) => i[0] == createVariantId(data.id, size!, data.colors[0])
               )
             }
             action={() =>
@@ -146,8 +145,10 @@ const ProductInfo: FC<IProduct> = (data) => {
                 stock: data.stock,
                 quantity: 1,
                 size: size!,
+                sizes: data.sizes,
                 image: data.images[0],
                 color: data.colors[0],
+                colors: data.colors,
               })
             }
           >
@@ -156,7 +157,7 @@ const ProductInfo: FC<IProduct> = (data) => {
             ) : !data.stock ? (
               "No product"
             ) : productsInCart.find(
-                (i) => i === createVariantId(data.id, size!, data.colors[0])
+                (i) => i[0] === createVariantId(data.id, size!, data.colors[0])
               ) ? (
               "Remove from cart"
             ) : (

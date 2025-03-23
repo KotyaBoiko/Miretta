@@ -9,6 +9,7 @@ import {
   getDocs,
   setDoc,
   updateDoc,
+  writeBatch,
 } from "firebase/firestore";
 import { ICartProduct } from "../types/cartTypes";
 
@@ -45,29 +46,39 @@ export const cartApi = baseApi.injectEndpoints({
       invalidatesTags: ["Cart"],
     }),
     updateCartItemVariant: builder.mutation<
-      {oldVariantId: string, newVariantId: string},
-      { newCartProduct: ICartProduct; oldVariant: string }
+      { oldVariantId: string; newCartProduct: ICartProduct },
+      {
+        newCartProduct: ICartProduct;
+        oldVariant: string;
+        updateExisting?: boolean;
+      }
     >({
-      async queryFn({ newCartProduct, oldVariant }) {
+      async queryFn({ newCartProduct, oldVariant, updateExisting = false }) {
         try {
           if (!auth.currentUser) throw new Error("User not authenticated");
           const productRef = doc(
             collection(db, "users", auth.currentUser.uid, "cart"),
             newCartProduct.variantId
           );
-          await deleteDoc(
+          const batch = writeBatch(db);
+          batch.delete(
             doc(
               collection(db, "users", auth.currentUser.uid, "cart"),
               oldVariant
             )
           );
-          await setDoc(productRef, newCartProduct);
-          return { data: {oldVariantId: oldVariant, newVariantId: newCartProduct.variantId} };
+          if (updateExisting) {
+            batch.update(productRef, {quantity: newCartProduct.quantity});
+          } else {
+            batch.set(productRef, newCartProduct);
+          }
+          await batch.commit();
+          return { data: { oldVariantId: oldVariant, newCartProduct } };
         } catch (error) {
           return { error };
         }
       },
-      invalidatesTags: ["Cart"]
+      invalidatesTags: ["Cart"],
     }),
     updateProductQuantity: builder.mutation<
       null,
@@ -99,7 +110,7 @@ export const cartApi = baseApi.injectEndpoints({
           return { error };
         }
       },
-      invalidatesTags: ["Cart"]
+      invalidatesTags: ["Cart"],
     }),
     removeProductFromCart: builder.mutation<string, string>({
       async queryFn(id) {

@@ -41,13 +41,15 @@
   }
   &_info {
     padding: 30px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
   &_title {
     font-size: 24px;
-    margin-bottom: 10px;
   }
   &_price {
-    margin-bottom: 10px;
     font-family: $numbers-font;
     font-size: 50px;
     color: $main-dark-color;

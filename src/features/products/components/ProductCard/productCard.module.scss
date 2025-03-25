@@ -7,6 +7,11 @@
     &:hover {
       transform: scale(1.01);
     }
+
+    @media (max-width: 480px) {
+      max-width: 400px;
+      margin: 0 auto;
+    }
   }
 
   &-disable {
@@ -28,17 +33,35 @@
     justify-content: space-between;
     gap: 5px;
     white-space: nowrap;
+    @media (max-width: 1024px) {
+      padding: 3px;
+    }
   }
   &__name {
     overflow: hidden;
     text-overflow: ellipsis;
     color: $main-text-color;
     font-size: 24px;
+    @media (max-width: 1200px) {
+      font-size: 22px;
+    }
+    @media (max-width: 480px) {
+      font-size: 18px;
+    }
   }
   &__price {
     margin-top: 5px;
     font-size: 50px;
     color: $main-dark-color;
     font-family: $numbers-font;
+    @media (max-width: 1200px) {
+      font-size: 45px;
+    }
+    @media (max-width: 1200px) {
+      font-size: 40px;
+    }
+    @media (max-width: 480px) {
+      font-size: 35px;
+    }
   }
 }

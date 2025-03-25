@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import CartIcon from "@/assets/icons/cart.svg?react";
 import LikeIcon from "@/assets/icons/heart2.svg?react";
 import ProfileIcon from "@/assets/icons/profile.svg?react";
+import BurgerMenuIcon from "@/components/ui/BurgerMenuIcon/BurgerMenuIcon";
 import AuthModal from "@/features/auth/components/AuthModal/AuthModal";
 import { useAppSelector } from "@/redux/types";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
@@ -18,6 +19,8 @@ const types = [
 ];
 
 const Header: FC = () => {
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+
   const totalQuantityProductsInCart = useAppSelector(
     (state) => state.cart.totalQuantity
   );
@@ -59,6 +62,7 @@ const Header: FC = () => {
               );
             })}
           </nav>
+          <BurgerMenuIcon onClick={() => setIsBurgerMenuOpen(p => !p)}/>
           {location.pathname != "/" && (
             <Link
               to={COMMON_ROUTES_NAMES.Home}

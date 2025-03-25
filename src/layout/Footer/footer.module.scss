@@ -9,28 +9,42 @@
   &__top {
     display: flex;
     align-items: center;
-    padding: 100px 100px;
+    padding: 100px;
     font-weight: 600;
     font-size: 18px;
     position: relative;
+
+    @media (max-width: 763px) {
+      flex-direction: column;
+      padding: 50px;
+    }
   }
 
   &__logo {
     color: $main-light-color;
-    align-self: center;
-    margin: auto;
     font-family: "Mouzambik", sans-serif;
     font-size: 150px;
     font-weight: 400;
     position: absolute;
     left: 50%; 
     transform: translateX(-50%); 
+
+    @media (max-width: 1024px) {
+      font-size: 100px;
+    }
+    @media (max-width: 763px) {
+      position: static;
+      transform: translateX(0);
+    }
   }
 
   &__social {
     margin-left: auto;
     display: flex;
     gap: .625rem;
+    @media (max-width: 763px) {
+      margin-left: 0;
+    }
     &_icon {
       width: 35px;
       height: 35px;

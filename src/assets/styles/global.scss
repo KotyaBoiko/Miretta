@@ -42,9 +42,15 @@ body {
 }
 
 .wrapper {
-  margin: 0 100px;
+  margin: 0 $wrapper-padding-lg;
   position: relative;
   z-index: 90;
+  @media (max-width: 1024px) {
+    margin: 0 $wrapper-padding-md;
+  }
+  @media (max-width: 763px) {
+    margin: 0 $wrapper-padding-sm;
+  }
 }
 
 .line {
@@ -53,9 +59,16 @@ body {
   width: 1px;
   background: $line-color;
 
+  
   &-left {
-    margin-left: 99px;
+    margin-left: $wrapper-padding-lg - 1;
     left: 0;
+    @media (max-width: 1024px) {
+      margin-left: $wrapper-padding-md - 1;
+    }
+    @media (max-width: 763px) {
+      margin-left: $wrapper-padding-sm - 1;
+    }
     &::after {
       content: '';
       display: block;
@@ -65,12 +78,24 @@ body {
       position: absolute;
       top: 0;
       left: $lines-gap;
+      @media (max-width: 763px) {
+        left: $lines-gap-sm;
+      }
+      @media (max-width: 480px) {
+        left: $lines-gap-sm / 1.5;
+      }
     }
   }
 
   &-right {
-    margin-right: 99px;
+    margin-right: $wrapper-padding-lg - 1;
     right: 0;
+    @media (max-width: 1024px) {
+      margin-right: $wrapper-padding-md - 1;
+    }
+    @media (max-width: 763px) {
+      margin-right: $wrapper-padding-sm - 1;
+    }
     &::before {
       content: '';
       display: block;
@@ -80,6 +105,12 @@ body {
       position: absolute;
       top: 0;
       right: $lines-gap;
+      @media (max-width: 763px) {
+        right: $lines-gap-sm;
+      }
+      @media (max-width: 480px) {
+        right: $lines-gap-sm / 1.5;
+      }
     }
   }
 }

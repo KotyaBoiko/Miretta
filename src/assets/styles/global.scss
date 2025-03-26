@@ -82,7 +82,7 @@ body {
         left: $lines-gap-sm;
       }
       @media (max-width: 480px) {
-        left: $lines-gap-sm / 1.5;
+        left: calc($lines-gap-sm / 1.5)
       }
     }
   }
@@ -109,7 +109,7 @@ body {
         right: $lines-gap-sm;
       }
       @media (max-width: 480px) {
-        right: $lines-gap-sm / 1.5;
+        right: calc($lines-gap-sm / 1.5);
       }
     }
   }

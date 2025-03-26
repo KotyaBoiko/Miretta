@@ -1,0 +1,125 @@
+@use "/src/assets/styles/_variables.scss" as *;
+
+.burger {
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100vh;
+  background: $main-dark-color;
+  padding: 30px;
+  font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+  
+  @media (max-width: 480px) {
+    width: 100vw;
+    align-items: center;
+    font-size: 30px;
+  }
+
+
+  &__container {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.5s ease-in-out;
+    z-index: 90;
+    visibility: hidden;
+    transition: visibility 0.5s ease-in-out;
+    &_active {
+      visibility: visible;
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+  
+  &__active {
+    transform: translateX(0);
+    transition: transform 0.5s ease-in-out;
+  }
+  
+  &__icon {
+    display: none;
+    height: 20px;
+    width: 40px;
+    cursor: pointer;
+    span {
+      width: 100%;
+      height: 3px;
+      background: $main-dark-color;
+      border-radius: 1px;
+    }
+
+    @media (max-width: 1200px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 5px;
+    }
+  }
+
+  &__list {
+    color: $main-light-color;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  &__link {
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      transform: scaleX(0);
+      height: 0.0938rem;
+      background-color: $main-light-color;
+      transition: all 0.3s ease-in;
+    }
+
+    &:hover::after {
+      transform: scaleX(1);
+    }
+    &-active {
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}
+
+.cross {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  cursor: pointer;
+  margin-left: auto;
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 30px;
+    height: 3px;
+    background: $main-light-color;
+    border-radius: 3px;
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+}

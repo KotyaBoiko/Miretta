@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import CartIcon from "@/assets/icons/cart.svg?react";
 import LikeIcon from "@/assets/icons/heart2.svg?react";
 import ProfileIcon from "@/assets/icons/profile.svg?react";
-import BurgerMenuIcon from "@/components/ui/BurgerMenuIcon/BurgerMenuIcon";
+import BurgerMenu from "@/components/BurgerMenu/BurgerMenu";
 import AuthModal from "@/features/auth/components/AuthModal/AuthModal";
 import { useAppSelector } from "@/redux/types";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
@@ -62,7 +62,16 @@ const Header: FC = () => {
               );
             })}
           </nav>
-          <BurgerMenuIcon onClick={() => setIsBurgerMenuOpen(p => !p)}/>
+          <BurgerMenu
+            setIsOpen={() => setIsBurgerMenuOpen((p) => !p)}
+            isOpen={isBurgerMenuOpen}
+            data={types.map((i) => {
+              return {
+                name: i[1],
+                to: COMMON_ROUTES_NAMES.Category + `/${i[0].toLowerCase()}`,
+              };
+            })}
+          />
           {location.pathname != "/" && (
             <Link
               to={COMMON_ROUTES_NAMES.Home}

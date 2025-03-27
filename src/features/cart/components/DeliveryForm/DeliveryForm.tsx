@@ -1,7 +1,6 @@
 import { CommonInput } from "@/components/ui/Input";
 import SelectInput from "@/components/ui/Input/SelectInput/SelectInput";
 import AddressFields from "@/features/user/components/AddressFields/AddressFields";
-import { auth } from "@/firebase/firebase-config";
 import {
   useLazyGetCitiesQuery,
   useLazyGetDepartmentsQuery,

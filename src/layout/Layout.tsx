@@ -1,5 +1,4 @@
 import { setAuth } from "@/features/auth/redux/slices/authSlice";
-import { collectionApi } from "@/features/collections/collectionApi";
 import { userApi } from "@/features/user/API/userApi";
 import { auth } from "@/firebase/firebase-config";
 import { baseApi } from "@/redux/API/baseApi";
@@ -21,7 +20,6 @@ const logOutLoading = useAppSelector(state => state.auth.loadingLogOut)
 useEffect (() => {
   if (logOutLoading === 'succeeded') {
     dispatch(baseApi.util.resetApiState())
-    dispatch(collectionApi.endpoints.getCollections.initiate())
     navigate(COMMON_ROUTES_NAMES.Home)
     dispatch(setAuth(false));
     localStorage.removeItem('user');

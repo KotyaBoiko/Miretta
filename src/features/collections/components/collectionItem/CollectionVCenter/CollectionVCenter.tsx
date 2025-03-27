@@ -1,15 +1,14 @@
 import { MoreButton } from "@/components/ui/Buttons/MoreButton";
-import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import { FC } from "react";
-import { TCollection } from "../type";
+import { TCollection } from "../../../type";
 import classes from "./collectionVCenter.module.scss";
 
 
-const CollectionVCenter: FC<Omit<TCollection, "additionalImg" | "code">> = ({
+const CollectionVCenter: FC<Omit<TCollection, "additionalImg" | "variant">> = ({
   title,
   description,
   mainImg,
-  id
+  link
 }) => {
   return (
     <div className="wrapper">
@@ -23,7 +22,7 @@ const CollectionVCenter: FC<Omit<TCollection, "additionalImg" | "code">> = ({
           </p>
           <div className={classes.collection__btn}>
             <MoreButton
-              path={COMMON_ROUTES_NAMES.Collection + `/${id}`}
+              path={link}
               text="Discover Collection"
               className={classes.collection__btn_theme}
             />

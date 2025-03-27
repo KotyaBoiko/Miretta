@@ -3,10 +3,6 @@ export type TCollection = {
   description: string;
   mainImg: string;
   additionalImg?: string;
-  code: number;
-  id: number;
-};
-
-export type TCollectionProps = {
   variant: string
-} & Omit<TCollection, "code">;
+  link: string,
+};

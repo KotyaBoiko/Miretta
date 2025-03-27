@@ -1,38 +1,33 @@
 import { FC } from "react";
-import {
-  CollectionVCenter,
-  CollectionVSide,
-} from "../collectionItem";
-
-import { useGetCollectionsQuery } from "../../collectionApi";
+import { CollectionVCenter, CollectionVSide } from "../collectionItem";
+import { collections } from "../../data/collectionsData";
 import classes from "./collectionsList.module.scss";
 
-const CollectionList:FC = () => {
-  const {data: collections, isLoading} = useGetCollectionsQuery()
+const CollectionList: FC = () => {
   return (
     <section className={classes.collections}>
-      {isLoading ? <>Loading...</> : !collections ? <>No data</> : collections.map((collection, index) => {
-        if (collection.code == 3) {
+      {collections.map((collection, index) => {
+        if (collection.variant == 'center') {
           return (
             <CollectionVCenter
-              key={collection.id}
+              key={collection.title + index + collection.mainImg}
               title={collection.title.toUpperCase()}
               description={collection.description}
               mainImg={collection.mainImg}
-              id={collection.id}
+              link={collection.link}
             />
           );
         }
 
         return (
           <CollectionVSide
-            key={collection.id}
+            key={collection.title + index + collection.mainImg}
             title={collection.title.toUpperCase()}
             description={collection.description}
             mainImg={collection.mainImg}
             additionalImg={collection.additionalImg}
-            variant={index % 2 === 0 || index == 0 ? 'left' : 'right'}
-            id={collection.id}
+            variant={index % 2 === 0 || index == 0 ? "left" : "right"}
+            link={collection.link}
           />
         );
       })}

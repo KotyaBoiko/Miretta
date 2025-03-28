@@ -24,9 +24,15 @@ input[type="number"]:focus {
 
 body {
   font-family: "Roboto", sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   color: $main-text-color;
   background-color: $main-light-color;
+  @media (min-width: $mobile) {
+    font-size: 16px;
+  }
+  @media (min-width: $laptop) {
+    font-size: 18px;
+  }
 }
 
 .modal-active {
@@ -45,10 +51,10 @@ body {
   margin: 0 $wrapper-padding-lg;
   position: relative;
   z-index: 90;
-  @media (max-width: 1024px) {
+  @media (max-width: $desktop) {
     margin: 0 $wrapper-padding-md;
   }
-  @media (max-width: 763px) {
+  @media (max-width: $tablet) {
     margin: 0 $wrapper-padding-sm;
   }
 }
@@ -63,10 +69,10 @@ body {
   &-left {
     margin-left: $wrapper-padding-lg - 1;
     left: 0;
-    @media (max-width: 1024px) {
+    @media (max-width: $desktop) {
       margin-left: $wrapper-padding-md - 1;
     }
-    @media (max-width: 763px) {
+    @media (max-width: $tablet) {
       margin-left: $wrapper-padding-sm - 1;
     }
     &::after {
@@ -78,10 +84,10 @@ body {
       position: absolute;
       top: 0;
       left: $lines-gap;
-      @media (max-width: 763px) {
+      @media (max-width: $tablet) {
         left: $lines-gap-sm;
       }
-      @media (max-width: 480px) {
+      @media (max-width: $mobile) {
         left: calc($lines-gap-sm / 1.5)
       }
     }
@@ -90,10 +96,10 @@ body {
   &-right {
     margin-right: $wrapper-padding-lg - 1;
     right: 0;
-    @media (max-width: 1024px) {
+    @media (max-width: $desktop) {
       margin-right: $wrapper-padding-md - 1;
     }
-    @media (max-width: 763px) {
+    @media (max-width: $tablet) {
       margin-right: $wrapper-padding-sm - 1;
     }
     &::before {
@@ -105,10 +111,10 @@ body {
       position: absolute;
       top: 0;
       right: $lines-gap;
-      @media (max-width: 763px) {
+      @media (max-width: $tablet) {
         right: $lines-gap-sm;
       }
-      @media (max-width: 480px) {
+      @media (max-width: $mobile) {
         right: calc($lines-gap-sm / 1.5);
       }
     }

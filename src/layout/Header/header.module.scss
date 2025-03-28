@@ -16,7 +16,7 @@
     position: relative;
     z-index: 10;
     flex-wrap: wrap;
-    @media (max-width: 763px) {
+    @media (max-width: $tablet) {
       height: 90px;
     }
   }
@@ -25,7 +25,7 @@
     display: flex;
     gap: 15px;
 
-    @media (max-width: 1200px) {
+    @media (max-width: $laptop) {
       display: none;
     }
     &_link {
@@ -59,16 +59,16 @@
     font-family: "Mouzambik", sans-serif;
     font-size: 90px;
     font-weight: 300;
-    position: absolute;
-    left: 50%;
     transform: translateX(-50%);
-    @media (max-width: 1024px) {
+    @media (max-width: $laptop) {
       font-size: 85px;
+      position: absolute;
+      left: 50%;
     }
     @media (max-width: 530px) {
       font-size: 70px;
     }
-    @media (max-width: 480px) {
+    @media (max-width: $mobile) {
       font-size: 60px;
     }
     @media (max-width: 360px) {
@@ -81,7 +81,7 @@
     gap: 1.25rem;
     cursor: pointer;
 
-    @media (max-width: 480px) {
+    @media (max-width: $mobile) {
       gap: 0.55rem;
     }
     @media (max-width: 260px) {

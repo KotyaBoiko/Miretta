@@ -8,7 +8,7 @@
       transform: scale(1.01);
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: $mobile) {
       max-width: 400px;
       margin: 0 auto;
     }
@@ -33,7 +33,7 @@
     justify-content: space-between;
     gap: 5px;
     white-space: nowrap;
-    @media (max-width: 1024px) {
+    @media (max-width: $laptop) {
       padding: 3px;
     }
   }
@@ -45,7 +45,7 @@
     @media (max-width: 1200px) {
       font-size: 22px;
     }
-    @media (max-width: 480px) {
+    @media (max-width: $mobile) {
       font-size: 18px;
     }
   }
@@ -60,7 +60,7 @@
     @media (max-width: 1200px) {
       font-size: 40px;
     }
-    @media (max-width: 480px) {
+    @media (max-width: $mobile) {
       font-size: 35px;
     }
   }

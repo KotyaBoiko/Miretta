@@ -1,14 +1,16 @@
 @use "/src/assets/styles/variables" as *;
 .more {
   display: flex;
-  padding: 12px;
+  padding: 8px;
   border: 1px solid $main-text-color;
   border-radius: 25px;
   width: fit-content;
   justify-content: center;
   align-items: center;
   transition: all 0.2s;
-
+  @media (min-width: 800px) {
+    padding: 12px;
+  }
   &:hover {
     border: 1px solid $main-dark-color;
     transform: scale(105%);

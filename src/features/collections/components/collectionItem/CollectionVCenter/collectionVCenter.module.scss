@@ -1,35 +1,82 @@
 @use "/src/assets/styles/variables.scss" as *;
 
 .collection {
-  height: 100vh;
   position: relative;
   z-index: 80;
   overflow: hidden;
-  margin: 50px 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  margin: 20px 0;
+  @media (min-width: $tablet) {
+    margin: 50px 0;
+  }
   &__container {
-    padding: 0 40px;
-    padding-top: 50px;
     display: flex;
     justify-content: space-between;
-    position: relative;
-    z-index: 80;
+    flex-wrap: wrap;
+    padding: 0;
+    @media (min-width: $mobile) {
+      margin-bottom: 20px;
+    }
+    @media (min-width: $tablet) {
+      position: absolute;
+      z-index: 80;
+      padding: 0 40px;
+      padding-top: 50px;
+    }
   }
 
   &__title {
-    color: $main-light-color;
-    position: absolute;
-    z-index: 80;
-    left: 50%;
-    bottom: 20%;
-    transform: translateX(-50%);
-    font-size: 400px;
-    
+    font-size: 120px;
+    text-align: start;
+    // color: $main-text-color;
+    @media (min-width: 480px) {
+      color: $main-light-color;
+      position: absolute;
+      font-size: 60px;
+      bottom: 28%;
+      left: 20px;
+      font-size: 150px;
+    }
+    @media (min-width: 520px) {
+      font-size: 150px;
+    }
+    @media (min-width: 600px) {
+      font-size: 200px;
+    }
+    @media (min-width: 705px) {
+      font-size: 250px;
+    }
+    @media (min-width: $tablet) {
+      width: 100%;
+      text-align: center;
+      position: static;
+    }
+    @media (min-width: 913px) {
+      font-size: 300px;
+    }
+    @media (min-width: $laptop) {
+      font-size: 350px;
+    }
+    @media (min-width: 1150px) {
+      font-size: 400px;
+    }
   }
 
   &__description {
-    max-width: 35%;
-    font-size: 18px;
-    color: $main-light-color;
+    max-width: 100%;
+    margin-right: 10px;
+    color: $main-text-color;
+    @media (min-width: 600px) {
+      max-width: 50%;
+    }
+    @media (min-width: $tablet) {
+      color: $main-light-color;
+    }
+    @media (min-width: 1150px) {
+      max-width: 35%;
+    }
   }
 
   &__btn {
@@ -38,24 +85,26 @@
 
 
     &_theme{
-      border: 1px solid $main-light-color;
-      color: $main-light-color;
-
+      border: 1px solid $main-dark-color;
+      color: $main-text-color;
       svg {
-        stroke: $main-light-color;
+        stroke: $main-text-color;
+      }
+      @media (min-width: $tablet) {
+        border: 1px solid $main-light-color;
+        color: $main-light-color;
+        svg {
+          stroke: $main-light-color;
+        }
       }
     }
   }
 
-  &__imgContainer {
-  }
-
   &__mainImg {
-    position: absolute;
-    top: 0;
-    left: 0;
     z-index: 70;
     width: 100%;
-    height: 100%;
+    aspect-ratio: 5/3;
+    object-fit: cover;
+    object-position: bottom;
   }
 }

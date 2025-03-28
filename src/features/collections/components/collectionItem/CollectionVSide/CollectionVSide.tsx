@@ -15,6 +15,9 @@ const CollectionVSide: FC<TCollection> = ({
   const mainImgClass = `${classes.collection__mainImg_picture} ${
     classes[`collection__mainImg_picture-${variant}`]
   }`;
+  const additionImgClass = `${classes.collection__more_smallImg} ${
+    classes[`collection__more_smallImg-${variant}`]
+  }`;
   const textClass = `${classes.collection__text} ${
     classes[`collection__text-${variant}`]
   }`;
@@ -40,7 +43,7 @@ const CollectionVSide: FC<TCollection> = ({
               <img
                 src={additionalImg}
                 alt={title}
-                className={classes.collection__more_smallImg}
+                className={additionImgClass}
               />
             )}
           </div>

@@ -14,7 +14,7 @@
     font-size: 18px;
     position: relative;
 
-    @media (max-width: 763px) {
+    @media (max-width: $tablet) {
       flex-direction: column;
       padding: 50px;
     }
@@ -29,10 +29,10 @@
     left: 50%; 
     transform: translateX(-50%); 
 
-    @media (max-width: 1024px) {
+    @media (max-width: $laptop) {
       font-size: 100px;
     }
-    @media (max-width: 763px) {
+    @media (max-width: $tablet) {
       position: static;
       transform: translateX(0);
     }
@@ -42,7 +42,7 @@
     margin-left: auto;
     display: flex;
     gap: .625rem;
-    @media (max-width: 763px) {
+    @media (max-width: $tablet) {
       margin-left: 0;
     }
     &_icon {

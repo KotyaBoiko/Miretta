@@ -1,3 +1,5 @@
+@use '/src/assets/styles/variables' as *;
+
 .product {
   &__list {
     margin: 20px 0;
@@ -8,15 +10,15 @@
     @media (max-width: 1200px) {
       grid-template-columns: repeat(3, minmax(14.625rem, 1fr));
     }
-    @media (max-width: 1024px) {
+    @media (max-width: $laptop) {
       margin: 20px 0;
       grid-gap: 1rem;
       grid-template-columns: repeat(3, minmax(12.625rem, 1fr));
     }
-    @media (max-width: 763px) {
+    @media (max-width: $tablet) {
       grid-template-columns: repeat(2, minmax(10.625rem, 1fr));
     }
-    @media (max-width: 480px) {
+    @media (max-width: $mobile) {
       grid-template-columns: repeat(1, minmax(5.625rem, 1fr));
     }
 

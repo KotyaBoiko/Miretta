@@ -5,7 +5,6 @@
     overflow: hidden;
     position: relative;
     z-index: 20;
-    margin-top: -100px;
     height: 100vh;
     background: $light-green;
     background: radial-gradient(
@@ -13,40 +12,41 @@
       $light-green 7%,
       rgba(49, 107, 72, 1) 38%
     );
-    @media (max-width: $tablet) {
-      margin-top: -90px;
+    margin-top: -90px;
+    @media (min-width: $tablet) {
+      margin-top: -100px;
     }
     &_logo {
       text-align: center;
       font-family: "Mouzambik", sans-serif;
       color: $main-light-color;
-      font-size: 550px;
       position: absolute;
       z-index: 30;
       left: 50%;
       top: 50%;
       transform: translate(-50%, -50%);
+      font-size: 145px;
 
-      @media (max-width: $desktop) {
-        font-size: 500px;
-      }
-      @media (max-width: $laptop) {
-        font-size: 400px;
-      }
-      @media (max-width: 850px) {
-        font-size: 360px;
-      }
-      @media (max-width: $tablet) {
-        font-size: 300px;
-      }
-      @media (max-width: 630px) {
-        font-size: 230px;
-      }
-      @media (max-width: $mobile) {
+      @media (min-width: $mobile-s) {
         font-size: 180px;
       }
-      @media (max-width: $mobile-s) {
-        font-size: 145px;
+      @media (min-width: $mobile) {
+        font-size: 230px;
+      }
+      @media (min-width: 630px) {
+        font-size: 300px;
+      }
+      @media (min-width: $tablet) {
+        font-size: 360px;
+      }
+      @media (min-width: 850px) {
+        font-size: 400px;
+      }
+      @media (min-width: $laptop) {
+        font-size: 500px;
+      }
+      @media (min-width: $desktop) {
+        font-size: 550px;
       }
     }
   }

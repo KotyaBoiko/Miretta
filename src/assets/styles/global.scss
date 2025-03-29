@@ -1,5 +1,6 @@
 @use "./reset.scss" as *;
 @use "./variables.scss" as *;
+@use "./mixins.scss" as *;
 @use "./fonts.scss" as *;
 
 * {
@@ -48,14 +49,14 @@ body {
 }
 
 .wrapper {
-  margin: 0 $wrapper-padding-lg;
   position: relative;
   z-index: 90;
-  @media (max-width: $desktop) {
+  margin: 0 $wrapper-padding-sm;
+  @media (min-width: $laptop) {
     margin: 0 $wrapper-padding-md;
   }
-  @media (max-width: $tablet) {
-    margin: 0 $wrapper-padding-sm;
+  @media (min-width: $desktop) {
+    margin: 0 $wrapper-padding-lg;
   }
 }
 
@@ -67,13 +68,13 @@ body {
 
   
   &-left {
-    margin-left: $wrapper-padding-lg - 1;
     left: 0;
-    @media (max-width: $desktop) {
+    margin-left: $wrapper-padding-sm - 1;
+    @media (min-width: $laptop) {
       margin-left: $wrapper-padding-md - 1;
     }
-    @media (max-width: $tablet) {
-      margin-left: $wrapper-padding-sm - 1;
+    @media (min-width: $desktop) {
+      margin-left: $wrapper-padding-lg - 1;
     }
     &::after {
       content: '';
@@ -83,24 +84,24 @@ body {
       background-color: $line-color;
       position: absolute;
       top: 0;
-      left: $lines-gap;
-      @media (max-width: $tablet) {
+      left: calc($lines-gap-sm / 1.5);
+      @media (min-width: $mobile) {
         left: $lines-gap-sm;
       }
-      @media (max-width: $mobile) {
-        left: calc($lines-gap-sm / 1.5)
+      @media (min-width: $laptop) {
+        left: $lines-gap;
       }
     }
   }
 
   &-right {
-    margin-right: $wrapper-padding-lg - 1;
     right: 0;
-    @media (max-width: $desktop) {
+    margin-right: $wrapper-padding-sm - 1;
+    @media (min-width: $laptop) {
       margin-right: $wrapper-padding-md - 1;
     }
-    @media (max-width: $tablet) {
-      margin-right: $wrapper-padding-sm - 1;
+    @media (min-width: $desktop) {
+      margin-right: $wrapper-padding-lg - 1;
     }
     &::before {
       content: '';
@@ -110,12 +111,12 @@ body {
       background-color: $line-color;
       position: absolute;
       top: 0;
-      right: $lines-gap;
-      @media (max-width: $tablet) {
+      right: calc($lines-gap-sm / 1.5);
+      @media (min-width: $mobile) {
         right: $lines-gap-sm;
       }
-      @media (max-width: $mobile) {
-        right: calc($lines-gap-sm / 1.5);
+      @media (min-width: $laptop) {
+        right: $lines-gap;
       }
     }
   }
@@ -124,6 +125,22 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: $high-font;
   font-weight: 400;
-  font-size: 120px;
+  font-size: 60px;
   color: $main-dark-color;
+  @media (min-width: $mobile-s) {
+    font-size: 80px;
+  }
+  @media (min-width: $mobile) {
+    font-size: 90px;
+  }
+  @media (min-width: $tablet) {
+    font-size: 100px;
+  }
+  @media (min-width: $laptop) {
+    font-size: 110px;
+  }
+  @media (min-width: $desktop) {
+    font-size: 120px;
+  }
+
 }

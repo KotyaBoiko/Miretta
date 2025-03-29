@@ -9,41 +9,38 @@
   &__top {
     display: flex;
     align-items: center;
-    padding: 100px;
     font-weight: 600;
     font-size: 18px;
     position: relative;
-
-    @media (max-width: $tablet) {
-      flex-direction: column;
-      padding: 50px;
+    flex-direction: column;
+    padding: 50px;
+    @media (min-width: $tablet) {
+      padding: 100px;
+      flex-direction: row;
     }
   }
 
   &__logo {
     color: $main-light-color;
     font-family: "Mouzambik", sans-serif;
-    font-size: 150px;
     font-weight: 400;
-    position: absolute;
-    left: 50%; 
-    transform: translateX(-50%); 
-
-    @media (max-width: $laptop) {
-      font-size: 100px;
+    left: 50%;     
+    font-size: 100px;
+    @media (min-width: $tablet) {
+      position: absolute;
+      transform: translateX(-50%); 
     }
-    @media (max-width: $tablet) {
-      position: static;
-      transform: translateX(0);
+    @media (min-width: $laptop) {
+      font-size: 150px;
     }
   }
 
   &__social {
-    margin-left: auto;
     display: flex;
     gap: .625rem;
-    @media (max-width: $tablet) {
-      margin-left: 0;
+    margin-left: 0;
+    @media (min-width: $tablet) {
+      margin-left: auto;
     }
     &_icon {
       width: 35px;

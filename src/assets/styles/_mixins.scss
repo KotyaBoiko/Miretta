@@ -1,0 +1,31 @@
+@use './variables' as *;
+
+@mixin cross($size: 30px, $thickness: 3px, $color: $main-dark-color, $position: relative) {
+    width: $size;
+    height: $size;
+    position: $position;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: $size;
+      border-radius: 3px;
+      height: $thickness;
+      background: $color;
+    }
+  
+    &::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+  
+    &::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+    &:hover {
+      opacity: 0.7;
+    }
+}

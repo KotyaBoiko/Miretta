@@ -1,4 +1,3 @@
-import LikeIcon from "@/assets/icons/heart-remove.svg?react";
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
 import { COMMON_ROUTES_NAMES } from "@/router/common/commonRoutesNames";
 import { FC } from "react";
@@ -30,8 +29,8 @@ const WishlistProductCard: FC<Props> = ({ img, price, title, id }) => {
         >
           View Product
         </MainButton>
-        <LikeIcon
-          className={classes.products__wishlist_like}
+        <div
+          className={classes.products__wishlist_remove}
           onClick={() => removeProductFromWishlist(id)}
         />
       </div>

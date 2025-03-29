@@ -20,9 +20,8 @@
     @media (min-width: $tablet) {
       position: absolute;
       width: 50%;
-    }
-    @media (min-width: 800px) {
-      padding: 20px 0;
+      padding: 10px 0;
+      gap: 20px;
     }
     @media (min-width: 1100px) {
       padding: 40px 0;
@@ -33,7 +32,7 @@
       align-items: end;
       text-align: end;
       @media (min-width: $tablet) {
-        top: 20px;
+        top: 0;
         left: 50%;
       }
     }
@@ -46,15 +45,13 @@
   }
 
   &__title {
-    font-size: 60px;
     @media (min-width: $mobile) {
-      font-size: 90px;
-      width: 430px;
+      width: 450px;
     }
-    @media (min-width: 830px) {
-      font-size: 100px;
+    @media (min-width: $tablet) {
+      width: 500px;
     }
-    @media (min-width: 930px) {
+    @media (min-width: $desktop) {
       width: 520px;
     }
   }
@@ -65,10 +62,10 @@
       max-width: 450px;
       font-size: 14px;
     }
-    @media (min-width: 790px) {
+    @media (min-width: $tablet) {
       font-size: 16px;
     }
-    @media (min-width: $laptop) {
+    @media (min-width: 800px) {
       font-size: 18px;
     }
   }
@@ -115,6 +112,10 @@
 
     &_btn {
       margin-top: 10px;
+      font-size: 14px;
+      @media (min-width: $tablet) {
+        font-size: inherit;
+      }
     }
 
     &_smallImg {
@@ -128,15 +129,9 @@
         position: absolute;
         top: 20px;
       }
-      @media (min-width: 830px) {
-        height: 200px;
-        width: 150px;
-      }
-      @media (min-width: 913px) {
-        height: 220px;
-        width: 170px;
-      }
       @media (min-width: $tablet) {
+        height: 207px;
+        width: 157px;
         position: static;
       }
       @media (min-width: $laptop) {

@@ -7,7 +7,7 @@
   z-index: 100;
 
   &__container {
-    height: 100px;
+    height: 90px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,17 +16,17 @@
     position: relative;
     z-index: 10;
     flex-wrap: wrap;
-    @media (max-width: $tablet) {
-      height: 90px;
+    @media (min-width: $tablet) {
+    height: 100px;
     }
   }
 
   &__nav {
-    display: flex;
-    gap: 15px;
-
-    @media (max-width: $laptop) {
-      display: none;
+    
+    display: none;
+    @media (min-width: $laptop) {
+      display: flex;
+      gap: 15px;
     }
     &_link {
       text-decoration: none;
@@ -57,35 +57,32 @@
   &__logo {
     color: $dark-green;
     font-family: "Mouzambik", sans-serif;
-    font-size: 90px;
     font-weight: 300;
+    font-size: 50px;
+    position: absolute;
+    left: 50%;
     transform: translateX(-50%);
-    @media (max-width: $laptop) {
-      font-size: 85px;
-      position: absolute;
-      left: 50%;
-    }
-    @media (max-width: 530px) {
-      font-size: 70px;
-    }
-    @media (max-width: $mobile) {
+    @media (min-width: $mobile-s) {
       font-size: 60px;
     }
-    @media (max-width: 360px) {
-      font-size: 50px;
+    @media (min-width: $mobile) {
+      font-size: 70px;
+    }
+    @media (min-width: $tablet) {
+      font-size: 80px;
+    }
+    @media (min-width: $laptop) {
+      font-size: 90px;
     }
   }
 
   &__interactive {
     display: flex;
-    gap: 1.25rem;
     cursor: pointer;
-
-    @media (max-width: $mobile) {
-      gap: 0.55rem;
-    }
-    @media (max-width: 260px) {
-      gap: 0.25rem;
+    gap: 0.25rem;
+    
+    @media (min-width: $mobile) {
+      gap: 1.25rem;
     }
 
     svg {

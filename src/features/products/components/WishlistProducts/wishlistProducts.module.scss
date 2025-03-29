@@ -1,9 +1,17 @@
+@use '/src/assets/styles/variables' as *;
+
 .products__wishlist {
   &_list {
+    row-gap: 5px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    @media (max-width: 1250px) {
+    @media (min-width: $mobile) {
       grid-template-columns: repeat(2, 1fr);
+    }
+    @media (min-width: $tablet) {
+      row-gap: 0;
+    }
+    @media (min-width: $desktop) {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 

@@ -3,17 +3,36 @@
 
 .cart {
   &__info {
-    min-width: 430px;
     display: flex;
     flex-direction: column;
-    padding: 30px;
-    border: 1px solid $main-dark-color;
-    background-color: $main-light-color;
-
+    @media (min-width: $laptop) {
+      position: relative;
+      z-index: 2;
+      border: 1px solid $main-dark-color;
+      background-color: $main-light-color;
+      min-width: 365px;
+      padding: 20px;
+    }
+    @media (min-width: $desktop) {
+      padding: 30px;
+      min-width: 430px;
+    }
     &_title {
-      margin-bottom: 10px;
       text-align: center;
-      font-size: 70px;
+      font-size: 50px;
+      @media (min-width: $mobile) {
+        font-size: 70px;
+      }
+      @media (min-width: $tablet) {
+        font-size: 90px;
+      }
+      @media (min-width: $laptop) {
+        margin-bottom: 10px;
+        font-size: 55px;
+      }
+      @media (min-width: $desktop) {
+        font-size: 70px;
+      }
     }
     &_line {
       margin: 20px 0;
@@ -37,6 +56,7 @@
       color: $main-dark-color;
       font-size: 30px;
       font-weight: lighter;
+      
     }
     &_price-total {
       font-weight: 500;

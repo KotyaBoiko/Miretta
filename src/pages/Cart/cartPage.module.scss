@@ -1,16 +1,34 @@
-.cart {
-  padding: 50px 0;
+@use '/src/assets/styles/variables' as *;
 
+.cart {
+  padding: 20px 0;
+  @media (min-width: $tablet) {
+    padding: 50px 0;
+  }
   &__title {
     margin-bottom: 20px;
   }
   &__container {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    @media (min-width: $laptop) {
+      flex-direction: row;
+    }
   }
-  &__products {
-    width: 100%;
-    margin-top: 60px;
+
+  &__delivery {
+    padding-top: 10px;
+    @media (min-width: $mobile) {
+      padding: 10px 20px;
+    }
+    @media (min-width: $tablet) {
+      padding: 20px 40px;
+    }
+
+    @media (min-width: $laptop) {
+      padding: 0;
+    }
   }
 
   &__clear {

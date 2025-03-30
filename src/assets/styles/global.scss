@@ -88,6 +88,9 @@ body {
       @media (min-width: $mobile) {
         left: $lines-gap-sm;
       }
+      @media (min-width: $tablet) {
+        left: $lines-gap-md;
+      }
       @media (min-width: $laptop) {
         left: $lines-gap;
       }
@@ -114,6 +117,9 @@ body {
       right: calc($lines-gap-sm / 1.5);
       @media (min-width: $mobile) {
         right: $lines-gap-sm;
+      }
+      @media (min-width: $tablet) {
+        right: $lines-gap-md;
       }
       @media (min-width: $laptop) {
         right: $lines-gap;

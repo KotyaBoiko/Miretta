@@ -1,0 +1,10 @@
+@use '/src/assets/styles/variables' as *;
+
+.cart {
+  &__products {
+    width: 100%;
+    @media (min-width: $laptop) {
+      margin-top: 60px;
+    }
+  }
+}

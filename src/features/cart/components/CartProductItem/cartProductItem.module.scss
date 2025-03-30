@@ -4,60 +4,98 @@
 .cart__product {
   position: relative;
   display: flex;
-  overflow: hidden;
   z-index: 1;
-  &::after {
+  &::after,
+  &:last-child::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: calc(100vw - $wrapper-padding-sm);
     height: 1px;
     background: $line-color;
+    @media (min-width: $laptop) {
+      width: calc(100vw - 2*$wrapper-padding-md);
+    }
+    @media (min-width: $desktop) {
+      width: calc(100vw - 2*$wrapper-padding-lg);
+    }
   }
   &:last-child {
     &::before {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 1px;
-      background: $line-color;
+      top: 100%;
     }
   }
   &_preview {
-    width: $lines-gap;
-    text-align: center;
+    display: flex;
+    flex-shrink: 0;
+    align-self: center;
+    width: calc($lines-gap-sm / 1.5);
+      @media (min-width: $mobile) {
+        width: $lines-gap-sm;
+      }
+      @media (min-width: $tablet) {
+        width: $lines-gap-md;
+      }
+      @media (min-width: $laptop) {
+        justify-content: center;
+        width: $lines-gap;
+      }
   }
 
   &_img {
     position: relative;
     z-index: 2;
-    margin: 0 auto;
-    width: 175px;
+    width: 100%;
+    margin-top: auto;
     aspect-ratio: 3/4;
     object-fit: cover;
+    @media (min-width: $laptop) {
+      width: 187px;
+    }
   }
   &_info {
-    padding: 30px;
-    margin-bottom: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding: 20px;
+    @media (min-width: $laptop) {
+      padding: 20px 10px
+    }
+    @media (min-width: $desktop) {
+      padding: 30px;
+    }
   }
   &_title {
-    font-size: 24px;
+    font-size: 16px;
+    @media (min-width: $mobile-s) {
+      font-size: 18px;
+    }
+    @media (min-width: $tablet) {
+      font-size: 20px;
+    }
+    @media (min-width: $desktop) {
+      font-size: 24px;
+    }
   }
   &_price {
+    font-size: 30px;
     font-family: $numbers-font;
-    font-size: 50px;
-    color: $main-dark-color;
+    color: $main-dark-color; 
+    @media (min-width: $mobile-s) {
+      font-size: 35px;
+    }
+    @media (min-width: $desktop) {
+      font-size: 50px;
+    }
   }
   &_control {
     display: flex;
-    gap: 10px;
+    gap: 3px;
     align-items: center;
+    @media (min-width: $mobile) {
+      gap: 10px;
+    }
   }
   &_quantity {
     font-size: 20px;
@@ -70,10 +108,15 @@
 
   }
   &_delete {
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     fill: $main-dark-color;
     transition: 0.3s;
+    margin-left: 10px;
+    @media (min-width: $mobile) {
+      width: 25px;
+      height: 25px;
+    }
     &:hover {
       fill: rgb(194, 9, 9);
       scale: 1.07;

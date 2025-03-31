@@ -1,11 +1,19 @@
+@use '/src/assets/styles/variables' as *;
+
 .profile {
   &__logout {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
 
     &_title {
-      font-size: 60px;
+      font-size: 35px;
+      @media (min-width: $mobile-s) {
+        font-size: 40px;
+      }
+      @media (min-width: $mobile) {
+        font-size: 60px;
+      }
     }
   }
 }

@@ -1,4 +1,3 @@
-import Ract from "react";
 import { Link } from "react-router";
 import { profileMenu, TProfileMenu } from "../../libs/profileMenu";
 import classes from "./profileNav.module.scss";

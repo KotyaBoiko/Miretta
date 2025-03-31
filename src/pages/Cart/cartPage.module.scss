@@ -2,7 +2,7 @@
 
 .cart {
   padding: 20px 0;
-  @media (min-width: $tablet) {
+  @media (min-width: $laptop) {
     padding: 50px 0;
   }
   &__title {

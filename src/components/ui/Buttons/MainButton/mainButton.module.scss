@@ -43,9 +43,14 @@
     }
   }
   &-medium {
-    min-height: 50px;
-    min-width: 95px;
     width: 95px;
+    height: 35px;
+    @media (min-width: $mobile-s) {
+      min-height: 40px;
+    }
+    @media (min-width: $tablet) {
+      min-height: 50px;
+    }
   }
   &-full {
     width: 100%;

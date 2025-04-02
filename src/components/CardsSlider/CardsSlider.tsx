@@ -1,10 +1,9 @@
 import { mainDarkColor } from "@/assets/styles/_variables";
 import { FC, useState } from "react";
-import { FreeMode, Navigation, Scrollbar, Thumbs } from "swiper/modules";
+import { FreeMode, Navigation, Pagination, Scrollbar, Thumbs } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import "swiper/swiper-bundle.css";
 import classes from "./cardsSlider.module.scss";
-
 type Props = {
   slides: string[];
 };
@@ -12,18 +11,22 @@ type Props = {
 const CardsSlider: FC<Props> = ({ slides }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
   return (
-    <>
+    <div className={classes.slider}>
       <Swiper
         style={
           {
             "--swiper-navigation-color": mainDarkColor,
+            "--swiper-pagination-color": mainDarkColor,
           } as React.CSSProperties
         }
-        className={classes.swiper__main}
+        className={classes.slider__main}
         navigation={true}
+        pagination={{
+          clickable: true,
+        }}
         loop={true}
         thumbs={{ swiper: thumbsSwiper }}
-        modules={[FreeMode, Navigation, Thumbs]}
+        modules={[FreeMode, Navigation, Thumbs, Pagination]}
       >
         {slides.map((slide) => {
           return (
@@ -34,7 +37,7 @@ const CardsSlider: FC<Props> = ({ slides }) => {
         })}
       </Swiper>
       <Swiper
-        className={classes.swiper__thumbs}
+        className={classes.slider__thumbs}
         onSwiper={(swiper) => setThumbsSwiper(swiper)}
         slidesPerView={3}
         freeMode={true}
@@ -51,7 +54,7 @@ const CardsSlider: FC<Props> = ({ slides }) => {
           );
         })}
       </Swiper>
-    </>
+    </div>
   );
 };
 

@@ -1,19 +1,36 @@
+@use '/src/assets/styles/variables' as *;
+
 .slider {
   &__slide {
-    height: 110vh; // або інше значення, яке потрібне
-    overflow: hidden; // Щоб уникнути виходу зображення за межі слайду
+    text-align: center;
+    @media (min-width: 500px) {
+    }
+    @media (min-width: $tablet) {
+      height: auto;
+    }
     img {
+      aspect-ratio: 3/4;
       object-fit: cover;
       object-position: center;
+      height: auto;
+      width: 100%;
     }
   }
 
   &__preview {
-    height: 300px;
-
     img {
+      aspect-ratio: 3/4;
+      height: auto; 
+      width: 100%;
       object-fit: cover;
       object-position: center;
     }
+    }
+
+    &__thumbs {
+      display: none;
+      @media (min-width: $tablet) {
+        display: block;
+      }
     }
 }

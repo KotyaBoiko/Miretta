@@ -3,16 +3,21 @@
 
 .product {
   &__data {
-    width: 50%;
     display: flex;
     flex-direction: column;
-    gap: 35px;
+    gap: 20px;
+    @media (min-width: $tablet) {
+      gap: 25px;
+      width: 50%;
+    }
+    @media (min-width: $laptop) {
+      gap: 35px;
+    }
   }
   &__title {
-    align-self: flex-end;
-    max-width: 80%;
-    text-align: end;
-    font-size: 140px;
+    @media (min-width: $tablet) {
+      text-align: end;
+    }
   }
   &__specification {
     font-size: 14px;
@@ -24,8 +29,14 @@
     }
   }
   &__price {
-    font-size: 100px;
     font-family: $numbers-font;
+    font-size: 60px;
+    @media (min-width: $tablet) {
+      font-size: 80px;
+    }
+    @media (min-width: $laptop) {
+      font-size: 100px;
+    }
   }
   &__interactive {
     display: flex;
@@ -34,7 +45,6 @@
 
   &__liked {
     fill: none;
-    width: 95px;
     &-true {
       svg {
         animation: 0.5s ease-in-out animateLike;

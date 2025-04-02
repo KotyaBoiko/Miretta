@@ -24,13 +24,16 @@
   }
 
   &__size {
-    font-size: 40px;
     font-family: $numbers-font;
     font-weight: 400;
     position: absolute;
     top: 54%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-size: 35px;
+    @media (min-width: $mobile) {
+      font-size: 40px;
+    }
       &_minimalistic {
         font-size: 20px;
         @media (min-width: $mobile-s) {

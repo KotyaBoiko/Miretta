@@ -3,17 +3,28 @@
 .auth {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 30px 30px;
+  gap: 10px;
   border: 1px solid $main-dark-color;
   background: $main-light-color;
   color: $main-dark-color;
+  @media (min-width: $mobile) {
+    gap: 20px;
+  }
   &-signIn {
-    width: 360px;
     top: 80px;
-    right: 5vw;
-    animation: emerge 0.3s;
+    width: 80vw;
+    right: 50%;
+    transform: translateX(50%);
+    min-width: auto;
+    animation: emergeMobile 0.3s;
+    @media (min-width: $mobile) {
+      transform: translateX(0);
+      right: 5vw;
+      width: 360px;
+      animation: emerge 0.3s;
+    }
     &::after {
+      right: 5vw;
       content: "";
       width: 20px;
       height: 20px;
@@ -23,14 +34,27 @@
       border-bottom: none;
       border-right: none;
       position: absolute;
-      top: -11px;
-      right: calc(183px - 5vw);
+      top: -10.8px;
+      right: calc($wrapper-padding-sm + 36px - 5vw);
+      @media (min-width: $mobile) {
+        right: calc($wrapper-padding-sm + 86px - 5vw);
+      }
+      @media (min-width: $laptop) {
+        right: calc($wrapper-padding-md + 86px - 5vw);
+      }
+      @media (min-width: $desktop) {
+        right: calc($wrapper-padding-lg + 86px - 5vw);
+      }
     }
   }
 
   &-signUp {
-    width: 400px;
+    width: 80vw;
+    min-width: auto;
     animation: emergeCenter 0.3s;
+    @media (min-width: $mobile) {
+      width: 400px;
+    }
   }
 
   &__other {
@@ -42,7 +66,6 @@
     font-weight: 300;
   }
 
-
   &-close {
     animation: close 0.3s;
 
@@ -51,7 +74,6 @@
     }
   }
 }
-
 
 @keyframes emerge {
   0% {
@@ -64,6 +86,19 @@
     opacity: 1;
   }
 }
+
+@keyframes emergeMobile {
+  0% {
+    transform: translateX(50%) scale(0.4);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(50%) scale(1);
+    opacity: 1;
+  }
+}
+
 @keyframes emergeCenter {
   0% {
     transform: translate(-50%, -50%) scale(0.4);
@@ -98,4 +133,3 @@
     opacity: 0;
   }
 }
-

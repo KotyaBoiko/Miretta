@@ -47,7 +47,8 @@ const Modal: React.FC<ModalProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {children}
-      </div>
+        <div className={classes.modal__cross} onClick={onClose}></div>
+      </div> 
     </div>,
     document.getElementById("modal-root")!
   );

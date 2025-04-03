@@ -11,9 +11,15 @@ type initialStateType = {
 };
 
 const totalQuantityLocal = localStorage.getItem("totalQuantity");
-const productsInCartLocal = JSON.parse(
+let productsInCartLocal;
+try {
+  productsInCartLocal = JSON.parse(
   localStorage.getItem("productsInCart") || "[]"
-);
+)
+} catch (error) {
+  console.log('Error getting cart data')
+  localStorage.clear()
+}
 const productsInCartNoAuthUser = !auth.currentUser
   ? JSON.parse(localStorage.getItem("productsInCartNoAuthUser") || "[]")
   : [];

@@ -48,7 +48,7 @@ const CardsSlider: FC<Props> = ({ slides }) => {
       >
         {slides.map((slide, index) => {
           return (
-            <SwiperSlide key={index + slide} className={classes.slider__preview}>
+            <SwiperSlide key={index + slide + index} className={classes.slider__preview}>
               <img src={slide} alt={slide[6]} />
             </SwiperSlide>
           );

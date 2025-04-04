@@ -4,6 +4,7 @@ import { logOut } from "../thunks";
 
 export interface IAuthState extends IAuthData {
   isAuth: boolean;
+  isAuthReady: boolean;
   loading: "idle" | "pending" | "succeeded" | "failed";
   loadingLogOut: "idle" | "pending" | "succeeded" | "failed";
 }
@@ -12,6 +13,7 @@ const initialState: IAuthState = {
   email: "",
   id: "",
   isAuth: false,
+  isAuthReady: false,
   loading: "idle",
   loadingLogOut: "idle",
 };
@@ -23,6 +25,9 @@ export const authSlice = createSlice({
     setAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;
     },
+    setAuthReady: (state, action: PayloadAction<boolean>) => {
+      state.isAuthReady = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(logOut.pending, (state) => {
@@ -64,6 +69,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setAuth } = authSlice.actions;
+export const { setAuth, setAuthReady } = authSlice.actions;
 
 export default authSlice.reducer;

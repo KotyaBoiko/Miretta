@@ -1,4 +1,4 @@
-import { setAuth } from "@/features/auth/redux/slices/authSlice";
+import { setAuth, setAuthReady } from "@/features/auth/redux/slices/authSlice";
 import { userApi } from "@/features/user/API/userApi";
 import { auth } from "@/firebase/firebase-config";
 import { baseApi } from "@/redux/API/baseApi";
@@ -26,17 +26,6 @@ useEffect (() => {
     localStorage.removeItem('wishlist');
   }
 }, [logOutLoading])
-  
-  useEffect(() => {
-    const listener = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        dispatch(setAuth(true));
-        dispatch(userApi.util.prefetch('getUser', undefined, {}))
-      } else {
-      }
-    });
-    return () => listener();
-  }, [dispatch, navigate]);
 
   return (
     <div className="global__wrapper">

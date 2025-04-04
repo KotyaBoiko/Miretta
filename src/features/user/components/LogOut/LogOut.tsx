@@ -1,4 +1,4 @@
-import LogOutButton from "@/components/LogOutButton/logOutButton";
+import LogOutButton from '@/components/LogOutButton/LogOutButton';
 import classes from './logOut.module.scss'
 const LogOut = () => {
   return (

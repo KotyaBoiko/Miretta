@@ -1,15 +1,17 @@
-import DeliveryInfo from "@/features/cart/components/DeliveryInfo/DeliveryInfo";
-import classes from "./cartPage.module.scss";
-import CartProducts from "@/features/cart/components/CartProducts/CartProducts";
+import EmptyCartIcon from "@/assets/img/empty-cart.png";
+import EmptyList from "@/components/EmptyList/EmptyList";
+import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
+import Loader from "@/components/ui/Loader/Loader";
 import {
   useClearCartMutation,
   useGetCartQuery,
 } from "@/features/cart/API/cartApi";
-import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
-import Loader from "@/components/ui/Loader/Loader";
-import EmptyCart from "@/features/cart/components/EmptyCart/EmptyCart";
-import { useAppDispatch, useAppSelector } from "@/redux/types";
+import CartProducts from "@/features/cart/components/CartProducts/CartProducts";
+import DeliveryInfo from "@/features/cart/components/DeliveryInfo/DeliveryInfo";
 import { clearCartLocal } from "@/features/cart/slices/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/types";
+import classes from "./cartPage.module.scss";
+
 const CartPage = () => {
   const isAuth = useAppSelector((state) => state.auth.isAuth);
   const [clearCart, { isLoading }] = useClearCartMutation();
@@ -40,7 +42,11 @@ const CartPage = () => {
               </div>
             </>
           ) : (
-            <EmptyCart />
+            <EmptyList
+            img={EmptyCartIcon}
+            title="Your cart is Empty!"
+            description="Looks like you haven't added anything to your cart yet. Start shopping to fill it up! Browse through our categories and discover amazing products tailored just for you."
+          />
           )}
         </div>
       </div>

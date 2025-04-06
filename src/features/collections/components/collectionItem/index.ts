@@ -1,3 +1,4 @@
-export { CollectionVSide } from "./CollectionVSide/CollectionVSide.tsx"
+export { type TCollection } from '../../type.ts'
 export { CollectionVCenter } from "./CollectionVCenter/CollectionVCenter.tsx"
-export {type TCollectionProps } from '../../type.ts'
+export { CollectionVSide } from "./CollectionVSide/CollectionVSide.tsx"
+

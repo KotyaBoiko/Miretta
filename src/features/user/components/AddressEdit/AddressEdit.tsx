@@ -151,7 +151,8 @@ const AddressEdit: FC<Props> = ({ close, addresses, oldData }) => {
       >
         <AddressFields
           oldData={oldData}
-          country={country}
+          country={'Україна'}
+          setCountry={setCountry}
           cityTitle={cityTitle}
           cityRef={cityRef}
           cityDescription={cityDescription}

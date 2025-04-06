@@ -183,6 +183,7 @@ const DeliveryForm = () => {
         <AddressFields
           oldData={userAddresses ? userAddresses[activeElement] : undefined}
           country={country}
+          setCountry={setCountry}
           cityTitle={cityTitle}
           cityRef={cityRef}
           cityDescription={cityDescription}

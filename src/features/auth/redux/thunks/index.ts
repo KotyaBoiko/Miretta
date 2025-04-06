@@ -33,6 +33,10 @@ export const authWithProvider = createAppAsyncThunk(
       case "google":
         authUser = await authService.signInWithGoogle();
         if (authUser instanceof Error) return Error;
+        if (authUser.user.metadata.lastSignInTime === authUser.user.metadata.creationTime) { 
+          await addUser({ email: authUser.user.email, id: authUser.user.uid });
+        }
+
         break;
       default:
         return Error("Incorrect provider");

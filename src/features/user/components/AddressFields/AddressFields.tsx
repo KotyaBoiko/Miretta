@@ -1,13 +1,14 @@
 import { CommonInput } from "@/components/ui/Input";
 import WritableSelectInput from "@/components/ui/Input/WritableSelectInput/WritableSelectInput";
 import { ICity, IDepartment, INovaPostResponse } from "@/redux/API/novaPost/types";
-import { FC } from "react";
+import React, { FC } from "react";
 import { IAddress } from "../../types";
 import classes from "./addressFields.module.scss";
 
 type Props = {
   oldData?: IAddress;
   country: string;
+  setCountry: (value: string) => void | React.Dispatch<React.SetStateAction<string>>;
   cityTitle: string;
   cityRef: string;
   cityDescription: string;
@@ -39,6 +40,7 @@ const AddressFields: FC<Props> = ({
   address,
   postCode,
   postRef,
+  setCountry,
   setCityRef,
   setCityTitle,
   setAddress,
@@ -103,7 +105,7 @@ const AddressFields: FC<Props> = ({
           type="text"
           placeholder="Ukraine"
           value={country}
-          // onChange={setCountry}
+          onChange={setCountry}
           readOnly
         />
       </label>

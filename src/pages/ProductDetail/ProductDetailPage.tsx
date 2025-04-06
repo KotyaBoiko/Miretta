@@ -9,7 +9,7 @@ import { useGetProductQuery } from "@/features/products/Api/productApi";
 const ProductDetailPage: FC = () => {
   const { id } = useParams();
   if (!id) return null;
-  const { data, isLoading } = useGetProductQuery(id);
+  const { data } = useGetProductQuery(id);
   if (!data) {
     return null;
   }

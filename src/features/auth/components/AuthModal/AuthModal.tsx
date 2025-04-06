@@ -1,11 +1,10 @@
-import { FC, SetStateAction, useEffect, useState } from "react";
-
 import MainButton from "@/components/ui/Buttons/MainButton/MainButton";
-import AuthForm from "../AuthForm/AuthForm";
-import FastAuth from "../FastAuth/FastAuth";
 import Modal from "@/components/ui/Modal/Modal";
 import { auth } from "@/firebase/firebase-config";
+import { FC, SetStateAction, useState } from "react";
 import { toggleAuthType } from "../../utils/toggleAuthType";
+import AuthForm from "../AuthForm/AuthForm";
+import FastAuth from "../FastAuth/FastAuth";
 
 import classes from "./authModal.module.scss";
 type Props = {

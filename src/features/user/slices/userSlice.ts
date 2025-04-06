@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IUser } from "../types";
 import { userApi } from "../API/userApi";
+import { IUser } from "../types";
 
 const initUser: IUser | "null" = JSON.parse(
   localStorage.getItem("user") ||
@@ -27,9 +27,9 @@ export const userSlice = createSlice({
   extraReducers: (builder) => {
     builder.addMatcher(
       userApi.endpoints.getUser.matchFulfilled,
-      (state, action: PayloadAction<IUser>) => {
+      (_, action: PayloadAction<IUser>) => {
         localStorage.setItem("user", JSON.stringify(action.payload));
-        return { ...action.payload };
+         return { ...action.payload };
       }
     );
   },

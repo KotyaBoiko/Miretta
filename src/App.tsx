@@ -1,6 +1,6 @@
 import Layout from "@/layout/Layout";
 import { commonRouter } from "@/router/common/commonRouter";
-import { createBrowserRouter, RouterProvider, useNavigate } from "react-router";
+import { createBrowserRouter, RouterProvider } from "react-router";
 import { auth } from "./firebase/firebase-config";
 
 import { onAuthStateChanged } from "firebase/auth";

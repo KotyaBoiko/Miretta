@@ -5,7 +5,7 @@ import svgr from "vite-plugin-svgr";
 import { visualizer } from 'rollup-plugin-visualizer';
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), svgr(), visualizer({ open: true })],
+  plugins: [react(), svgr(), visualizer({ open: false })],
   resolve: {
 		alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
 	},
